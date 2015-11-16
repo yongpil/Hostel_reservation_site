@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.spring.HostelLink.rsv.dao.RsvDao">
+	<select id="rsvList" resultType="com.spring.HostelLink.rsv.dto.RsvCheckDto">
+		<![CDATA[select * from reservation where RSVHOSTELNUM = #{param1} and RSVDATE >=#{param2} and RSVDATE <= #{param3}]]>
+	</select>
+	<insert id="RsvConfirm">
+			insert into reservation_confirm (hostelNum, roomNum, userId, ReservationDays, totalRate) values(#{param1},#{param2},#{param3},#{param4},#{param5})";
+	</insert>
+</mapper>

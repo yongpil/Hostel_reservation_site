@@ -1,0 +1,101 @@
+@CHARSET "EUC-KR";
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+* { margin: 0; padding: 0;}
+html, body { width:100%;height:100%; }
+ul,ol,li {list-style:none;}
+
+
+
+#hostelsGallery {
+	
+}
+
+#hostelsGallery li:last-child{
+	border-bottom : 0;
+}
+
+
+#hostelsGallery li a{
+	display: block;
+	width: auto;
+	color: #222;
+	text-decoration: none;
+}
+
+#HostelsPic {
+	background-repeat: no-repeat;
+	width:100%;
+	height:150px;
+}
+
+#HostelsPic img{
+	width:100%;
+	height:100%;
+}
+
+#HostelsName {
+	width:auto; height:25px;
+	padding-top:10px;
+	padding-left:10px;
+	font-family: 'Hanna', sans-serif;
+	border-bottom : 2px solid #ccc;
+}
+
+
+#hostelsGallery .text .desc{
+	font-soze : 0.8em;
+	line-height : 150%;
+}
+
+#buttonGroup { 
+	width:100%;
+	text-align:center;
+	height:25px;
+
+}
+#searchContent1{
+	margin:3px;	
+	font-family: 'Jeju Gothic', sans-serif;
+	font-size:13px;
+	text-align:center;
+}
+
+#searchContent2{
+	margin:3px;	
+	font-family: 'Jeju Gothic', sans-serif;
+	font-size:13px;
+	text-align:center;
+}
+
+
+#price{
+	font-family: 'Jeju Gothic', sans-serif;
+	font-size:15px;	
+	color:#FFFFFF;
+	font-weight:bold;
+	text-align:right;
+	padding-top:130px;
+	padding-right:5px;
+}
+
+.myButton {
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family: 'Jeju Gothic', sans-serif;
+	font-size:13.5px;
+	padding:1.5px 15px;
+	text-decoration:none;
+
+}
+.myButton:hover {
+	background-color:#FFFFFF;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+        
