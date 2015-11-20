@@ -21,6 +21,17 @@ import com.NeoRomax.HostelTonight.Rsv.Command.RsvConfirmCommand;
 import com.NeoRomax.HostelTonight.Rsv.Command.RsvViewCommand;
 import com.NeoRomax.HostelTonight.util.Constant;
 
+/**
+ * <PRE>
+ * 1. FileName  : HostelListController.java
+ * 2. Package  : com.NeoRomax.HostelTonight.HostelList.Controller
+ * 3. Comment  : 
+ * 4. 작성자   : "Yong Pil Moon"
+ * 5. 작성일   : 2015. 11. 20. 오후 3:44:40
+ * </PRE>
+ */ 
+
+
 @Controller
 public class HostelListController {
 

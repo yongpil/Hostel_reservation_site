@@ -17,6 +17,17 @@ import com.NeoRomax.HostelTonight.HostelList.Dto.HostelListRoomsDto;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvConfirmDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
+/**
+ * <PRE>
+ * 1. FileName  : RsvViewCommand.java
+ * 2. Package  : com.NeoRomax.HostelTonight.Rsv.Command
+ * 3. Comment  : 
+ * 4. 작성자   : "Yong Pil Moon"
+ * 5. 작성일   : 2015. 11. 20. 오후 3:45:34
+ * </PRE>
+ */ 
+
+
 public class RsvViewCommand implements HostelListCommand {
 	SqlSession sqlSession = null;
 public RsvViewCommand() {

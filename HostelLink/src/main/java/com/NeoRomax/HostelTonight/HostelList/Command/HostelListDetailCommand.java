@@ -13,6 +13,17 @@ import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListRoomsDao;
 import com.NeoRomax.HostelTonight.Rsv.Dao.RsvDao;
 import com.NeoRomax.HostelTonight.util.Constant;
 
+/**
+ * <PRE>
+ * 1. FileName  : HostelListDetailCommand.java
+ * 2. Package  : com.NeoRomax.HostelTonight.HostelList.Command
+ * 3. Comment  : 
+ * 4. 작성자   : "Yong Pil Moon"
+ * 5. 작성일   : 2015. 11. 20. 오후 3:44:57
+ * </PRE>
+ */ 
+
+
 public class HostelListDetailCommand implements HostelListCommand {
 	SqlSession sqlSession = null;
 	
