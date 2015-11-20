@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.spring.HostelLink.dto.*"%>
-<%@ page import="com.spring.HostelLink.rsv.dto.*"%>
+<%@ page import="com.NeoRomax.HostelTonight.HostelList.Dto.*"%>
+<%@ page import="com.NeoRomax.HostelTonight.Rsv.Dto.*"%>
 <%
 	String userId = (String)session.getAttribute("id");
 %>
@@ -24,7 +24,7 @@
  <%
  	List rsvConfirmList = (List)request.getAttribute("rsvConfirmList");
 	List roomlist = (List)request.getAttribute("roomList");	
-	HostelDto hostelbean = (HostelDto)request.getAttribute("hostelbean");
+	HostelListHostelDto hostelbean = (HostelListHostelDto)request.getAttribute("hostelbean");
 	String rsvConfirmDataName[][] = new String[5][3];
 	
 
@@ -54,13 +54,13 @@
 <% 
  	for(int i=0;i<rsvConfirmList.size();i++)
  	{
- 		RoomsDto roombean; 
+ 		HostelListRoomsDto roombean; 
  		RsvConfirmDto rsvbean = (RsvConfirmDto)rsvConfirmList.get(i);
  		hostelsNum = rsvbean.getHOSTELNUM();
  		roomNum = rsvbean.getROOMNUM();
  		rsvDays = rsvbean.getRESERVATIONDAYS();
  		totalRate = rsvbean.getTOTALRATE();
- 		roombean = ((RoomsDto)roomlist.get(i));
+ 		roombean = ((HostelListRoomsDto)roomlist.get(i));
  		int dayCount = rsvDays.split(",").length;
  		String dayList[] = new String[dayCount];
  		

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"%>
-<%@ page import="com.spring.HostelLink.dto.*"%>
-<%@ page import="com.spring.HostelLink.rsv.dto.*"%>
+<%@ page import="com.NeoRomax.HostelTonight.HostelList.Dto.*"%>
+<%@ page import="com.NeoRomax.HostelTonight.Rsv.Dto.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	HostelDto hostel = (HostelDto) request.getAttribute("hDto");
+	HostelListHostelDto hostel = (HostelListHostelDto) request.getAttribute("hDto");
 	RsvCheckDto rsvConfirmBean;
 	List roomsList = (List) request.getAttribute("roomsDtos");
 	List rsvsList = (List) request.getAttribute("RsvCheckDto"); //예약관련 객실 정보 리스트
@@ -22,7 +22,6 @@
   <link rel="stylesheet" href="css/hostels/hstView.css">
   <link rel="stylesheet" href="dist/css/font-awesome.css">
   <link rel="stylesheet" href="dist/css/bootstrap.css">
-	
 	
 	
 <style>
@@ -60,6 +59,7 @@
 								</c:choose>
 					 		</c:forEach>
 				    </div>
+				    
 				
 				    <!-- Left and right controls -->
 				    <a class="left carousel-control" href="#hostelsPics" role="button" data-slide="prev">
@@ -112,7 +112,7 @@
 						     							     	
 						     	for(int i=0;i<roomsList.size();i++)
 							    {
-						     		RoomsDto roombean = (RoomsDto)roomsList.get(i); 
+						     		HostelListRoomsDto roombean = (HostelListRoomsDto)roomsList.get(i); 
 							    	RoomName[i]= roombean.getROOMS_NAME();
 						     %>						    
 						     <!-- 객실 패널 -->
