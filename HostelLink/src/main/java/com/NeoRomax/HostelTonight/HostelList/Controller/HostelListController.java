@@ -45,20 +45,7 @@ public class HostelListController {
 		Constant.sqlSession = this.sqlSession;
 	}
 	
-	@RequestMapping("/search")
-	public String search(Model model) {
-		System.out.println("test()");
-		return "search";
-	}
-	
-	@RequestMapping("/login")
-	public String login( Model model) {
-		System.out.println("login()");
-		
-		return "/login/login";
-	}
-	
-	@RequestMapping(value="/list", method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/index.html", method={RequestMethod.POST,RequestMethod.GET})
 	public String list(HttpServletRequest request,Model model) {
 		System.out.println("list()");
 		model.addAttribute("request",request);
@@ -66,16 +53,16 @@ public class HostelListController {
 		command = new HostelListViewCommand();
 		command.execute(model);
 		System.out.println(request.getRealPath("/"));
-		return "/Hostels/hostel_list";	
+		return "/Hostels/hostel_index";	
 	}
 	
-	@RequestMapping("/addHostel_view")
+	@RequestMapping("/addHostel_view.html")
 	public String addHostel_view(Model model) {
 		System.out.println("addHostel_view()");
 		return "/Hostels/hostel_add_view";
 	}
 	
-	@RequestMapping("/addHostel")
+	@RequestMapping("/addHostel.html")
 	public String addHostel(MultipartHttpServletRequest mRequest, Model model) {
 		System.out.println("addHostel()");
 		model.addAttribute("mRequest", mRequest);
@@ -84,7 +71,7 @@ public class HostelListController {
 		return "redirect:list";
 	}
 	
-	@RequestMapping("/hostel_detail")
+	@RequestMapping("/hostel_detail.html")
 	public String hostel_detail(HttpServletRequest request, Model model) {
 		System.out.println("hostel_detail()");
 		model.addAttribute("request",request);
@@ -94,7 +81,7 @@ public class HostelListController {
 		return "/Hostels/hostel_detail";
 	}
 	
-	@RequestMapping("/rsvView")
+	@RequestMapping("/rsvView.html")
 	public String rsvView(HttpServletRequest request, Model model) {
 		System.out.println("rsvView()");
 		model.addAttribute("request",request);
@@ -104,7 +91,7 @@ public class HostelListController {
 		return "/Hostels/hostel_rsv_view";
 	}
 	
-	@RequestMapping("/rsvConfirm")
+	@RequestMapping("/rsvConfirm.html")
 	public String rsvConfirm(HttpServletRequest request, Model model) {
 		System.out.println("rsvConfirm()");
 		model.addAttribute("request",request);

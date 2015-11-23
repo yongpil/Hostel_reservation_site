@@ -6,6 +6,22 @@
 <%
 	String userId = (String)session.getAttribute("id");
 %>
+<%
+/* =================================================================
+ * 
+ * 작성일 : 2015. 11. 20.
+ *  
+ * 작성자 : 문용필
+ * 
+ * 상세설명 : 
+ *   
+ * =================================================================
+ * 수정일         작성자             내용     
+ * -----------------------------------------------------------------------
+ * 
+ * =================================================================
+ */ 
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,6 +54,8 @@
 	int rsvNum=0;
 %>
 <div id="main">
+		<!--Header-->
+		<jsp:include page="../header.jsp"></jsp:include>
  		 <!-- 컨텐츠 -->
 			<div id="content">
 			<!-- 호스텔 이름 -->
@@ -50,7 +68,7 @@
 			</div>
 			<div class="container">
 			
-<form action="rsvConfirm" method="post">
+<form action="rsvConfirm.html" method="post">
 <% 
  	for(int i=0;i<rsvConfirmList.size();i++)
  	{
@@ -96,7 +114,6 @@
 </tr>
  </table>	
  <%
- System.out.print("rsvConfirm : " + rsvConfirmList.size());
  	}
  %>
 

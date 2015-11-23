@@ -2,6 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.*"%>
+<%@ page session="false" %>
 <%
 	String realFolder="";
 	realFolder="./HostelsUpload/";
@@ -20,6 +21,7 @@
 <body>
 	<div id="main">
 		<!--Header-->
+		<jsp:include page="../header.jsp"></jsp:include>
 			<!-- 컨텐츠 -->
 			<div id="content">
 				<!--검색내용란  -->
@@ -44,7 +46,7 @@
 				<c:forEach items="${hDtos}" var="hDto">
 					<li>
 						<%-- <a href="./hostelsDetailAction.me?num=${dto.HostelCode}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> --%>
-					    <a href="./hostel_detail?num=${hDto.HOSTELS_NUM}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> 
+					    <a href="./hostel_detail.html?num=${hDto.HOSTELS_NUM}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> 
 						 <div  id="HostelsPic" style="background:url(<%=realFolder%>${hDto.IMAGENAME}) no-repeat; background-size:100%">
 						<div id=price>13,000 Won</div>
 						</div> 

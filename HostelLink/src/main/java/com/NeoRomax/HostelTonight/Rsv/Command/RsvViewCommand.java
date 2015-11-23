@@ -58,13 +58,13 @@ public RsvViewCommand() {
 	 		rsvRate[i]=0;
 	 	}
 	 		
-	 	for(int i=0;i<60;i++)
+	 	for(int i=0;i<60;i++)//앞에서 체크된 객실들을 가지고 객실별로 체크된 요금은 rsvRate배열에 날짜는 rsvDate에 넣는다.
 	 	{
 	 		checkBox[i]="checkBox"+i;
 	 		
 	 		if(i>=0 && i<12 && request.getParameter(checkBox[i])!=null)
 	 		{
-	 			String[] tempRsv = request.getParameter(checkBox[i]).split(",");
+	 			String[] tempRsv = request.getParameter(checkBox[i]).split(",");//,로 구분 되어 있는 rsvRate와 rsvDate를 분리 한다.
 	 			rsvRate[0] = rsvRate[0] + Integer.parseInt(tempRsv[0]); //tempRsv[0]은 해당 방의 가격이고 tempRsv[1]은 해당 방의 예약 날짜 이다.
 	 			rsvDate[0] = rsvDate[0] + tempRsv[1];
 	 		}
@@ -97,10 +97,10 @@ public RsvViewCommand() {
 	 	
 	 	for(int i=0;i<5;i++)
 	 	{
-	 		if(!rsvDate[i].equals(""))
+	 		if(!rsvDate[i].equals(""))//rsvDate가 널이 아니면
 	 		{
-	 			rsvDate[i]= rsvDate[i].substring(0, rsvDate[i].length()-1);
-	 			RsvConfirmDto rsvbean = new RsvConfirmDto(Integer.parseInt(request.getParameter("hostelNum")),i,request.getParameter("userId"),rsvDate[i],rsvRate[i]);
+	 			rsvDate[i]= rsvDate[i].substring(0, rsvDate[i].length()-1);//rsvDate의 마지막에 들어있는 ,를 제거 하고
+	 			RsvConfirmDto rsvbean = new RsvConfirmDto(Integer.parseInt(request.getParameter("hostelNum")),i,request.getParameter("userId"),rsvDate[i],rsvRate[i]); //예약 객체를 만들어 저장한다.
 	 			rsvConfirmList.add(rsvbean);
 	 		}		
 	 		

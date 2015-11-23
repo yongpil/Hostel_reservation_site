@@ -1,3 +1,20 @@
+<%
+/* =================================================================
+ * 
+ * 작성일 : 2015. 11. 20.
+ *  
+ * 작성자 : 문용필
+ * 
+ * 상세설명 : 호스텔을 클릭하면 호스텔의 정보 및 객실 정보를 볼 수 있게 해주는 페이지이다.호스텔 클릭이 이루어지면 backend에서 호스텔 정보와 방 정보,검색한 날짜의 개실 리스트를 넘겨 준다.
+ * frontend 쪽에서 backend에서 받은 정보를 가공하여 사용자에게 보여준다.
+ *   
+ * =================================================================
+ * 수정일         작성자             내용     
+ * -----------------------------------------------------------------------
+ * 
+ * =================================================================
+ */ 
+%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"%>
 <%@ page import="com.NeoRomax.HostelTonight.HostelList.Dto.*"%>
 <%@ page import="com.NeoRomax.HostelTonight.Rsv.Dto.*"%>
@@ -36,7 +53,10 @@
 
 <body>
 
+	<!-- 호스텔 사진 배너 -->
 	<div id="main">
+		<!--Header-->
+		<jsp:include page="../header.jsp"></jsp:include>
 			<!-- 컨텐츠 -->
 			<div id="content">
 				<!-- 호스텔  배너 -->
@@ -90,7 +110,7 @@
 						  <div class="infoList" data-toggle="collapse" data-target="#demo1">객실 정보  <i class="fa fa-bed"></i></div>
 						  	<div id="demo1" class="collapse">	
 						  	
-						  	<form action="rsvView" method="post">
+						  	<form action="rsvView.html" method="post">
 							 	    
 						    <div class="panel-group" id="accordion">
 						     <%
@@ -102,7 +122,7 @@
 						     	String checkBoxId[][]= new String[5][12];
 							    String RoomName[]=new String[5];
 							    
-							       for(int x=0; x<5; x++)
+							       for(int x=0; x<roomsList.size(); x++)
 							       {
 							    	   for(int y=0; y<12; y++)
 							    	   {
