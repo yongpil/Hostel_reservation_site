@@ -100,7 +100,7 @@ public RsvViewCommand() {
 	 		if(!rsvDate[i].equals(""))//rsvDate가 널이 아니면
 	 		{
 	 			rsvDate[i]= rsvDate[i].substring(0, rsvDate[i].length()-1);//rsvDate의 마지막에 들어있는 ,를 제거 하고
-	 			RsvConfirmDto rsvbean = new RsvConfirmDto(Integer.parseInt(request.getParameter("hostelNum")),i,request.getParameter("userId"),rsvDate[i],rsvRate[i]); //예약 객체를 만들어 저장한다.
+	 			RsvConfirmDto rsvbean = new RsvConfirmDto(Integer.parseInt(request.getParameter("hostelNum")),i,request.getParameter("userId"),rsvRate[i]); //예약 객체를 만들어 저장한다.
 	 			rsvConfirmList.add(rsvbean);
 	 		}		
 	 		

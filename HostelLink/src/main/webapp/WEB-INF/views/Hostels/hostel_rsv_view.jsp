@@ -41,8 +41,15 @@
  	List rsvConfirmList = (List)request.getAttribute("rsvConfirmList");
 	List roomlist = (List)request.getAttribute("roomList");	
 	HostelListHostelDto hostelbean = (HostelListHostelDto)request.getAttribute("hostelbean");
-	String rsvConfirmDataName[][] = new String[5][3];
 	
+	String rsvRate[] = new String[roomlist.size()];
+	String rsvRoomNum[] = new String[roomlist.size()]; 
+	
+	for(int i=0;i<roomlist.size();i++)
+	{
+		rsvRate[i]="rsvRate"+i;
+		rsvRoomNum[i]="rsvRoomNum"+i;
+	}
 
     
  	String hostelName = hostelbean.getHOSTELS_NAME();
@@ -76,7 +83,7 @@
  		RsvConfirmDto rsvbean = (RsvConfirmDto)rsvConfirmList.get(i);
  		hostelsNum = rsvbean.getHOSTELNUM();
  		roomNum = rsvbean.getROOMNUM();
- 		rsvDays = rsvbean.getRESERVATIONDAYS();
+/*  		rsvDays = rsvbean.getRESERVATIONDAYS(); */
  		totalRate = rsvbean.getTOTALRATE();
  		roombean = ((HostelListRoomsDto)roomlist.get(i));
  		int dayCount = rsvDays.split(",").length;
@@ -88,9 +95,9 @@
 		}
  %>
 
- <input type="hidden" name=<%=rsvConfirmDataName[i][0]%> value=<%=rsvbean.getROOMNUM()%>>
- <input type="hidden" name=<%=rsvConfirmDataName[i][1]%> value=<%=rsvbean.getRESERVATIONDAYS()%>>
- <input type="hidden" name=<%=rsvConfirmDataName[i][2]%> value=<%=rsvbean.getTOTALRATE() %>>  
+ <input type="hidden" name=<%=rsvRoomNum[i]%> value=<%=rsvbean.getROOMNUM()%>>
+<%--  <input type="hidden" name=<%=rsvConfirmDataName[i][1]%> value=<%=rsvbean.getRESERVATIONDAYS()%>> --%>
+ <input type="hidden" name=<%=rsvRate[i]%> value=<%=rsvbean.getTOTALRATE() %>>  
 
 		
 

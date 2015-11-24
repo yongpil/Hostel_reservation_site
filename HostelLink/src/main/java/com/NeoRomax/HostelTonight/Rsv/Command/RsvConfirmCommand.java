@@ -42,12 +42,10 @@ public class RsvConfirmCommand implements HostelListCommand {
 		for(int i=0;i<Integer.parseInt(request.getParameter("listSize"));i++)
 		{
 			RsvConfirmDto rsvConBean = new RsvConfirmDto();
-			
-			rsvConBean.setROOMNUM(Integer.parseInt(request.getParameter("rsvConfirmData" + String.valueOf(i*5+1))));
-			rsvConBean.setRESERVATIONDAYS(request.getParameter("rsvConfirmData" + String.valueOf(i*5+2)));
-			rsvConBean.setTOTALRATE(Integer.parseInt(request.getParameter("rsvConfirmData" + String.valueOf(i*5+3))));
-			
-			rsvDao.RsvConfirm(hostelNum,rsvConBean.getROOMNUM(),UserId,rsvConBean.getRESERVATIONDAYS(),rsvConBean.getTOTALRATE());
+			rsvConBean.setROOMNUM(Integer.parseInt(request.getParameter("rsvRoomNum" + String.valueOf(i))));
+			//rsvConBean.setRESERVATIONDAYS(request.getParameter("rsvConfirmData" + String.valueOf(i*5+2)));
+			rsvConBean.setTOTALRATE(Integer.parseInt(request.getParameter("rsvRate" + String.valueOf(i))));
+			rsvDao.RsvConfirm(hostelNum,rsvConBean.getROOMNUM(),UserId,rsvConBean.getTOTALRATE());
 		}
 
 	}

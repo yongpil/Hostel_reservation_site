@@ -5,16 +5,14 @@ public class RsvConfirmDto {
 	private int HOSTELNUM;
 	private int ROOMNUM;
 	private String USERID;
-	private String RESERVATIONDAYS;
 	private int  TOTALRATE;
 	
 	
-	public RsvConfirmDto( int hOSTELNUM, int rOOMNUM, String uSERID, String rESERVATIONDAYS, int tOTALRATE) {
+	public RsvConfirmDto( int hOSTELNUM, int rOOMNUM, String uSERID, int tOTALRATE) {
 		super();
 		HOSTELNUM = hOSTELNUM;
 		ROOMNUM = rOOMNUM;
 		USERID = uSERID;
-		RESERVATIONDAYS = rESERVATIONDAYS;
 		TOTALRATE = tOTALRATE;
 	}
 	
@@ -45,12 +43,6 @@ public class RsvConfirmDto {
 	}
 	public void setUSERID(String uSERID) {
 		USERID = uSERID;
-	}
-	public String getRESERVATIONDAYS() {
-		return RESERVATIONDAYS;
-	}
-	public void setRESERVATIONDAYS(String rESERVATIONDAYS) {
-		RESERVATIONDAYS = rESERVATIONDAYS;
 	}
 	public int getTOTALRATE() {
 		return TOTALRATE;

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ * Spring Security Context
+ * @version 1.0
+ * @author Yang Jin Seung 
+ -->
+<beans 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+					http://www.springframework.org/schema/beans/spring-beans.xsd
+					http://www.springframework.org/schema/security
+					http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<security:http auto-config="true">
+		<security:form-login login-page="/loginForm.html"
+					authentication-failure-url="/loginForm.html?ng"/>
+		<security:intercept-url pattern="/login.html*" access="ROLE_USER"/>
+		<security:intercept-url pattern="/welcome.html*" access="ROLE_ADMIN"/>
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider>
+				 <security:jdbc-user-service 
+				data-source-ref="dataSource"
+				users-by-username-query="SELECT usrId, usrPsw, usrEnable from user_information where usrId=?"
+				authorities-by-username-query="SELECT u.usrId, au.authority FROM user_information u, user_auth au WHERE u.usrId=? AND u.usrNum=au.auNum"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/hostel" />
+		<property name="username" value="root" />
+		<property name="password" value="1234" />
+	</bean>			
+</beans>

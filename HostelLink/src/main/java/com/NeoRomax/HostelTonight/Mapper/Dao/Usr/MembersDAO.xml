@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+ * Members DAO XML mybatis
+ * @version 1.0
+ * @author Yang Jin Seung 
+ -->
+
+<mapper namespace="com.NeoRomax.HostelTonight.Usr.Dao.MembersDAO">
+
+	<insert id="joinDao">
+		INSERT INTO user_information (ID, PASSWORD, FIRST_NAME, LAST_NAME, BIRTH, enabled) VALUES 
+		(#{param1}, #{param2}, #{param3}, #{param4},#{param5}, '1')
+	</insert>
+	<insert id="joinAuthDao">
+		INSERT INTO user_auth (authority) VALUES (#{param1})
+	</insert>
+</mapper>
