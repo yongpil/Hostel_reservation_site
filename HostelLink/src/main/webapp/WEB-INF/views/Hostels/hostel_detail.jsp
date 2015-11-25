@@ -32,16 +32,22 @@
 	int hostelNum = hostel.getHOSTELS_NUM();
 %>
 
-<html ng-app>
+<html data-ng-app="myApp" data-ng-controller="checkBoxCtrl">
 <head>
 
-  <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src= "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="dist/js/bootstrap.js"></script>
   <link rel="stylesheet" href="css/hostels/hstView.css">
   <link rel="stylesheet" href="dist/css/font-awesome.css">
   <link rel="stylesheet" href="dist/css/bootstrap.css">
-	
+   <script>
+   var app = angular.module('myApp',[]);
+   app.controller('checkBoxCtrl',function($scope){
+		$scope.row = 10;
+	});
+   </script>
+   
 	
 <style>
   .carousel-inner > .item > img,
@@ -53,7 +59,7 @@
     
 </head>
 
-<body>
+<body ng-init="appName = 'abc' ">
 
 	<!-- 호스텔 사진 배너 -->
 	<h1>{{appName}} </h1>
@@ -83,7 +89,7 @@
 					 		</c:forEach>
 				    </div>
 				    
-				
+					{{row}}
 				    <!-- Left and right controls -->
 				    <a class="left carousel-control" href="#hostelsPics" role="button" data-slide="prev">
 				      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -123,8 +129,7 @@
 							      				<div id="Room${roomIndex.index}" class="panel-collapse collapse">
 							      				 <div class="panel-body">${roomDto.ROOMS_INFO}<br><br>
 							      				 	<!-- 객실예약 테이블 -->						       
-						        					<table class="table table-bordered table-striped">
-
+						        					<table class="table table-bordered table-striped" >						   
 						        					</table>
 							      				 </div>
 							      				</div>
