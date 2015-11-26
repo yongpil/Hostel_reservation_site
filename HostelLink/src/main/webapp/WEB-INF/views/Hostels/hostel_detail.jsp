@@ -43,8 +43,9 @@
   <link rel="stylesheet" href="dist/css/bootstrap.css">
    <script>
    var app = angular.module('myApp',[]);
+   
    app.controller('checkBoxCtrl',function($scope){
-		$scope.row = 10;
+		$scope.row =${RsvCheckDto.size()}/3;
 	});
    </script>
    
@@ -63,6 +64,7 @@
 
 	<!-- 호스텔 사진 배너 -->
 	<h1>{{appName}} </h1>
+	${RsvCheckDto.get(0).RSVDATE}
 	<div id="main">
 		<!--Header-->
 		<jsp:include page="../header.jsp"></jsp:include>
@@ -129,7 +131,8 @@
 							      				<div id="Room${roomIndex.index}" class="panel-collapse collapse">
 							      				 <div class="panel-body">${roomDto.ROOMS_INFO}<br><br>
 							      				 	<!-- 객실예약 테이블 -->						       
-						        					<table class="table table-bordered table-striped" >						   
+						        					<table class="table table-bordered table-striped" >	
+						        										   
 						        					</table>
 							      				 </div>
 							      				</div>
