@@ -1,5 +1,7 @@
 package com.NeoRomax.HostelTonight.HostelList.Command;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +12,10 @@ import org.springframework.ui.Model;
 import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListHostelDao;
 import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListImgDao;
 import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListRoomsDao;
+import com.NeoRomax.HostelTonight.HostelList.Dto.HostelListRoomsDto;
 import com.NeoRomax.HostelTonight.Rsv.Dao.RsvDao;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvCheckDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvRoomListDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
 /**
@@ -44,6 +49,31 @@ public class HostelListDetailCommand implements HostelListCommand {
 		model.addAttribute("hImgDtos",hImgDao.getHImgList(Integer.parseInt(request.getParameter("num"))));
 		model.addAttribute("roomsDtos",roomsDao.RoomsList(Integer.parseInt(request.getParameter("num"))));
 		model.addAttribute("RsvCheckDto",rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150915","20150920"));
+		ArrayList<HostelListRoomsDto> hostelListRoomDtos = (ArrayList<HostelListRoomsDto>)roomsDao.RoomsList(Integer.parseInt(request.getParameter("num")));
+		ArrayList<RsvCheckDto> rsvCheckDtos = (ArrayList<RsvCheckDto>)rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150915","20150920");
+		
+		RsvRoomListDto rsvRoomListDto = new RsvRoomListDto();
+		
+		for(int i=0;i<hostelListRoomDtos.size();i++)
+		{
+			
+			HostelListRoomsDto hostelListRoomsDto = hostelListRoomDtos.get(i);
+		
+			rsvRoomListDto.setROOMS_NUM(hostelListRoomsDto.getROOMS_NUM());
+			rsvRoomListDto.setROOMS_NAME(hostelListRoomsDto.getROOMS_NAME());
+			rsvRoomListDto.setROOMS_INFO(hostelListRoomsDto.getROOMS_INFO());
+			ArrayList<RsvCheckDto> RsvCheckDtos = new ArrayList<RsvCheckDto>();
+			
+			for(int j=0;j<rsvCheckDtos.size();j++)
+			{
+				if(rsvCheckDtos.get(j).getRSVROOM()==i);
+				RsvCheckDtos.add(rsvCheckDtos.get(j));
+			}
+			rsvRoomListDto.setRsvCheckList(RsvCheckDtos);
+		}
+		System.out.println(rsvRoomListDto.getROOMS_NUM());
+		model.addAttribute("rsvRoomListDto",rsvRoomListDto);
+	}
+		
 	}
 
-}

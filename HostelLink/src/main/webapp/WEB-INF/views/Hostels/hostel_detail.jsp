@@ -32,7 +32,7 @@
 	int hostelNum = hostel.getHOSTELS_NUM();
 %>
 
-<html data-ng-app="myApp" data-ng-controller="checkBoxCtrl">
+<html>
 <head>
 
   <script src= "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -41,13 +41,6 @@
   <link rel="stylesheet" href="css/hostels/hstView.css">
   <link rel="stylesheet" href="dist/css/font-awesome.css">
   <link rel="stylesheet" href="dist/css/bootstrap.css">
-   <script>
-   var app = angular.module('myApp',[]);
-   
-   app.controller('checkBoxCtrl',function($scope){
-		$scope.row =${RsvCheckDto.size()}/3;
-	});
-   </script>
    
 	
 <style>
@@ -57,13 +50,16 @@
       margin: auto;
   }
   </style>
-    
+
 </head>
 
-<body ng-init="appName = 'abc' ">
+<body data-ng-app="myApp" data-ng-controller="checkBoxCtrl">
+	
 
+	
+
+	
 	<!-- 호스텔 사진 배너 -->
-	<h1>{{appName}} </h1>
 	${RsvCheckDto.get(0).RSVDATE}
 	<div id="main">
 		<!--Header-->
@@ -130,9 +126,17 @@
 							      				</div>
 							      				<div id="Room${roomIndex.index}" class="panel-collapse collapse">
 							      				 <div class="panel-body">${roomDto.ROOMS_INFO}<br><br>
-							      				 	<!-- 객실예약 테이블 -->						       
+							      				 	<!-- 객실예약 테이블 -->	
+							      				 	<c:forEach items="${RsvCheckDto}" var="rsvCheck"	varStatus="checkIndex">
+							      				 		<c:if test="${'${roomDto.ROOMS_NUM}' eq '${rsvCheck.ROOMS_NUM}'}">
+							      				 			${rsvCheck.RSVDATE} 
+							      				 		</c:if>
+							      				 	</c:forEach>				       
 						        					<table class="table table-bordered table-striped" >	
-						        										   
+						        						
+						        						<tr ng-repeat="checkBox in RsvCheckDto ">
+						        							<td>{{checkBox.RSVDATE}}</td>
+						        						</tr>					   
 						        					</table>
 							      				 </div>
 							      				</div>
@@ -147,7 +151,11 @@
 						 </div>
 			<!-- 게시판 수정 -->
 			<a href="../HostelProject/hostelsModify.me?num=<%=hostel.getHOSTELS_NUM()%>">호스텔 수정</a>
+			${rsvRoomList.get(0).ROOMS_NUM}
 		<script>
+		
+
+		   
 		$('#roomPrice1').hide();
 		$('#roomPrice2').hide();
 		$('#roomPrice3').hide();
