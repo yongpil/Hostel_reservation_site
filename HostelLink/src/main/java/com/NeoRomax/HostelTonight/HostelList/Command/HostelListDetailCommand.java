@@ -1,7 +1,10 @@
 package com.NeoRomax.HostelTonight.HostelList.Command;
 
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +17,7 @@ import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListImgDao;
 import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListRoomsDao;
 import com.NeoRomax.HostelTonight.HostelList.Dto.HostelListRoomsDto;
 import com.NeoRomax.HostelTonight.Rsv.Dao.RsvDao;
-import com.NeoRomax.HostelTonight.Rsv.Dto.RsvCheckDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvRoomListDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
@@ -31,7 +34,7 @@ import com.NeoRomax.HostelTonight.util.Constant;
 
 public class HostelListDetailCommand implements HostelListCommand {
 	SqlSession sqlSession = null;
-	
+	DateFormat outputFormattoer = new SimpleDateFormat("MM/dd/yyyy");
 	public HostelListDetailCommand() {
 		sqlSession = Constant.sqlSession;
 	}
@@ -50,29 +53,39 @@ public class HostelListDetailCommand implements HostelListCommand {
 		model.addAttribute("roomsDtos",roomsDao.RoomsList(Integer.parseInt(request.getParameter("num"))));
 		model.addAttribute("RsvCheckDto",rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150915","20150920"));
 		ArrayList<HostelListRoomsDto> hostelListRoomDtos = (ArrayList<HostelListRoomsDto>)roomsDao.RoomsList(Integer.parseInt(request.getParameter("num")));
-		ArrayList<RsvCheckDto> rsvCheckDtos = (ArrayList<RsvCheckDto>)rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150915","20150920");
+		ArrayList<RsvAvailableDto> rsvAvailableDtos = (ArrayList<RsvAvailableDto>)rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150914","20150920");
+		ArrayList<RsvRoomListDto> rsvRoomListDtos = new ArrayList<RsvRoomListDto>();
 		
-		RsvRoomListDto rsvRoomListDto = new RsvRoomListDto();
-		
+
 		for(int i=0;i<hostelListRoomDtos.size();i++)
 		{
-			
+			RsvRoomListDto rsvRoomListDto = new RsvRoomListDto();
 			HostelListRoomsDto hostelListRoomsDto = hostelListRoomDtos.get(i);
 		
-			rsvRoomListDto.setROOMS_NUM(hostelListRoomsDto.getROOMS_NUM());
-			rsvRoomListDto.setROOMS_NAME(hostelListRoomsDto.getROOMS_NAME());
-			rsvRoomListDto.setROOMS_INFO(hostelListRoomsDto.getROOMS_INFO());
-			ArrayList<RsvCheckDto> RsvCheckDtos = new ArrayList<RsvCheckDto>();
+			rsvRoomListDto.setRoomsNum(hostelListRoomsDto.getROOMS_NUM());
+			rsvRoomListDto.setRoomsName(hostelListRoomsDto.getROOMS_NAME());
+			rsvRoomListDto.setRoomsInfo(hostelListRoomsDto.getROOMS_INFO());
+			ArrayList<RsvAvailableDto> rsvRoomCheckDtos = new ArrayList<RsvAvailableDto>();
 			
-			for(int j=0;j<rsvCheckDtos.size();j++)
-			{
-				if(rsvCheckDtos.get(j).getRSVROOM()==i);
-				RsvCheckDtos.add(rsvCheckDtos.get(j));
+			for(int j=0;j<rsvAvailableDtos.size();j++)
+			{   
+				if(rsvAvailableDtos.get(j).getRsvRoom()==i)
+				{
+					rsvRoomCheckDtos.add(rsvAvailableDtos.get(j));		
+					System.out.println(rsvAvailableDtos.get(j).getRsvRate());
+				}
 			}
-			rsvRoomListDto.setRsvCheckList(RsvCheckDtos);
+			rsvRoomListDto.settRsvAvailableDtos(rsvRoomCheckDtos);
+			rsvRoomListDtos.add(rsvRoomListDto);
+/*		System.out.println(rsvRoomListDtos.get(i).gettRsvAvailableDtos());
+			for(int k=0;k<rsvRoomListDtos.get(0).gettRsvAvailableDtos().size();k++)
+			{
+				System.out.println(rsvRoomListDtos.get(0).gettRsvAvailableDtos().get(k).getRsvRate());
+			}*/
 		}
-		System.out.println(rsvRoomListDto.getROOMS_NUM());
-		model.addAttribute("rsvRoomListDto",rsvRoomListDto);
+		
+		
+		model.addAttribute("rsvRoomListDtos",rsvRoomListDtos);
 	}
 		
 	}

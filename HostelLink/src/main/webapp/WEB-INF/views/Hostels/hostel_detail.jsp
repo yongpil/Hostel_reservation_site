@@ -24,7 +24,7 @@
 
 <%
 	HostelListHostelDto hostel = (HostelListHostelDto) request.getAttribute("hDto");
-	RsvCheckDto rsvConfirmBean;
+	RsvAvailableDto rsvConfirmBean;
 	List roomsList = (List) request.getAttribute("roomsDtos");
 	List rsvsList = (List) request.getAttribute("RsvCheckDto"); //예약관련 객실 정보 리스트
 	String realFolder = "";
@@ -53,14 +53,8 @@
 
 </head>
 
-<body data-ng-app="myApp" data-ng-controller="checkBoxCtrl">
-	
-
-	
-
-	
+<body data-ng-app="">	
 	<!-- 호스텔 사진 배너 -->
-	${RsvCheckDto.get(0).RSVDATE}
 	<div id="main">
 		<!--Header-->
 		<jsp:include page="../header.jsp"></jsp:include>
@@ -87,7 +81,6 @@
 					 		</c:forEach>
 				    </div>
 				    
-					{{row}}
 				    <!-- Left and right controls -->
 				    <a class="left carousel-control" href="#hostelsPics" role="button" data-slide="prev">
 				      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -117,27 +110,40 @@
 						  		 <div class="panel-group" id="accordion">
 						  		<form action="rsvView.html" method="post">
 						  			 <div class="panel-group" id="accordion">
-						  			 	<c:forEach items="${roomsDtos}" var="roomDto" varStatus="roomIndex">
+						  			 		<c:forEach items="${rsvRoomListDtos}" var="rsvRoom" varStatus="roomIndex">
 						  					<div class="panel panel-default">
 							      				<div class="panel-heading">
 								        			<h4 class="panel-title">
-								        			 <a data-toggle="collapse" data-parent="#accordion" href="#Room${roomIndex.index}">${roomDto.ROOMS_NAME}</a>
+								        			 <a data-toggle="collapse" data-parent="#accordion" href="#Room${roomIndex.index}">${rsvRoom.roomsName}</a>
 								        			</h4>
 							      				</div>
 							      				<div id="Room${roomIndex.index}" class="panel-collapse collapse">
-							      				 <div class="panel-body">${roomDto.ROOMS_INFO}<br><br>
+							      				 <div class="panel-body">${rsvRoom.roomsInfo}<br><br>
 							      				 	<!-- 객실예약 테이블 -->	
-							      				 	<c:forEach items="${RsvCheckDto}" var="rsvCheck"	varStatus="checkIndex">
-							      				 		<c:if test="${'${roomDto.ROOMS_NUM}' eq '${rsvCheck.ROOMS_NUM}'}">
-							      				 			${rsvCheck.RSVDATE} 
-							      				 		</c:if>
-							      				 	</c:forEach>				       
-						        					<table class="table table-bordered table-striped" >	
-						        						
-						        						<tr ng-repeat="checkBox in RsvCheckDto ">
-						        							<td>{{checkBox.RSVDATE}}</td>
-						        						</tr>					   
-						        					</table>
+							      				 		<table class="table table-bordered table-striped" >		
+														 	<c:forEach items="${rsvRoom.tRsvAvailableDtos}" var="RsvAvailableDto" varStatus="RsvAvailableDtoIndex" step="3">
+														 		<tr>
+														 		 <td ng-show="${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index]}">
+														 		 <label class="rsvDate"><input type="checkbox" name="checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvAvailableDtoIndex.index}"
+														 		  value="${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+0].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+0].rsvRate}"/>
+														 		  ${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+0].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+0].rsvRate}
+														 		 </label>													 		 
+								        						 </td>
+																 <td ng-show="${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+1]}">
+																 <label class="rsvDate"><input type="checkbox" name="checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvAvailableDtoIndex.index+1}"
+														 		  value="${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+1].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+1].rsvRate}"/>
+														 		  ${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+1].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+1].rsvRate}
+														 		 </label> 
+																 </td>
+																 <td ng-show="${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+2]}">
+																 <label class="rsvDate"><input type="checkbox" name="checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvAvailableDtoIndex.index+2}"
+														 		  value="${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+2].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+2].rsvRate}"/>
+														 		  ${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+2].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvAvailableDtoIndex.index+2].rsvRate}
+														 		 </label>
+																 </td>
+																</tr>
+															</c:forEach>		
+														</table>		       
 							      				 </div>
 							      				</div>
 						      				</div>
@@ -151,11 +157,7 @@
 						 </div>
 			<!-- 게시판 수정 -->
 			<a href="../HostelProject/hostelsModify.me?num=<%=hostel.getHOSTELS_NUM()%>">호스텔 수정</a>
-			${rsvRoomList.get(0).ROOMS_NUM}
 		<script>
-		
-
-		   
 		$('#roomPrice1').hide();
 		$('#roomPrice2').hide();
 		$('#roomPrice3').hide();
