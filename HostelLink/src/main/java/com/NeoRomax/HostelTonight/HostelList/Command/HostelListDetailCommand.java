@@ -51,7 +51,7 @@ public class HostelListDetailCommand implements HostelListCommand {
 		model.addAttribute("hDto",hDao.getHDto(Integer.parseInt(request.getParameter("num"))));
 		model.addAttribute("hImgDtos",hImgDao.getHImgList(Integer.parseInt(request.getParameter("num"))));
 		model.addAttribute("roomsDtos",roomsDao.RoomsList(Integer.parseInt(request.getParameter("num"))));
-		model.addAttribute("RsvCheckDto",rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150915","20150920"));
+		model.addAttribute("RsvAbleDto",rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150915","20150920"));
 		ArrayList<HostelListRoomsDto> hostelListRoomDtos = (ArrayList<HostelListRoomsDto>)roomsDao.RoomsList(Integer.parseInt(request.getParameter("num")));
 		ArrayList<RsvAvailableDto> rsvAvailableDtos = (ArrayList<RsvAvailableDto>)rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150914","20150920");
 		ArrayList<RsvRoomListDto> rsvRoomListDtos = new ArrayList<RsvRoomListDto>();
