@@ -1,0 +1,21 @@
+<!--       <script>
+ 	     function myFunction(){
+
+ 	    var result = new Array();
+ 	   <c:forEach items="${RsvCheckDto}" var="info">
+ 	   		var json = new Object();
+ 	   		json.date="${info.RSVDATE}";
+ 	   		json.roomName="${info.RSVROOM}";
+ 	   		result.push(json);
+ 	   	</c:forEach>
+ 	   	console.log(result);
+ 	   alert("jsoninfo="+JSON.stringify(result));
+ 	     }
+ 	     
+ 	  var myApp = angular.module('myApp', []);
+ 	   
+ 	  myApp.controller('checkBoxCtrl',function($scope){
+			//$scope.RsvCheckDto=${RsvCheckDto}
+			$scope.row=10;
+		});
+    </script> -->

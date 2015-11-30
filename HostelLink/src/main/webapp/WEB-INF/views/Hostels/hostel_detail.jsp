@@ -151,10 +151,25 @@
 						    			 </div>
 						  			</form>
 						  			</div>
-						  			</div>		
-						  		 </div> 
-						 		</div> 
-						 </div>
+						  			</div>
+						  			
+					 <!-- 지도 및 약도 -->
+						<div class="infoList" data-toggle="collapse" data-target="#map">지도 및 약도  <i class="fa fa-map"></i></div>
+						  <div id="map" class="collapse"><br>
+						    </div> 						
+						    
+					 <!-- 시설 -->
+						<div class="infoList" data-toggle="collapse" data-target="#facility">시설</div>
+						  <div id="facility" class="collapse"><br>
+						    </div> 
+						    
+						    <!-- 이용후기 -->
+						<div> <a href="../HostelProject/hostelsReviewListAction.re?num=<%=hostel.getHOSTELS_NUM()%>">이용 후기</a> <i class="fa fa-pencil"></i></div>
+						  <div id="review" class="collapse"><br>	  
+						    </div> 	
+					 </div> 
+					</div> 
+				 </div>
 			<!-- 게시판 수정 -->
 			<a href="../HostelProject/hostelsModify.me?num=<%=hostel.getHOSTELS_NUM()%>">호스텔 수정</a>
 		<script>

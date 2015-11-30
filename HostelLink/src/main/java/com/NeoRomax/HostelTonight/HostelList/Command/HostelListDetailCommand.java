@@ -72,16 +72,10 @@ public class HostelListDetailCommand implements HostelListCommand {
 				if(rsvAvailableDtos.get(j).getRsvRoom()==i)
 				{
 					rsvRoomCheckDtos.add(rsvAvailableDtos.get(j));		
-					System.out.println(rsvAvailableDtos.get(j).getRsvRate());
 				}
 			}
 			rsvRoomListDto.settRsvAvailableDtos(rsvRoomCheckDtos);
 			rsvRoomListDtos.add(rsvRoomListDto);
-/*		System.out.println(rsvRoomListDtos.get(i).gettRsvAvailableDtos());
-			for(int k=0;k<rsvRoomListDtos.get(0).gettRsvAvailableDtos().size();k++)
-			{
-				System.out.println(rsvRoomListDtos.get(0).gettRsvAvailableDtos().get(k).getRsvRate());
-			}*/
 		}
 		
 		
