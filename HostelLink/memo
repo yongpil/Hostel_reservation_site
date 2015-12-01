@@ -25,3 +25,14 @@
 						}
 			    }
 			});
+			
+			
+			
+						if(x.checked==true)
+				{
+					rateArry[roomsNum_] = rateArry[roomsNum_] + '<%=rsvRoomList.get(roomsNum_).gettRsvAvailableDtos().get(index_).getRsvRate%>';	
+				}
+			else
+				{
+						rateArry[roomsNum_] = rateArry[roomsNum_] - '<%=rsvRoomList.get(roomsNum_).gettRsvAvailableDtos().get(index_).getRsvRate%>';
+				}

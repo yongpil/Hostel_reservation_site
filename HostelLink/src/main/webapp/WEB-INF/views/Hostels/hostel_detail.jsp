@@ -27,6 +27,7 @@
 	RsvAvailableDto rsvConfirmBean;
 	List roomsList = (List) request.getAttribute("roomsDtos");
 	List rsvsList = (List) request.getAttribute("RsvAbleDto"); //예약관련 객실 정보 리스트
+	List rsvRoomList = (List) request.getAttribute("rsvRoomListDtos");
 	String realFolder = "";
 	realFolder = "./HostelsUpload/";
 	int hostelNum = hostel.getHOSTELS_NUM();
@@ -127,7 +128,7 @@
 														 		 <label class="rsvDate"><input type="checkbox" name="checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index}"
 														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+0].rsvRate}"
 														 		  id = "checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index}"
-														 		  onclick="priceCal(${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index},${RsvADIndex.index},${rsvRoom.roomsNum})"/>
+														 		  onclick="priceCal(${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+0].rsvRate},${RsvADIndex.index},${rsvRoom.roomsNum})"/>
 														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+0].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+0].rsvRate}
 														 		 </label>													 		 
 								        						 </td>
@@ -135,7 +136,7 @@
 																 <label class="rsvDate"><input type="checkbox" name="checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index+1}"
 														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate}"
 														 		  id = "checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index}"
-														 		  onclick="priceCal(${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index+1},${RsvADIndex.index},${rsvRoom.roomsNum})"/>	  
+														 		  onclick="priceCal(${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate},${RsvADIndex.index},${rsvRoom.roomsNum})"/>	  
 														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate}
 														 		 </label> 
 																 </td>
@@ -143,7 +144,7 @@
 																 <label class="rsvDate"><input type="checkbox" name="checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index+2}"
 														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate}"
 														 		  id = "checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index}"
-														 		  onclick="priceCal(${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index+2},${RsvADIndex.index},${rsvRoom.roomsNum})"/>
+														 		  onclick="priceCal(,${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate},${RsvADIndex.index},${rsvRoom.roomsNum})"/>
 														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate}
 														 		 </label> 
 																 </td>
@@ -184,23 +185,28 @@
 		
 
 		<script>
-		var rateArry = new Array(${rsvRoomListDtos.size()});
+		var rateArry = new Array('<%=rsvRoomList.size()%>');
 		
 		for(var i=0;i<rateArry.length;i++)
 			{
 				rateArry[i]=0;
 			}
 		
-		function priceCal(checkId,index,roomsNum){
-			checkBoxId = "checkBox"+checkId;
-			var x=document.getElementById(checkBoxId);
+		var priceCalfunction = function (rommsRate, roomsNum){
+			checkBoxId_ = "checkBox"+checkId_;
+			var index_ = parseInt(index);
+			var roomsNum_ = parseInt(roomsNum);
+			var x = document.getElementById(checkId);
+			
 			if(x.checked==true)
-				{
-					rateArry[roomsNum] = rateArry[roomsNum] + ${rsvRoomListDtos.get(roomsNum).tRsvAvailableDtos.get(index).rsvRate};
-				}
-			else{
-					rateArry[roomsNum] = rateArry[roomsNum] - ${rsvRoomListDtos.get(roomsNum).tRsvAvailableDtos.get(index).rsvRate};
-				}
+			{
+				rateArry[roomsNum]= rateArry[roomsNum] + rommsRate;
+			}
+			else
+			{
+				rateArry[roomsNum]= rateArry[roomsNum] - rommsRate;	
+			}
+			
 			rateId = "rate"+roomsNum;
 			document.getElementById(rateId).innerHTML = rateArry[roomsNum];
 		}
