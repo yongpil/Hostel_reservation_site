@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListHostelDao;
-import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListImgDao;
-import com.NeoRomax.HostelTonight.HostelList.Dto.HostelListImgDto;
+import com.NeoRomax.HostelTonight.HostelList.Dao.HostelDao;
+import com.NeoRomax.HostelTonight.HostelList.Dao.ImgDao;
+import com.NeoRomax.HostelTonight.HostelList.Dto.ImgDto;
 import com.NeoRomax.HostelTonight.HostelList.Dto.HostelsListDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
@@ -37,16 +37,16 @@ public class HostelListAddCommand implements HostelListCommand {
 	
 	@Override
 	public void execute(Model model) {
-		HostelListHostelDao hDao = sqlSession.getMapper(HostelListHostelDao.class);
-		HostelListImgDao hImgDao = sqlSession.getMapper(HostelListImgDao.class);
+		HostelDao hDao = sqlSession.getMapper(HostelDao.class);
+		ImgDao hImgDao = sqlSession.getMapper(ImgDao.class);
 		
 		Map<String, Object> map = model.asMap();
 		MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) map.get("mRequest");
 		
   		/*호스텔 정보 저장*/
-  		hDao.addHostel(mRequest.getParameter("HOSTELS_NAME"),mRequest.getParameter("HOSTELS_NATION"),mRequest.getParameter("HOSTELS_CITY"),
-  				mRequest.getParameter("HOSTELS_ADDR"),mRequest.getParameter("HOSTELS_INFO"),mRequest.getParameter("HOSTELS_PHONE"),
-  				mRequest.getParameter("HOSTELS_EMAIL"));
+  		hDao.addHostel(mRequest.getParameter("hostelsName"),mRequest.getParameter("hostelsNation"),mRequest.getParameter("hostelsCity"),
+  				mRequest.getParameter("hostelsAddr"),mRequest.getParameter("hostelsInfo"),mRequest.getParameter("hostelsPhone"),
+  				mRequest.getParameter("hostelsEmail"));
   		
 		/*호스텔 사진 저장*/		
    		int imgcount=0;

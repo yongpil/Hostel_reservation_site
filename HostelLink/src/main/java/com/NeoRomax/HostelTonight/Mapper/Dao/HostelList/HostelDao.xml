@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.NeoRomax.HostelTonight.HostelList.Dao.HostelDao">
+	<select id="Hlist" resultType="com.NeoRomax.HostelTonight.HostelList.Dto.HostelsListDto">
+		SELECT hostelNum, hostelName, hostelNation, hostelCity, hostelAddr, hostelInfo, hostelPhone, hostelEmail, imageName FROM HOSTELS A JOIN HOSTELS_IMAGE B ON A.hostelNum = B.hstNum GROUP BY hstNum
+	</select>
+	
+	<select id="getHstNumfromEmail" resultType="java.lang.Integer">
+		SELECT hostelNum FROM  HOSTELS WHERE hostelEmail = #{param1}
+	</select>
+	
+	<insert id="addHostel">
+		insert into hostels (hostelName, hostelNation, hostelCity, hostelAddr, hostelInfo, hostelPhone, hostelEmail) 
+		values( #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7})
+	</insert>
+	
+	<select id="getHDto" resultType="com.NeoRomax.HostelTonight.HostelList.Dto.HostelDto">
+		SELECT * FROM HOSTELS WHERE hostelNum = #{PARAM1}
+	</select>
+</mapper>

@@ -1,7 +1,6 @@
 package com.NeoRomax.HostelTonight.HostelList.Dto;
 
-public class HostelsListDto {
-	
+public class HostelDto {
 	private int hostelNum;
 	private String hostelName;
 	private String hostelNation;
@@ -10,7 +9,6 @@ public class HostelsListDto {
 	private String hostelInfo;
 	private String hostelPhone;
 	private String hostelEmail;
-	private String imageName;
 	
 	public int getHostelNum() {
 		return hostelNum;
@@ -60,12 +58,7 @@ public class HostelsListDto {
 	public void setHostelEmail(String hostelEmail) {
 		this.hostelEmail = hostelEmail;
 	}
-	public String getImageName() {
-		return imageName;
-	}
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
 
-
+	
+	
 }

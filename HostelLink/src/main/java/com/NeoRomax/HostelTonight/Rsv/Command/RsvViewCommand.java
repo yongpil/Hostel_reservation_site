@@ -10,11 +10,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
 import com.NeoRomax.HostelTonight.HostelList.Command.HostelListCommand;
-import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListHostelDao;
-import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListRoomsDao;
-import com.NeoRomax.HostelTonight.HostelList.Dto.HostelListHostelDto;
-import com.NeoRomax.HostelTonight.HostelList.Dto.HostelListRoomsDto;
+import com.NeoRomax.HostelTonight.HostelList.Dao.HostelDao;
+import com.NeoRomax.HostelTonight.HostelList.Dao.RoomsDao;
+import com.NeoRomax.HostelTonight.HostelList.Dto.HostelDto;
+import com.NeoRomax.HostelTonight.HostelList.Dto.RoomsDto;
+import com.NeoRomax.HostelTonight.Rsv.Dao.RsvDao;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvConfirmDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvRoomListDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
 /**
@@ -38,27 +41,50 @@ public RsvViewCommand() {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
-		HostelListHostelDao hDao = sqlSession.getMapper(HostelListHostelDao.class);
-		HostelListRoomsDao roomsDao = sqlSession.getMapper(HostelListRoomsDao.class);
-		List<HostelListRoomsDto> roomList = new ArrayList<HostelListRoomsDto>();
+		HostelDao hDao = sqlSession.getMapper(HostelDao.class);
+		RoomsDao roomsDao = sqlSession.getMapper(RoomsDao.class);
+		RsvDao rsvDao = sqlSession.getMapper(RsvDao.class);
 		
-		HostelListHostelDto hostelDto;
-		hostelDto = hDao.getHDto(Integer.parseInt(request.getParameter("hostelNum")));
+		System.out.println(request.getParameter("hostelNum"));
+		
+		List<RoomsDto> roomList = new ArrayList<RoomsDto>();
 		roomList = roomsDao.RoomsList(Integer.parseInt(request.getParameter("hostelNum")));
+		System.out.println(request.getParameter("hostelNum"));
+		List<RsvAvailableDto> rsvAbleDto = rsvDao.rsvList((Integer.parseInt(request.getParameter("hostelNum"))),"20150915","20150920");
 		
-		
-	 	ArrayList rsvConfirmList = new ArrayList();
-	 	String checkBox[] = new String[60];
-	 	String rsvDate[] =  new String[5];
-	 	int rsvRate[] = new int[5];
+	 	ArrayList<ArrayList<String>> rsvDatesList = new ArrayList<ArrayList<String>>();
+	 	ArrayList<ArrayList<String>> rsvRatesList = new ArrayList<ArrayList<String>>();
 	 	
-	 	for(int i=0;i<5;i++)
-	 	{
-	 		rsvDate[i]="";
-	 		rsvRate[i]=0;
-	 	}
+	 	
+	 	
 	 		
-	 	for(int i=0;i<60;i++)//앞에서 체크된 객실들을 가지고 객실별로 체크된 요금은 rsvRate배열에 날짜는 rsvDate에 넣는다.
+		for(int i=0;i<roomList.size();i++)
+		{
+			ArrayList<String> rsvDates =  new ArrayList<String>();
+			ArrayList<String> rsvRates = new ArrayList<String>();
+			
+			for(int j=0;j<rsvAbleDto.size();j++)
+			{   
+				if(request.getParameter("check"+i+"-"+j) != null)
+				{
+					String[] tempRsv = request.getParameter("check"+i+"-"+j).split(",");//,로 구분 되어 있는 rsvRate와 rsvDate를 분리 한다.
+					rsvDates.add(tempRsv[0]);
+					rsvRates.add(tempRsv[1]);
+				}
+			}
+			
+			if(rsvDates!=null)
+				rsvDatesList.add(rsvDates);
+			if(rsvRates!=null)
+				rsvRatesList.add(rsvRates);
+		}
+		
+	 	model.addAttribute("rsvDatesList", rsvDatesList);
+	 	model.addAttribute("rsvRatesList", rsvRatesList);
+	 	model.addAttribute("hostelDto", hDao.getHDto(Integer.parseInt(request.getParameter("hostelNum"))));
+	 	model.addAttribute("roomList", roomList);
+	 	
+	/* 	for(int i=0;i<60;i++)//앞에서 체크된 객실들을 가지고 객실별로 체크된 요금은 rsvRate배열에 날짜는 rsvDate에 넣는다.
 	 	{
 	 		checkBox[i]="checkBox"+i;
 	 		
@@ -93,9 +119,9 @@ public RsvViewCommand() {
 	 			rsvRate[4] = rsvRate[4] + Integer.parseInt(tempRsv[0]); 
 	 			rsvDate[4] = rsvDate[4] + tempRsv[1];
 	 		}
-	 	}
+	 	}*/
 	 	
-	 	for(int i=0;i<5;i++)
+/*	 	for(int i=0;i<5;i++)
 	 	{
 	 		if(!rsvDate[i].equals(""))//rsvDate가 널이 아니면
 	 		{
@@ -108,7 +134,7 @@ public RsvViewCommand() {
 	 	
 	 	model.addAttribute("rsvConfirmList", rsvConfirmList);
 	 	model.addAttribute("hostelbean", hostelDto);
-	 	model.addAttribute("roomList", roomList);
+	 	model.addAttribute("roomList", roomList);*/
 
 	}
 
