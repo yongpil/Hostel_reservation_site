@@ -37,72 +37,40 @@
 </head>
 <body>   
 
-<c:forEach items="${rsvDatesList}" var="rsvDates" varStatus="sta">
-		${roomList[sta.index].roomsName}
-	<c:forEach items="${rsvDates}" var="rsvDate">
-		${rsvDate}
-	</c:forEach>	
-	<br>	
-</c:forEach>
-
- 
 
 
 <div id="main">
 		<!--Header-->
 		<jsp:include page="../header.jsp"></jsp:include>
  		 <!-- 컨텐츠 -->
+ 		 <div class="container">
 			<div id="content">
 			<!-- 호스텔 이름 -->
 			<div id="hstName">
-				<h2>${hostelDto.hostelName}</h2>
+				<h2>${sessionDto.hostelDto.hostelName}</h2>
 			</div>
 			<!-- 호스텔 주소 -->
 			<div id="hostelAddr">
-				${hostelDto.hostelName}
+				${sessionDto.hostelDto.hostelAddr}
 			</div>
-			<div class="container">
-			
-<%-- <form action="rsvConfirm.html" method="post">
-
-
- <input type="hidden" name=<%=rsvRoomNum[i]%> value=<%=rsvbean.getROOMNUM()%>>
- <input type="hidden" name=<%=rsvConfirmDataName[i][1]%> value=<%=rsvbean.getRESERVATIONDAYS()%>>
- <input type="hidden" name=<%=rsvRate[i]%> value=<%=rsvbean.getTOTALRATE() %>>  
-
-		
-
- <!-- 객실예약 테이블 -->						       
- <table class="table table-bordered table-striped">
- <tr>
- <td><%=roombean.getROOMS_NAME() %></td>
- </tr>
-
- <%for(int j=0;j<dayCount;j++){%>
- <tr>
- <td>
- <%=dayList[j] %>
-</td>
-</tr>
-<%} %>
-<tr>
- <td>
- <%=totalRate %>
-</td>
-</tr>
- </table>	
- <%
- 	}
- %>
-
-<input type="hidden" name="listSize" value=<%=rsvConfirmList.size()%>>
-<input type="hidden" name="hstNum" value=<%=hostelsNum%>>
-<input type="hidden" name="userId" value=<%=userId%>>
-<input type="submit" value="예약확정">
-     
-  예약확정</form> --%>
-  </div> 
-  </div>
+			<br>
+			<br>
+			 <form action="rsvConfirm.html" method="post">
+			 <!-- 객실예약 테이블 -->						       
+						<table>
+						<c:forEach items="${sessionDto.rsvDatesList}" var="rsvDates" varStatus="sta">
+							<tr>
+							<th>${sessionDto.roomList[sta.index].roomsName}</th>
+							<c:forEach items="${rsvDates}" var="rsvDate">
+								<td>${rsvDate}&nbsp</td>
+							</c:forEach>
+							</tr>
+						</c:forEach>
+						</table>	
+				<input type="submit" value="예약확정">
+			  </form> 
+  		</div> 
+  	</div>
   </div>
 </body>
 </html>

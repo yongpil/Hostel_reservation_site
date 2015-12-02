@@ -9,14 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.NeoRomax.HostelTonight.HostelList.Command.HostelListAddCommand;
 import com.NeoRomax.HostelTonight.HostelList.Command.HostelListCommand;
 import com.NeoRomax.HostelTonight.HostelList.Command.HostelListDetailCommand;
 import com.NeoRomax.HostelTonight.HostelList.Command.HostelListViewCommand;
+import com.NeoRomax.HostelTonight.HostelList.Dto.SessionDto;
 import com.NeoRomax.HostelTonight.Rsv.Command.RsvConfirmCommand;
 import com.NeoRomax.HostelTonight.Rsv.Command.RsvViewCommand;
 import com.NeoRomax.HostelTonight.util.Constant;
@@ -33,6 +37,7 @@ import com.NeoRomax.HostelTonight.util.Constant;
 
 
 @Controller
+@SessionAttributes("sessionDto")
 public class HostelListController {
 
 	HostelListCommand command = null;
@@ -92,10 +97,9 @@ public class HostelListController {
 	}
 	
 	@RequestMapping("/rsvConfirm.html")
-	public String rsvConfirm(HttpServletRequest request, Model model) {
+	public String rsvConfirm(@ModelAttribute SessionDto sessionDto, SessionStatus sessionStatus, HttpServletRequest request, Model model) {
 		System.out.println("rsvConfirm()");
 		model.addAttribute("request",request);
-		
 		command = new RsvConfirmCommand();
 		command.execute(model);
 		return "/Hostels/hostel_rsv_confirm";

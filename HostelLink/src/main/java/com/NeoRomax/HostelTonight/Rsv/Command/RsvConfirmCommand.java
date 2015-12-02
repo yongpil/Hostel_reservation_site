@@ -31,7 +31,7 @@ public class RsvConfirmCommand implements HostelListCommand {
 		sqlSession = Constant.sqlSession;
 	}
 	@Override
-	public void execute(Model model) {
+	public void execute(Model model) { 
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		int hostelNum = Integer.parseInt(request.getParameter("hstNum"));

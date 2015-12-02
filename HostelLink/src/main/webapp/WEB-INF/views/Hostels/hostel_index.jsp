@@ -46,11 +46,11 @@
 				<c:forEach items="${hDtos}" var="hDto">
 					<li>
 						<%-- <a href="./hostelsDetailAction.me?num=${dto.HostelCode}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> --%>
-					    <a href="./hostel_detail.html?num=${hDto.hostelsNum}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> 
+					    <a href="./hostel_detail.html?num=${hDto.hostelNum}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> 
 						 <div  id="HostelsPic" style="background:url(<%=realFolder%>${hDto.imageName}) no-repeat; background-size:100%">
 						<div id=price>13,000 Won</div>
 						</div> 
-						<div id="HostelsName">${hDto.hostelsName}</div>
+						<div id="HostelsName">${hDto.hostelName}</div>
 						<span class="text">
 						  <%-- <span class="title"><%=hos.getHostelsName()%></span> --%>
 						</span>	

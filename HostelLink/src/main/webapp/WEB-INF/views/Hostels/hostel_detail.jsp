@@ -194,10 +194,6 @@
 			rateId = "rate"+roomsNum;
 			var x = document.getElementById(checkBoxId);
 			var total = 0;
-			console.log(checkId);
-			console.log(roomsRate);
-			console.log(roomsNum);
-			console.log(x);
 			if(x.checked==true)
 			{
 				rateArry[roomsNum]= rateArry[roomsNum] + roomsRate;
