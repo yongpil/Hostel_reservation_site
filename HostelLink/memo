@@ -36,3 +36,7 @@
 				{
 						rateArry[roomsNum_] = rateArry[roomsNum_] - '<%=rsvRoomList.get(roomsNum_).gettRsvAvailableDtos().get(index_).getRsvRate%>';
 				}
+				
+2015/12/03
+1.로그인 성공하면 session에 ID값 넣어주기
+2.예약 버튼 누르면 session에 ID값이 저장되어 잇는지 확인하고 저장이 않되있으면 loginForm페이지로 저장이 되있으면 예약 페이지로 이동하기. 

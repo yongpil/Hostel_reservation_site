@@ -1,9 +1,9 @@
 package com.NeoRomax.HostelTonight.HostelList.Dto;
 
-public class HostelListImgDto {
+public class ImgDto {
 	private int hstImageNum;
 	private int hstNum;
-	private String IMAGENAME;
+	private String imageName;
 	
 	public int getHstImageNum() {
 		return hstImageNum;
@@ -17,11 +17,12 @@ public class HostelListImgDto {
 	public void setHstNum(int hstNum) {
 		this.hstNum = hstNum;
 	}
-	public String getIMAGENAME() {
-		return IMAGENAME;
+	public String getImageName() {
+		return imageName;
 	}
-	public void setIMAGENAME(String iMAGENAME) {
-		IMAGENAME = iMAGENAME;
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
+	
 	
 }

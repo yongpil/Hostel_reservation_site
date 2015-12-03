@@ -3,6 +3,8 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.NeoRomax.HostelTonight.HostelList.Dto.*"%>
 <%@ page import="com.NeoRomax.HostelTonight.Rsv.Dto.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
 	String userId = (String)session.getAttribute("id");
 %>
@@ -35,103 +37,52 @@
 </head>
 <body>   
 
- 
 
- <%
- 	List rsvConfirmList = (List)request.getAttribute("rsvConfirmList");
-	List roomlist = (List)request.getAttribute("roomList");	
-	HostelListHostelDto hostelbean = (HostelListHostelDto)request.getAttribute("hostelbean");
-	
-	String rsvRate[] = new String[roomlist.size()];
-	String rsvRoomNum[] = new String[roomlist.size()]; 
-	
-	for(int i=0;i<roomlist.size();i++)
-	{
-		rsvRate[i]="rsvRate"+i;
-		rsvRoomNum[i]="rsvRoomNum"+i;
-	}
 
-    
- 	String hostelName = hostelbean.getHOSTELS_NAME();
-	String hostelAddr = hostelbean.getHOSTELS_ADDR();
-	int hostelsNum=0;
-	int roomNum;
-	String rsvDays="";
-	int totalRate;
-	int rsvNum=0;
-%>
 <div id="main">
 		<!--Header-->
 		<jsp:include page="../header.jsp"></jsp:include>
  		 <!-- 컨텐츠 -->
+ 		 <div class="container">
 			<div id="content">
 			<!-- 호스텔 이름 -->
 			<div id="hstName">
-				<h2><%=hostelName%></h2>
+				<h2>${sessionDto.hostelDto.hostelName}</h2>
 			</div>
 			<!-- 호스텔 주소 -->
 			<div id="hostelAddr">
-				<%=hostelAddr%>
+				${sessionDto.hostelDto.hostelAddr}
 			</div>
-			<div class="container">
-			
-<form action="rsvConfirm.html" method="post">
-<% 
- 	for(int i=0;i<rsvConfirmList.size();i++)
- 	{
- 		HostelListRoomsDto roombean; 
- 		RsvConfirmDto rsvbean = (RsvConfirmDto)rsvConfirmList.get(i);
- 		hostelsNum = rsvbean.getHOSTELNUM();
- 		roomNum = rsvbean.getROOMNUM();
-/*  		rsvDays = rsvbean.getRESERVATIONDAYS(); */
- 		totalRate = rsvbean.getTOTALRATE();
- 		roombean = ((HostelListRoomsDto)roomlist.get(i));
- 		int dayCount = rsvDays.split(",").length;
- 		String dayList[] = new String[dayCount];
- 		
- 		for(int k = 0; k<dayCount;k++)
-		{
- 			dayList[k] = rsvDays.split(",")[k];
-		}
- %>
-
- <input type="hidden" name=<%=rsvRoomNum[i]%> value=<%=rsvbean.getROOMNUM()%>>
-<%--  <input type="hidden" name=<%=rsvConfirmDataName[i][1]%> value=<%=rsvbean.getRESERVATIONDAYS()%>> --%>
- <input type="hidden" name=<%=rsvRate[i]%> value=<%=rsvbean.getTOTALRATE() %>>  
-
-		
-
- <!-- 객실예약 테이블 -->						       
- <table class="table table-bordered table-striped">
- <tr>
- <td><%=roombean.getROOMS_NAME() %></td>
- </tr>
-
- <%for(int j=0;j<dayCount;j++){%>
- <tr>
- <td>
- <%=dayList[j] %>
-</td>
-</tr>
-<%} %>
-<tr>
- <td>
- <%=totalRate %>
-</td>
-</tr>
- </table>	
- <%
- 	}
- %>
-
-<input type="hidden" name="listSize" value=<%=rsvConfirmList.size()%>>
-<input type="hidden" name="hstNum" value=<%=hostelsNum%>>
-<input type="hidden" name="userId" value=<%=userId%>>
-<input type="submit" value="예약확정">
-     
-  예약확정</form>
-  </div> 
-  </div>
+			<br>
+			<br>
+			 <form action="rsvConfirm.html" method="post">
+			 <!-- 객실예약 테이블 -->						       
+						<table>
+							<c:forEach items="${sessionDto.rsvDatesList}" var="rsvDates" varStatus="sta1">
+								<tr>
+								<th>${sessionDto.roomList[sta1.index].roomsName}</th>
+								<c:forEach items="${rsvDates}" var="rsvDate" varStatus="sta2">
+									<td>${rsvDate}&nbsp</td>
+									<td>${sessionDto.rsvRatesList[sta1.index].get(sta2.index)}&nbsp</td>
+								</c:forEach>
+								</tr>
+							</c:forEach>
+						</table>
+						total : ${sessionDto.totalRate}<br> 
+<%-- 						<table>
+							<c:forEach items="${sessionDto.rsvRatesList}" var="rsvRates" varStatus="sta1">
+								<tr>
+								<c:forEach items="${rsvRates}" var="rsvRate" varStatus="sta2">
+									<td>${rsvRate}&nbsp</td>
+								</c:forEach>
+								</tr>
+							</c:forEach>
+						</table> --%>
+						
+				<input type="submit" value="예약확정">
+			  </form> 
+  		</div> 
+  	</div>
   </div>
 </body>
 </html>

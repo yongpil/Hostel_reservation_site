@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <%@ page import="java.util.*"%>
 <%@ page session="false" %>
 <%
@@ -46,11 +47,11 @@
 				<c:forEach items="${hDtos}" var="hDto">
 					<li>
 						<%-- <a href="./hostelsDetailAction.me?num=${dto.HostelCode}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> --%>
-					    <a href="./hostel_detail.html?num=${hDto.HOSTELS_NUM}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> 
-						 <div  id="HostelsPic" style="background:url(<%=realFolder%>${hDto.IMAGENAME}) no-repeat; background-size:100%">
+					    <a href="./hostel_detail.html?num=${hDto.hostelNum}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> 
+						 <div  id="HostelsPic" style="background:url(<%=realFolder%>${hDto.imageName}) no-repeat; background-size:100%">
 						<div id=price>13,000 Won</div>
 						</div> 
-						<div id="HostelsName">${hDto.HOSTELS_NAME}</div>
+						<div id="HostelsName">${hDto.hostelName}</div>
 						<span class="text">
 						  <%-- <span class="title"><%=hos.getHostelsName()%></span> --%>
 						</span>	
@@ -62,7 +63,11 @@
 				</div>
 			</div>
 			<a href="addHostel_view">호스텔 추가</a>
+					
+					
 		</div>	
+		
+
 		
 <script>
  $('#filter').hide();

@@ -20,17 +20,11 @@
 <%@ page import="com.NeoRomax.HostelTonight.Rsv.Dto.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 
 <%
-	HostelListHostelDto hostel = (HostelListHostelDto) request.getAttribute("hDto");
-	RsvAvailableDto rsvConfirmBean;
-	List roomsList = (List) request.getAttribute("roomsDtos");
-	List rsvsList = (List) request.getAttribute("RsvAbleDto"); //예약관련 객실 정보 리스트
-	List rsvRoomList = (List) request.getAttribute("rsvRoomListDtos");
 	String realFolder = "";
 	realFolder = "./HostelsUpload/";
-	int hostelNum = hostel.getHOSTELS_NUM();
 %>
 
 <html>
@@ -54,7 +48,7 @@
 
 </head>
 
-<body data-ng-app="" >	
+ <body data-ng-app="" >	
 	<!-- 호스텔 사진 배너 -->
 	<div id="main">
 		<!--Header-->
@@ -70,18 +64,18 @@
 					 			<c:choose>
 								    <c:when test="${hImgIndex.index==0}">
 								        <div class="item active">
-					 						<img src="<%=realFolder%>${hImg.IMAGENAME}">
+					 						<img src="<%=realFolder%>${hImg.imageName}">
 					 					</div>
 								    </c:when>    
 								    <c:otherwise>
 								       <div class="item">
-											<img src="<%=realFolder%>${hImg.IMAGENAME}">
+											<img src="<%=realFolder%>${hImg.imageName}">
 									   </div>
 								    </c:otherwise>
 								</c:choose>
 					 		</c:forEach>
 				    </div>
-				    
+			    
 				    <!-- Left and right controls -->
 				    <a class="left carousel-control" href="#hostelsPics" role="button" data-slide="prev">
 				      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -96,20 +90,20 @@
 
 						<!-- 호스텔 이름 -->
 						<div id="hstName">
-							<h2><%=hostel.getHOSTELS_NAME()%></h2>
+							<h2>${hDto.hostelName}</h2>
 						</div>
 						
 						<!-- 호스텔 정보 -->
 						<div id="hostelInfoList" class="container">
 							<div  class="infoList" data-toggle="collapse" data-target="#hostelInfoView">호스텔 설명  <i class="fa fa-h-square"></i></div>
-								<div id="hostelInfoView" class="collapse"><br><p><%=hostel.getHOSTELS_INFO()%></p></div>		
+								<div id="hostelInfoView" class="collapse"><br><p>${hDto.hostelInfo}</p></div>		
 						
 		
 						<!-- 객실 정보 -->
 						 	<div class="infoList" data-toggle="collapse" data-target="#roomInfoView">객실 정보  <i class="fa fa-bed"></i></div>
 						  		<div id="roomInfoView" class="collapse">
 						  		 <div class="panel-group" id="accordion">
-						  		<form action="rsvView.html" method="post">
+						  		<form action="rsvView.html" method="post" name="rsvForm">
 						  			 <div class="panel-group" id="accordion">
 						  			 		<c:forEach items="${rsvRoomListDtos}" var="rsvRoom" varStatus="roomIndex">
 						  					<div class="panel panel-default">
@@ -125,26 +119,26 @@
 														 	<c:forEach items="${rsvRoom.tRsvAvailableDtos}" var="RsvAvailDto" varStatus="RsvADIndex" step="3">
 														 		<tr>
 														 		 <td data-ng-show="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index]}">
-														 		 <label class="rsvDate"><input type="checkbox" name="checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index}"
-														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+0].rsvRate}"
-														 		  id = "checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index}"
-														 		  onclick="priceCal(${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+0].rsvRate},${RsvADIndex.index},${rsvRoom.roomsNum})"/>
-														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+0].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+0].rsvRate}
+														 		 <label class="rsvDate"><input type="checkbox" name="check${roomIndex.index}-${RsvADIndex.index}"
+														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvRate}"
+														 		  id = "check${roomIndex.index}-${RsvADIndex.index}"
+														 		  onclick="priceCal(${RsvADIndex.index},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvRate},${rsvRoom.roomsNum})"/>
+														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvRate}
 														 		 </label>													 		 
 								        						 </td>
 																 <td data-ng-show="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1]}">
-																 <label class="rsvDate"><input type="checkbox" name="checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index+1}"
+																 <label class="rsvDate"><input type="checkbox" name="check${roomIndex.index}-${RsvADIndex.index+1}"
 														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate}"
-														 		  id = "checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index}"
-														 		  onclick="priceCal(${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate},${RsvADIndex.index},${rsvRoom.roomsNum})"/>	  
+														 		  id = "check${roomIndex.index}-${RsvADIndex.index+1}"
+														 		  onclick="priceCal(${RsvADIndex.index+1},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate},${rsvRoom.roomsNum})"/>	  
 														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate}
 														 		 </label> 
 																 </td>
 																 <td data-ng-show="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2]}">
-																 <label class="rsvDate"><input type="checkbox" name="checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index+2}"
+																 <label class="rsvDate"><input type="checkbox" name="check${roomIndex.index}-${RsvADIndex.index+2}"
 														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate}"
-														 		  id = "checkBox${rsvRoom.tRsvAvailableDtos.size()*roomIndex.index+RsvADIndex.index}"
-														 		  onclick="priceCal(,${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate},${RsvADIndex.index},${rsvRoom.roomsNum})"/>
+														 		  id = "check${roomIndex.index}-${RsvADIndex.index+2}"
+														 		  onclick="priceCal(${RsvADIndex.index+2},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate},${rsvRoom.roomsNum})"/>
 														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate}
 														 		 </label> 
 																 </td>
@@ -156,10 +150,22 @@
 						      				</div>
 						    			 </c:forEach>
 						    			 </div>
+						    		 <input type="hidden" name="hostelNum" value="${hDto.hostelNum}">
+						    		 <input type="hidden" name="userId" value="<s:authentication property="name"/>">						    		 	 
+						    		 <input type="submit" value="예약">	
 						  			</form>
 						  			</div>
 						  			</div>
-						  			
+					USER ID : <s:authentication property="name"/><br/>
+					<label value=""></label>
+					<s:authorize ifAnyGranted="ROLE_USER">
+					<p> A is Log-In</p>
+					</s:authorize>
+					
+					<s:authorize ifNotGranted="ROLE_USER">
+					<p> A is Log-Out</p>
+					</s:authorize>
+					<a href="${pageContext.request.contextPath}/j_spring_security_logout">Log Out</a> <br />
 					 <!-- 지도 및 약도 -->
 						<div class="infoList" data-toggle="collapse" data-target="#map">지도 및 약도  <i class="fa fa-map"></i></div>
 						  <div id="map" class="collapse"><br>
@@ -171,7 +177,7 @@
 						    </div> 
 						    
 					 <!-- 이용후기 -->
-						<div> <a href="../HostelProject/hostelsReviewListAction.re?num=<%=hostel.getHOSTELS_NUM()%>">이용 후기</a> <i class="fa fa-pencil"></i></div>
+						<div> <a href="../HostelProject/hostelsReviewListAction.re?num=${hDto.hostelNum}">이용 후기</a> <i class="fa fa-pencil"></i></div>
 						  <div id="review" class="collapse"><br>	  
 						    </div> 	
 					 </div> 
@@ -181,38 +187,46 @@
 			<c:forEach items="${rsvRoomListDtos}" var="roomRate" varStatus="rrIndex">
 				<label>${roomRate.roomsName}</label> <label id="rate${rrIndex.index}"></label> <br>
 			</c:forEach>
-			<a href="../HostelProject/hostelsModify.me?num=<%=hostel.getHOSTELS_NUM()%>">호스텔 수정</a>
-		
-
+			<a href="../HostelProject/hostelsModify.me?num=${hDto.hostelNum}">호스텔 수정</a>
+			
+			<br> 총 합계:<label id="TotalRate">0</label>	  
+			${hDto.hostelNum}
 		<script>
-		var rateArry = new Array('<%=rsvRoomList.size()%>');
+		var rateArry = new Array(${roomsDtos.size()});
 		
 		for(var i=0;i<rateArry.length;i++)
-			{
-				rateArry[i]=0;
-			}
+		{
+			rateArry[i]=0;
+		}
 		
-		var priceCalfunction = function (rommsRate, roomsNum){
-			checkBoxId_ = "checkBox"+checkId_;
-			var index_ = parseInt(index);
-			var roomsNum_ = parseInt(roomsNum);
-			var x = document.getElementById(checkId);
-			
+		var priceCal = function (checkId,roomsRate,roomsNum){
+			checkBoxId = "check"+roomsNum+"-"+checkId;
+			rateId = "rate"+roomsNum;
+			var x = document.getElementById(checkBoxId);
+			var total = 0;
 			if(x.checked==true)
 			{
-				rateArry[roomsNum]= rateArry[roomsNum] + rommsRate;
+				rateArry[roomsNum]= rateArry[roomsNum] + roomsRate;
+				console.log(rateArry[roomsNum]);
 			}
-			else
+			else if(x.checked==false)
 			{
-				rateArry[roomsNum]= rateArry[roomsNum] - rommsRate;	
+				rateArry[roomsNum]= rateArry[roomsNum] - roomsRate;	
+				console.log(rateArry[roomsNum]);
+			}
+			document.getElementById(rateId).innerHTML = rateArry[roomsNum];
+			
+			for(var i=0;i<rateArry.length;i++)
+			{
+				total = total + rateArry[i];
 			}
 			
-			rateId = "rate"+roomsNum;
-			document.getElementById(rateId).innerHTML = rateArry[roomsNum];
+			document.getElementById("TotalRate").innerHTML = total;
 		}
+		
 		</script>
 		<!--Footer-->
-						<%-- <jsp:include page="../Main/footer.jsp" /> --%>
+		<%-- 				<jsp:include page="../Main/footer.jsp" />  --%>
 		
 </body>
 </html> 

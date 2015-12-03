@@ -7,7 +7,7 @@
 	<select id="rsvList" resultType="com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto">
 		<![CDATA[select * from reservation where RSVHOSTELNUM = #{param1} and RSVDATE >=#{param2} and RSVDATE <= #{param3}]]>
 	</select>
-	<insert id="RsvConfirm">
-			insert into reservation_confirm (hostelNum, roomNum, userId, totalRate) values(#{param1},#{param2},#{param3},#{param4});
+	<insert id="rsvAdd">
+			insert into reservation_list (hostelNum, roomNum, userId, totalRate) values(#{param1},#{param2},#{param3},#{param4});
 	</insert>
 </mapper>

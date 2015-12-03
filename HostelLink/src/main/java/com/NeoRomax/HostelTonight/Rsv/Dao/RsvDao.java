@@ -18,5 +18,5 @@ import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto;
 
 public interface RsvDao {
 	public List<RsvAvailableDto> rsvList(int num, String dayfrom, String dayto);
-	public boolean RsvConfirm(int hOSTELNUM, int rOOMNUM, String uSERID, int tOTALRAT);
+	public boolean rsvAdd(int hostelNum, int roomNum, String userid, int totalrate);
 }

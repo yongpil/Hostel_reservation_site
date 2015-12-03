@@ -6,8 +6,8 @@ package com.NeoRomax.HostelTonight.HostelList.Command;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListHostelDao;
-import com.NeoRomax.HostelTonight.HostelList.Dao.HostelListImgDao;
+import com.NeoRomax.HostelTonight.HostelList.Dao.HostelDao;
+import com.NeoRomax.HostelTonight.HostelList.Dao.ImgDao;
 import com.NeoRomax.HostelTonight.util.Constant;
 
 /**
@@ -31,8 +31,8 @@ public class HostelListViewCommand implements HostelListCommand {
 	@Override
 	public void execute(Model model) {
 		
-		HostelListHostelDao hDao = sqlSession.getMapper(HostelListHostelDao.class);
-		HostelListImgDao hImgDao = sqlSession.getMapper(HostelListImgDao.class);
+		HostelDao hDao = sqlSession.getMapper(HostelDao.class);
+		ImgDao hImgDao = sqlSession.getMapper(ImgDao.class);
 		model.addAttribute("hDtos",hDao.Hlist());
 		
 	}
