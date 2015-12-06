@@ -10,5 +10,10 @@
 
 예약 확정
 
+${RsvList.rsvNum}
+${RsvList.hostelNum}
+${RsvList.userId}
+${RsvList.totalRate}
+
 </body>
 </html>

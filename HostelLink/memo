@@ -1,42 +1,32 @@
-		 	 (function myFunction(){
-		 	    var result = new Array();
-		 	   <c:forEach items="${RsvAbleDto}" var="info">
-		 	   		var json = new Object();
-		 	   		json.rsvDate="${info.rsvDate}";
-		 	   		json.rsvRate="${info.rsvRate}";
-		 	   		result.push(json);
-		 	   	</c:forEach>
-		 	     }());
-		 	     
-			var app = angular.module('app',[]);
-			
-			app.controller('ListController', function($scope) {
-			    $scope.price = 0;
-				$scope.sum = function(){
-					if($scope.mySwitch==true)
-						{
-							$scope.price = $scope.price + 100;
-							return $scope.price;
-						}
-					else if($scope.mySwitch==false)
-						{
-							$scope.price = $scope.price - 100;
-			    			return $scope.price;
-						}
-			    }
-			});
-			
-			
-			
-						if(x.checked==true)
-				{
-					rateArry[roomsNum_] = rateArry[roomsNum_] + '<%=rsvRoomList.get(roomsNum_).gettRsvAvailableDtos().get(index_).getRsvRate%>';	
-				}
-			else
-				{
-						rateArry[roomsNum_] = rateArry[roomsNum_] - '<%=rsvRoomList.get(roomsNum_).gettRsvAvailableDtos().get(index_).getRsvRate%>';
-				}
-				
+
 2015/12/03
 1.로그인 성공하면 session에 ID값 넣어주기
 2.예약 버튼 누르면 session에 ID값이 저장되어 잇는지 확인하고 저장이 않되있으면 loginForm페이지로 저장이 되있으면 예약 페이지로 이동하기. 
+
+-예약 내용 DB에 저장하기
+1.호텔번호, 방번호, 유저아이디, 총 비용을 데이터로 가지고있는 reservation_list를 먼저 업데이트한다.
+2.없데이트된	reservation_list에서 rsvNum을 받고 rsvDay와 같이 reservation_days를 업데이트한다. => select LAST_INSERT_ID(); 이용
+https://kldp.org/node/134198
+http://gubok.tistory.com/369
+3.reseravation_able에서 예약한 레코드를 찾아 rsvabl을 false로 바꾸어 준다.
+
+-DB나누기
+reservation_list를 reservation_days와 reservation_rooms로 나눈다.				
+
+-문제1.
+예약확인 페이지에서 새로고침 하면 다시 command가 실행되고 중복 예약이 이루어진다.
+session이 파괴되는 시점을 알아야 한다.
+만약 세션이 파괴됬으면 redirect로 페이지를 돌린다.
+예약 확인 페이지를 따로 생성 한다. 방금 생성된 예약 리스트를 DB에서 가지고 와서 뿌려 준다.
+http://kamsi76.egloos.com/378247
+
+-참고 싸이트
+http://www.javaproject.kr/Document/Lecture :javaproject
+
+-DB구성
+예약 번호 - 예약 객실 1:M
+예약 객실 - 예약 날짜 1:M
+
+-검색 기능
+1)검색하면 파라미터를 넣고 자기자신을 다시 부른다. 
+

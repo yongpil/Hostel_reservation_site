@@ -2,9 +2,12 @@ package com.NeoRomax.HostelTonight.HostelList.Controller;
 
 
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
+import org.hamcrest.core.IsNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -12,17 +15,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.NeoRomax.HostelTonight.HostelList.Command.HostelListAddCommand;
-import com.NeoRomax.HostelTonight.HostelList.Command.HostelListCommand;
+import com.NeoRomax.HostelTonight.HostelList.Command.HCommand;
 import com.NeoRomax.HostelTonight.HostelList.Command.HostelListDetailCommand;
 import com.NeoRomax.HostelTonight.HostelList.Command.HostelListViewCommand;
-import com.NeoRomax.HostelTonight.HostelList.Dto.SessionDto;
-import com.NeoRomax.HostelTonight.Rsv.Command.RsvConfirmCommand;
+import com.NeoRomax.HostelTonight.Rsv.Command.RsvCommand;
+import com.NeoRomax.HostelTonight.Rsv.Command.RsvConfirmViewCommand;
 import com.NeoRomax.HostelTonight.Rsv.Command.RsvViewCommand;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAddDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvSessionDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
 /**
@@ -38,10 +45,9 @@ import com.NeoRomax.HostelTonight.util.Constant;
 
 @Controller
 @SessionAttributes("sessionDto")
-
 public class HostelListController {
 
-	HostelListCommand command = null;
+	HCommand command = null;
 	public SqlSession sqlSession;
 
 
@@ -52,13 +58,11 @@ public class HostelListController {
 	}
 	
 	@RequestMapping(value="/index.html", method={RequestMethod.POST,RequestMethod.GET})
-	public String list(HttpServletRequest request,Model model) {
-		System.out.println("list()");
-		model.addAttribute("request",request);
-		System.out.println("dayfrom:" + request.getParameter("dayfrom"));
+	public String list(@RequestParam(value="lctSearch", required=false, defaultValue="seoul") String lctSearch, Model model) {
+		System.out.println("index()");
+		System.out.println(lctSearch);
 		command = new HostelListViewCommand();
 		command.execute(model);
-		System.out.println(request.getRealPath("/"));
 		return "/Hostels/hostel_index";	
 	}
 	
@@ -74,7 +78,7 @@ public class HostelListController {
 		model.addAttribute("mRequest", mRequest);
 		command = new HostelListAddCommand();
 		command.execute(model);
-		return "redirect:list";
+		return "redirect:index.html";
 	}
 	
 	@RequestMapping("/hostel_detail.html")
@@ -94,16 +98,32 @@ public class HostelListController {
 		
 		command = new RsvViewCommand();
 		command.execute(model);
+		System.out.println("rsvView() finished");
 		return "/Hostels/hostel_rsv_view";
 	}
 	
-	@RequestMapping("/rsvConfirm.html")
-	public String rsvConfirm(@ModelAttribute SessionDto sessionDto, SessionStatus sessionStatus, HttpServletRequest request, Model model) {
+	@RequestMapping("/rsvConfirm.html") 
+	public String rsvConfirm(RedirectAttributes redirectAttributes, @ModelAttribute RsvSessionDto sessionDto, SessionStatus sessionStatus, HttpServletRequest request, Model model) {
 		System.out.println("rsvConfirm()");
-		model.addAttribute("sessionDto", sessionDto);
 		model.addAttribute("request",request);
-		command = new RsvConfirmCommand();
+			command = new RsvCommand();
+			command.execute(model);
+			Map<String, Object> map = model.asMap();
+			RsvAddDto rsvAddDto = (RsvAddDto) map.get("rsvAddDto");
+			redirectAttributes.addAttribute("rsvNum",rsvAddDto.getRsvNum());
+			return "redirect:rsvConfirmView.html";
+	}
+	
+	@RequestMapping("/rsvConfirmView.html") //새로고침시 중복 예약을 방지하기 위해 redirect 시킨 후 db에서 예약된 내용을 다시 가져 온다.
+	public String rsvConfirmView(@RequestParam("rsvNum") int rsvNum, @ModelAttribute RsvSessionDto sessionDto, SessionStatus sessionStatus, Model model) {
+		System.out.println("rsvConfirmView()");
+		model.addAttribute("rsvNum",rsvNum);
+		
+		command = new RsvConfirmViewCommand();
 		command.execute(model);
-		return "/Hostels/hostel_rsv_confirm";
+		
+		sessionStatus.setComplete();//세션 파기
+			
+			return "/Hostels/hostel_rsv_confirm";
 	}
 }

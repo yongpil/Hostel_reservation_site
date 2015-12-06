@@ -47,7 +47,7 @@ var imgcount = 1;
 			<!-- 컨텐츠 -->
 			<div id="content">
 					<!-- 게시판 등록 -->
-					<form id="addHostel" action="addHostel" method="post"
+					<form id="addHostel" action="addHostel.html" method="post"
 						enctype="multipart/form-data" name="hostelsform">
 						<table cellpadding="0" cellspacing="0">
 							<tr align="center" valign="middle">
@@ -57,55 +57,51 @@ var imgcount = 1;
 								<td style="font-family: 돋음; font-size: 12" height="16">
 									<div align="center">호스텔 이름</div>
 								</td>
-								<td><input name="HOSTELS_NAME" type="text" size="30"
+								<td><input name="hostelsName" type="text" size="30"
 									maxlength="30" value="" /></td>
 							</tr>
 							<tr>
 								<td style="font-family: 돋음; font-size: 12" height="16">
 									<div align="center">국가</div>
 								</td>
-								<td><input name="HOSTELS_NATION" type="text" size="30"
+								<td><input name="hostelsNation" type="text" size="30"
 									maxlength="30" value="" /></td>
 							</tr>
 							<tr>
 								<td style="font-family: 돋음; font-size: 12" height="16">
 									<div align="center">도시</div>
 								</td>
-								<td><input name="HOSTELS_CITY" type="text" size="30"
+								<td><input name="hostelsCity" type="text" size="30"
 									maxlength="30" value="" /></td>
 							</tr>
 							<tr>
 								<td style="font-family: 돋음; font-size: 12" height="16">
 									<div align="center">주소</div>
 								</td>
-								<td><input name="HOSTELS_ADDR" type="text" size="30"
+								<td><input name="hostelsAddr" type="text" size="30"
 									maxlength="30" value="" /></td>
 							</tr>
 							<tr>
 								<td style="font-family: 돋음; font-size: 12" height="16">
 									<div align="center">전화번호</div>
 								</td>
-								<td><input name="HOSTELS_PHONE" type="text" size="30"
+								<td><input name="hostelsPhone" type="text" size="30"
 									maxlength="30" value="" /></td>
 							</tr>
 							<tr>
 								<td style="font-family: 돋음; font-size: 12" height="16">
 									<div align="center">이 메일</div>
 								</td>
-								<td><input name="HOSTELS_EMAIL" type="text" size="30"
+								<td><input name="hostelsEmail" type="text" size="30"
 									maxlength="30" value="" /></td>
 							</tr>
 							<tr>
 								<td style="font-family: 돋음; font-size: 12">
 									<div align="center">호스텔 정보</div>
 								</td>
-								<td><textarea name="HOSTELS_INFO" cols="67" rows="15"></textarea>
+								<td><textarea name="hostelsInfo" cols="67" rows="15"></textarea>
 								</td>
 							</tr>
-							
-
-								
-								
 							
 	<%-- 						<%
 								String fileName[] = {"HOSTELSIMAGE0","HOSTELSIMAGE1","HOSTELSIMAGE2","HOSTELSIMAGE3","HOSTELSIMAGE4"};

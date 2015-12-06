@@ -32,7 +32,7 @@ import com.NeoRomax.HostelTonight.util.Constant;
  */ 
 
 
-public class HostelListDetailCommand implements HostelListCommand {
+public class HostelListDetailCommand implements HCommand {
 	SqlSession sqlSession = null;
 	DateFormat outputFormattoer = new SimpleDateFormat("MM/dd/yyyy");
 	public HostelListDetailCommand() {
@@ -52,13 +52,16 @@ public class HostelListDetailCommand implements HostelListCommand {
 		model.addAttribute("hDto",hDao.getHDto(Integer.parseInt(request.getParameter("num"))));
 		model.addAttribute("hImgDtos",hImgDao.getHImgList(Integer.parseInt(request.getParameter("num"))));
 		model.addAttribute("roomsDtos",roomsDao.RoomsList(Integer.parseInt(request.getParameter("num"))));
-		model.addAttribute("RsvAbleDto",rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150915","20150920"));
+		model.addAttribute("RsvAbleDto",rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("num"))),"20150915","20150920"));
 		
 		
 		ArrayList<RoomsDto> hostelListRoomDtos = (ArrayList<RoomsDto>)roomsDao.RoomsList(Integer.parseInt(request.getParameter("num")));
-		ArrayList<RsvAvailableDto> rsvAvailableDtos = (ArrayList<RsvAvailableDto>)rsvDao.rsvList((Integer.parseInt(request.getParameter("num"))),"20150914","20150920");
+		ArrayList<RsvAvailableDto> rsvAvailableDtos = (ArrayList<RsvAvailableDto>)rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("num"))),"20150914","20150920");
 		ArrayList<RsvRoomListDto> rsvRoomListDtos = new ArrayList<RsvRoomListDto>();
-		
+		for(int i=0;i<rsvAvailableDtos.size();i++)
+		{
+			System.out.println(rsvAvailableDtos.get(i).getRsvDate());
+		}
 
 		for(int i=0;i<hostelListRoomDtos.size();i++)
 		{
@@ -70,9 +73,10 @@ public class HostelListDetailCommand implements HostelListCommand {
 			rsvRoomListDto.setRoomsInfo(hostelListRoomsDto.getRoomsInfo());
 			ArrayList<RsvAvailableDto> rsvRoomCheckDtos = new ArrayList<RsvAvailableDto>();
 			
-			for(int j=0;j<rsvAvailableDtos.size();j++)
+			
+			for(int j=0;j<rsvAvailableDtos.size();j++) //방번호에 따라서 rsvAvailableDto를 분류한다.
 			{   
-				if(rsvAvailableDtos.get(j).getRsvRoom()==i)
+				if(hostelListRoomDtos.get(i).getRoomsNum()==rsvAvailableDtos.get(j).getRsvRoom())
 				{
 					rsvRoomCheckDtos.add(rsvAvailableDtos.get(j));		
 				}

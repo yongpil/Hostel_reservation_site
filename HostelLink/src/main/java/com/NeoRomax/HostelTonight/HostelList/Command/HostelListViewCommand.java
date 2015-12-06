@@ -21,7 +21,7 @@ import com.NeoRomax.HostelTonight.util.Constant;
  */ 
 
 
-public class HostelListViewCommand implements HostelListCommand {
+public class HostelListViewCommand implements HCommand {
 	SqlSession sqlSession = null;
 	
 	public HostelListViewCommand() {

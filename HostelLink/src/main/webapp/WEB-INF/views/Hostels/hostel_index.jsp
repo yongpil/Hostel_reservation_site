@@ -9,20 +9,24 @@
 	realFolder="./HostelsUpload/";
 	String dayfrom = ((String)request.getAttribute("dayfrom"));
 	String dayto = ((String)request.getAttribute("dayto"));
-	System.out.println(dayfrom);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
 <link rel="stylesheet" href="css/hostels/hstList.css">
+
 <title>Insert title here</title>
 </head>
 <body>
 	<div id="main">
 		<!--Header-->
 		<jsp:include page="../header.jsp"></jsp:include>
+		<!--Search-->
+				<jsp:include page="../search.jsp" />
 			<!-- 컨텐츠 -->
 			<div id="content">
 				<!--검색내용란  -->
@@ -41,8 +45,10 @@
 
 				<div id="filter">안녕하세요</div> 
 				<div id="DetailSearch">반갑습니다</div> 
-				<!-- 이미지 게시판 -->
- 			
+				
+				
+				
+				<!-- 호스텔 리스트 -->
 				<div id="hostelsGallery">
 				<c:forEach items="${hDtos}" var="hDto">
 					<li>
@@ -62,7 +68,7 @@
 				</c:forEach> 
 				</div>
 			</div>
-			<a href="addHostel_view">호스텔 추가</a>
+			<a href="addHostel_view.html">호스텔 추가</a>
 					
 					
 		</div>	

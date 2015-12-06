@@ -151,21 +151,11 @@
 						    			 </c:forEach>
 						    			 </div>
 						    		 <input type="hidden" name="hostelNum" value="${hDto.hostelNum}">
-						    		 <input type="hidden" name="userId" value="<s:authentication property="name"/>">						    		 	 
-						    		 <input type="submit" value="예약">	
+						    		 <input type="hidden" name="userId" id="userId" value="<s:authentication property="name"/>">  		 	 
+						    		 <input type="button" value="예약" onclick="checkLogin()">							    		 
 						  			</form>
 						  			</div>
 						  			</div>
-					USER ID : <s:authentication property="name"/><br/>
-					<label value=""></label>
-					<s:authorize ifAnyGranted="ROLE_USER">
-					<p> A is Log-In</p>
-					</s:authorize>
-					
-					<s:authorize ifNotGranted="ROLE_USER">
-					<p> A is Log-Out</p>
-					</s:authorize>
-					<a href="${pageContext.request.contextPath}/j_spring_security_logout">Log Out</a> <br />
 					 <!-- 지도 및 약도 -->
 						<div class="infoList" data-toggle="collapse" data-target="#map">지도 및 약도  <i class="fa fa-map"></i></div>
 						  <div id="map" class="collapse"><br>
@@ -222,7 +212,15 @@
 			}
 			
 			document.getElementById("TotalRate").innerHTML = total;
-		}
+		};
+		
+	var checkLogin = function(){
+			var id = document.getElementById("userId").value;
+			if(id=="anonymousUser")
+				alert("you need to login");
+			else
+				rsvForm.submit();
+		}; 
 		
 		</script>
 		<!--Footer-->

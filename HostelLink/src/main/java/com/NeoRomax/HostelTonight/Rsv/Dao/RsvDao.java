@@ -2,7 +2,11 @@ package com.NeoRomax.HostelTonight.Rsv.Dao;
 
 import java.util.List;
 
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAddDto;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvDaysAddDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvRoomAddDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvSessionDto;
 
 
 /**
@@ -17,6 +21,10 @@ import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto;
 
 
 public interface RsvDao {
-	public List<RsvAvailableDto> rsvList(int num, String dayfrom, String dayto);
-	public boolean rsvAdd(int hostelNum, int roomNum, String userid, int totalrate);
+	public List<RsvAvailableDto> rsvAvailList(int num, String dayfrom, String dayto);
+	public int rsvAdd(RsvAddDto rsvAddDto);
+	public RsvAddDto getRsvList(int num);
+	public int rsvRoomsAdd(RsvRoomAddDto rsvRoomAddDto);
+	public void rsvDaysAdd(RsvDaysAddDto rsvDaysAddDto);
+	
 }

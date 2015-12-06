@@ -28,7 +28,7 @@ import com.NeoRomax.HostelTonight.util.Constant;
  */ 
 
 
-public class HostelListAddCommand implements HostelListCommand {
+public class HostelListAddCommand implements HCommand {
 	SqlSession sqlSession = null;
 	
 	public HostelListAddCommand() {
@@ -57,7 +57,7 @@ public class HostelListAddCommand implements HostelListCommand {
    		realFolder=mRequest.getRealPath("/") + saveFolder;
    		
   		
-		int hstNum = hDao.getHstNumfromEmail(mRequest.getParameter("HOSTELS_EMAIL"));
+		int hstNum = hDao.getHstNumfromEmail(mRequest.getParameter("hostelsEmail"));
 		
   		for(int i=0;i<imgcount;i++)
    		{

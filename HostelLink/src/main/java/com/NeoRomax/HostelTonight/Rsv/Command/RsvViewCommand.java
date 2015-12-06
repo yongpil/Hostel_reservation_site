@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-import com.NeoRomax.HostelTonight.HostelList.Command.HostelListCommand;
+import com.NeoRomax.HostelTonight.HostelList.Command.HCommand;
 import com.NeoRomax.HostelTonight.HostelList.Dao.HostelDao;
 import com.NeoRomax.HostelTonight.HostelList.Dao.RoomsDao;
 import com.NeoRomax.HostelTonight.HostelList.Dto.HostelDto;
 import com.NeoRomax.HostelTonight.HostelList.Dto.RoomsDto;
-import com.NeoRomax.HostelTonight.HostelList.Dto.SessionDto;
 import com.NeoRomax.HostelTonight.Rsv.Dao.RsvDao;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvConfirmDto;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvRoomListDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvSessionDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
 /**
@@ -32,7 +32,7 @@ import com.NeoRomax.HostelTonight.util.Constant;
  */ 
 
 
-public class RsvViewCommand implements HostelListCommand {
+public class RsvViewCommand implements HCommand {
 	SqlSession sqlSession = null;
 public RsvViewCommand() {
 	sqlSession = Constant.sqlSession;
@@ -46,12 +46,11 @@ public RsvViewCommand() {
 		RoomsDao roomsDao = sqlSession.getMapper(RoomsDao.class);
 		RsvDao rsvDao = sqlSession.getMapper(RsvDao.class);
 		
-		System.out.println(request.getParameter("hostelNum"));
+
 		
 		List<RoomsDto> roomList = new ArrayList<RoomsDto>();
 		roomList = roomsDao.RoomsList(Integer.parseInt(request.getParameter("hostelNum")));
-		System.out.println(request.getParameter("hostelNum"));
-		List<RsvAvailableDto> rsvAbleDto = rsvDao.rsvList((Integer.parseInt(request.getParameter("hostelNum"))),"20150915","20150920");
+		List<RsvAvailableDto> rsvAbleDto = rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("hostelNum"))),"20150915","20150920");
 		
 	 	ArrayList<ArrayList<String>> rsvDatesList = new ArrayList<ArrayList<String>>();
 	 	ArrayList<ArrayList<String>> rsvRatesList = new ArrayList<ArrayList<String>>();
@@ -92,10 +91,9 @@ public RsvViewCommand() {
 	 		totalRate = totalRate + eachRoomRate[i];
 	 	}
 	 	
-		SessionDto sessionDto = new SessionDto(rsvDatesList,rsvRatesList,
-				hDao.getHDto(Integer.parseInt(request.getParameter("hostelNum"))),roomList,totalRate);
-		
-	 	model.addAttribute("sessionDto", sessionDto);
+		RsvSessionDto sessionDto = new RsvSessionDto(rsvDatesList,rsvRatesList,
+				hDao.getHDto(Integer.parseInt(request.getParameter("hostelNum"))),roomList,totalRate,request.getParameter("userId"));
+	 	model.addAttribute("sessionDto",sessionDto);
 	 	
 	 	
 	}

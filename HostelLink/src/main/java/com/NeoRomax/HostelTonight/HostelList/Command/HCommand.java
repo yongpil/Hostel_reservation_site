@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
  */ 
 
 
-public interface HostelListCommand {
+public interface HCommand {
 
 	void execute(Model model);
 	
