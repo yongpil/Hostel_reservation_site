@@ -16,7 +16,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-
 <link rel="stylesheet" href="css/hostels/hstList.css">
 
 <title>Insert title here</title>
@@ -53,10 +52,10 @@
 				<c:forEach items="${hDtos}" var="hDto">
 					<li>
 						<%-- <a href="./hostelsDetailAction.me?num=${dto.HostelCode}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> --%>
-					    <a href="./hostel_detail.html?num=${hDto.hostelNum}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> 
-						 <div  id="HostelsPic" style="background:url(<%=realFolder%>${hDto.imageName}) no-repeat; background-size:100%">
+					    <a href="./hostel_detail.html?hstNum=${hDto.hostelNum}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> 						
+						<div  id="HostelsPic" style="background:url(<%=realFolder%>${hDto.imageName}) no-repeat; background-size:100%">
 						<div id=price>13,000 Won</div>
-						</div> 
+						</div>
 						<div id="HostelsName">${hDto.hostelName}</div>
 						<span class="text">
 						  <%-- <span class="title"><%=hos.getHostelsName()%></span> --%>

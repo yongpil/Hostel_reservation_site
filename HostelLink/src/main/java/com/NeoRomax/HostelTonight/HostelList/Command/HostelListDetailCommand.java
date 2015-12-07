@@ -48,16 +48,17 @@ public class HostelListDetailCommand implements HCommand {
 		RoomsDao roomsDao = sqlSession.getMapper(RoomsDao.class);
 		RsvDao rsvDao = sqlSession.getMapper(RsvDao.class);
 		
+		ArrayList<RoomsDto> hostelListRoomDtos = (ArrayList<RoomsDto>)roomsDao.RoomsList(Integer.parseInt(request.getParameter("hstNum")));//해당 hostel의 room정보가 들어 있는 List
+		ArrayList<RsvAvailableDto> rsvAvailableDtos = (ArrayList<RsvAvailableDto>)rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("hstNum"))),"20150914","20150920");
+		ArrayList<RsvRoomListDto> rsvRoomListDtos = new ArrayList<RsvRoomListDto>();//hostel_detail.jsp에서 jstl로 화면에 편리하게 뿌리기위해 만든 DTO
 
-		model.addAttribute("hDto",hDao.getHDto(Integer.parseInt(request.getParameter("num"))));
-		model.addAttribute("hImgDtos",hImgDao.getHImgList(Integer.parseInt(request.getParameter("num"))));
-		model.addAttribute("roomsDtos",roomsDao.RoomsList(Integer.parseInt(request.getParameter("num"))));
-		model.addAttribute("RsvAbleDto",rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("num"))),"20150915","20150920"));
+		model.addAttribute("hDto",hDao.getHDto(Integer.parseInt(request.getParameter("hstNum"))));
+		model.addAttribute("hImgDtos",hImgDao.getHImgList(Integer.parseInt(request.getParameter("hstNum"))));
+		model.addAttribute("roomsDtos",hostelListRoomDtos);
+		model.addAttribute("RsvAbleDto",rsvAvailableDtos);
 		
 		
-		ArrayList<RoomsDto> hostelListRoomDtos = (ArrayList<RoomsDto>)roomsDao.RoomsList(Integer.parseInt(request.getParameter("num")));
-		ArrayList<RsvAvailableDto> rsvAvailableDtos = (ArrayList<RsvAvailableDto>)rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("num"))),"20150914","20150920");
-		ArrayList<RsvRoomListDto> rsvRoomListDtos = new ArrayList<RsvRoomListDto>();
+		
 		for(int i=0;i<rsvAvailableDtos.size();i++)
 		{
 			System.out.println(rsvAvailableDtos.get(i).getRsvDate());

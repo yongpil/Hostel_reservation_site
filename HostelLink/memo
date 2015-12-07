@@ -30,3 +30,12 @@ http://www.javaproject.kr/Document/Lecture :javaproject
 -검색 기능
 1)검색하면 파라미터를 넣고 자기자신을 다시 부른다. 
 
+2015/12/03
+1.예약이 이루어지면 해당 reservation_list를 rsvAble을 false로 바꾸어 주어 검색 예약 할 수 없게 하기
+2.날짜별로 검색가능한 reservation_list 뽑아 오기-	값이 null이면 현재 날짜와 3일뒤의 날짜를 default로 해서 갖게한다.
+3.예약 가능한  호스텔, 객실, 날짜 어떻게 DB에 집어 넣을지 생각하기
+4.angular chart를 이용하여 호스텔 주인을 위한 chart만들기
+5.트랜젝션 처리 해주기
+6.뎃글 게시판 연동
+7.사이트 디자인
+8.논문 쓰기

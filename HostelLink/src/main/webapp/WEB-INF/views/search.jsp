@@ -27,25 +27,35 @@ $(function() {
         }
       });
   });
+  
+ var dayDefaultFunction = function(){
+	 var dayFrom = document.getElementById("from").value
+	 
+	 if(dayFrom=="")
+		 document.getElementById("from").value="testDay";
+	 
+
+	 searchForm.submit();
+ };
 </script>
 
 <div id='search'>
-	<form name="search" action ="index.html" method='post'>
+	<form name="searchForm" action ="index.html" method='post'>
 		<div id='destination'>
 			<p>Destination</p>
-			<input type="search" name="lctSearch" value="Writing a Destination" 
+			<input type="search" name="lctSearch" 
 			autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 		</div>
 		<div id='check_In'>
 			<p>Check In</p>
-			<input type="text" name="day_from" id="from">
+			<input type="text" name="dayFrom" id="from" >
 		</div>
 		<div id='check_Out'>
 			<p>Check Out</p>
-			<input type="text" name="day_to" id="to">			
+			<input type="text" name="dayTo" id="to">			
 		</div>
 		<div id='submit'>
-        	<input type='submit' class='button' value="search"></input>
+        	<input type="button" value="Search" class="button" onclick="dayDefaultFunction()">		
     	</div>	
 	</form>
 </div>

@@ -17,7 +17,7 @@ import com.NeoRomax.HostelTonight.HostelList.Dto.HostelsListDto;
 
 
 public interface HostelDao{
-	public ArrayList<HostelsListDto> Hlist();
+	public ArrayList<HostelsListDto> Hlist(String lctSearch);
 	public int getHstNumfromEmail(String hostelsEmail);
 	public void addHostel(String hostelsName, String hostelsNation, String hostelsCity,
 			String hostelsAddr, String hostelsInfo, String hostelsPhone, String hostelsEmail);

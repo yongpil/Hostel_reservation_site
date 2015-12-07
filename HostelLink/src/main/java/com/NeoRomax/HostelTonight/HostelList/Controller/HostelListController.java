@@ -2,12 +2,15 @@ package com.NeoRomax.HostelTonight.HostelList.Controller;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.hamcrest.core.IsNull;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -32,6 +35,8 @@ import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAddDto;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvSessionDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
+import ch.qos.logback.classic.Logger;
+
 /**
  * <PRE>
  * 1. FileName  : HostelListController.java
@@ -46,7 +51,9 @@ import com.NeoRomax.HostelTonight.util.Constant;
 @Controller
 @SessionAttributes("sessionDto")
 public class HostelListController {
+	private static org.slf4j.Logger logger = LoggerFactory.getLogger(HostelListController.class);
 
+    
 	HCommand command = null;
 	public SqlSession sqlSession;
 
@@ -58,9 +65,14 @@ public class HostelListController {
 	}
 	
 	@RequestMapping(value="/index.html", method={RequestMethod.POST,RequestMethod.GET})
-	public String list(@RequestParam(value="lctSearch", required=false, defaultValue="seoul") String lctSearch, Model model) {
-		System.out.println("index()");
-		System.out.println(lctSearch);
+	public String list(@RequestParam(value="lctSearch", required=false, defaultValue="seoul") String lctSearch,
+			@RequestParam(value="dayFrom") String dayFrom,@RequestParam(value="dayTo") String dayTo,Model model) {
+		
+		logger.info("index()");
+		logger.info(lctSearch);
+		logger.info(dayFrom);
+		logger.info(dayTo);
+		model.addAttribute("lctSearch",lctSearch);
 		command = new HostelListViewCommand();
 		command.execute(model);
 		return "/Hostels/hostel_index";	
@@ -68,7 +80,7 @@ public class HostelListController {
 	
 	@RequestMapping("/addHostel_view.html")
 	public String addHostel_view(Model model) {
-		System.out.println("addHostel_view()");
+		logger.info("addHostel_view()");
 		return "/Hostels/hostel_add_view";
 	}
 	

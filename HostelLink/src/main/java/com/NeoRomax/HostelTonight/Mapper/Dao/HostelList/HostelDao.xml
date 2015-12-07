@@ -5,7 +5,7 @@
     
 <mapper namespace="com.NeoRomax.HostelTonight.HostelList.Dao.HostelDao">
 	<select id="Hlist" resultType="com.NeoRomax.HostelTonight.HostelList.Dto.HostelsListDto">
-		SELECT hostelNum, hostelName, hostelNation, hostelCity, hostelAddr, hostelInfo, hostelPhone, hostelEmail, imageName FROM HOSTELS A JOIN HOSTELS_IMAGE B ON A.hostelNum = B.hstNum GROUP BY hstNum
+		SELECT hostelNum, hostelName, hostelNation, hostelCity, hostelAddr, hostelInfo, hostelPhone, hostelEmail, imageName FROM HOSTELS A JOIN HOSTELS_IMAGE B ON A.hostelNum = B.hstNum WHERE hostelCity = #{param1} GROUP BY hstNum
 	</select>
 	
 	<select id="getHstNumfromEmail" resultType="java.lang.Integer">
