@@ -58,7 +58,7 @@
 		<!-- Logout State -->
 		<s:authorize ifNotGranted="ROLE_USER">
 			<div class="navLogin">
-				<p onclick="location.href='login.html'">로그인</p>
+				<p onclick="location.href='hostelAdmin.html'">호스텔 관리자 페이지</p>
 			</div>
 		</s:authorize>
 	</div>

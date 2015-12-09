@@ -113,4 +113,9 @@ public class UsrController {
 	public String searchForm(){
 		return "search";
 	}
+	
+	@RequestMapping("/hostelAdmin.html")
+	public String hostelAdmin(){
+		return "hostel_admin_page";
+	}
 }

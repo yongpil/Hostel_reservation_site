@@ -1,0 +1,19 @@
+논문 골격 짜기
+spring security
+spring mvc
+mybatis
+db
+
+각각 문제점을 제시하면서 점점 발전해 가는 과정을 답는다
+model1 => mvcModel=> SpringMvc
+
+2.문제점에 대한 언급
+1)중복 섭밋
+@sessionAtribute
+2)jstl사용 코드 간소화
+
+프로젝트를 부분부분으로 나눈다
+Frontend  						BackEnd								하둡
+html,css,javascript 			스프링,mysql,mybatis.logback 			빅데이터
+angularJS
+깃허브 사용
