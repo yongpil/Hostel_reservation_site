@@ -3,6 +3,7 @@ package com.NeoRomax.HostelTonight.HostelList.Controller;
 
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -66,13 +67,25 @@ public class HostelListController {
 	
 	@RequestMapping(value="/index.html", method={RequestMethod.POST,RequestMethod.GET})
 	public String list(@RequestParam(value="lctSearch", required=false, defaultValue="seoul") String lctSearch,
-			@RequestParam(value="dayFrom") String dayFrom,@RequestParam(value="dayTo") String dayTo,Model model) {
+			@RequestParam(value="dayFrom", required=false, defaultValue="") String dayFrom,@RequestParam(value="dayTo", required=false, defaultValue="") String dayTo,Model model) {
 		
 		logger.info("index()");
 		logger.info(lctSearch);
+		if(dayFrom.equals("") && dayTo.equals(""))
+		{
+			Date defaultDayFrom = new Date();
+			SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
+			dayFrom = dayFormat.format(defaultDayFrom);
+			Calendar cal = Calendar.getInstance(); //Calendar를 이용하여 3일 후 날짜 구하기
+			cal.setTime ( defaultDayFrom );
+			cal.add(Calendar.DATE, 3);
+			dayTo = dayFormat.format(cal.getTime());
+		}
 		logger.info(dayFrom);
 		logger.info(dayTo);
 		model.addAttribute("lctSearch",lctSearch);
+		model.addAttribute("dayFrom",dayFrom);
+		model.addAttribute("dayTo",dayTo);
 		command = new HostelListViewCommand();
 		command.execute(model);
 		return "/Hostels/hostel_index";	

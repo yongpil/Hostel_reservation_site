@@ -5,7 +5,7 @@
     
 <mapper namespace="com.NeoRomax.HostelTonight.Rsv.Dao.RsvDao">
 	<select id="rsvAvailList" resultType="com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto">
-		<![CDATA[select * from reservation_able where rsvHostelNum = #{param1} and RSVDATE >=#{param2} and RSVDATE <= #{param3}]]>
+		<![CDATA[select * from reservation_able where rsvHostelNum = #{param1} and RSVDATE >=#{param2} and RSVDATE <= #{param3} and rsvAble=true]]>
 	</select>
 	
 	<insert id="rsvAdd" parameterType="com.NeoRomax.HostelTonight.Rsv.Dto.RsvAddDto" >
@@ -29,4 +29,8 @@
 	<insert id="rsvDaysAdd" parameterType="com.NeoRomax.HostelTonight.Rsv.Dto.RsvDaysAddDto" >
 			insert into reservation_days (rsvDays, rsvRoomsNum) values(#{rsvDays},#{rsvRoomsNum});
 	</insert>
+	
+	<update id="rsvAbleUpdate">
+		update reservation_able rsvAble set rsvAble = 0 where rsvHostelNum = #{param1} and rsvRoom =#{param2} and rsvDate= #{param3}
+	</update>
 </mapper>

@@ -49,7 +49,7 @@
         </rollingPolicy>
         <encoder>
             <pattern>
-                ▷ %-5level %d{HH:mm:ss} %logger[%method:%line] - %msg%n
+                %date SEARCH_INFO KEYWORD %msg%n
             </pattern>
         </encoder>
     </appender>

@@ -1,5 +1,6 @@
 package com.NeoRomax.HostelTonight.Rsv.Dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAddDto;
@@ -26,5 +27,5 @@ public interface RsvDao {
 	public RsvAddDto getRsvList(int num);
 	public int rsvRoomsAdd(RsvRoomAddDto rsvRoomAddDto);
 	public void rsvDaysAdd(RsvDaysAddDto rsvDaysAddDto);
-	
+	public void rsvAbleUpdate(int rsvHostelNum, int rsvRoom, Date date);
 }

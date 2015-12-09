@@ -28,15 +28,7 @@ $(function() {
       });
   });
   
- var dayDefaultFunction = function(){
-	 var dayFrom = document.getElementById("from").value
-	 
-	 if(dayFrom=="")
-		 document.getElementById("from").value="testDay";
-	 
 
-	 searchForm.submit();
- };
 </script>
 
 <div id='search'>
@@ -55,7 +47,7 @@ $(function() {
 			<input type="text" name="dayTo" id="to">			
 		</div>
 		<div id='submit'>
-        	<input type="button" value="Search" class="button" onclick="dayDefaultFunction()">		
+        	<input type="submit" value="Search" class="button">		
     	</div>	
 	</form>
 </div>

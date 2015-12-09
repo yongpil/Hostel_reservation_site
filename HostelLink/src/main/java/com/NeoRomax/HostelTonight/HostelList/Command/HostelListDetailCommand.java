@@ -49,7 +49,9 @@ public class HostelListDetailCommand implements HCommand {
 		RsvDao rsvDao = sqlSession.getMapper(RsvDao.class);
 		
 		ArrayList<RoomsDto> hostelListRoomDtos = (ArrayList<RoomsDto>)roomsDao.RoomsList(Integer.parseInt(request.getParameter("hstNum")));//해당 hostel의 room정보가 들어 있는 List
-		ArrayList<RsvAvailableDto> rsvAvailableDtos = (ArrayList<RsvAvailableDto>)rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("hstNum"))),"20150914","20150920");
+		System.out.println(request.getParameter("dayFrom"));
+		System.out.println(request.getParameter("dayTo"));
+		ArrayList<RsvAvailableDto> rsvAvailableDtos = (ArrayList<RsvAvailableDto>)rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("hstNum"))),request.getParameter("dayFrom"),request.getParameter("dayTo"));
 		ArrayList<RsvRoomListDto> rsvRoomListDtos = new ArrayList<RsvRoomListDto>();//hostel_detail.jsp에서 jstl로 화면에 편리하게 뿌리기위해 만든 DTO
 
 		model.addAttribute("hDto",hDao.getHDto(Integer.parseInt(request.getParameter("hstNum"))));

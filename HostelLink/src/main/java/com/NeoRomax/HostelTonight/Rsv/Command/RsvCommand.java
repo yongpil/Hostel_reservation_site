@@ -74,20 +74,18 @@ public class RsvCommand implements HCommand {
 							try {
 								parsed = transFormat.parse(tempDate);
 							} catch (ParseException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							java.sql.Date date = new java.sql.Date(parsed.getTime());
 
 							rsvDaysAddDto = new RsvDaysAddDto(date,rsvRoomAddDto.getRsvRoomsNum());
-							rsvDao.rsvDaysAdd(rsvDaysAddDto);
+							rsvDao.rsvDaysAdd(rsvDaysAddDto);//reservation_days »ðÀÔ
+							rsvDao.rsvAbleUpdate(sessionDto.getHostelDto().getHostelNum(), rsvRoomAddDto.getRsvRoomsNum(), date);
 						}
 					}
 		}
 		
 		model.addAttribute("rsvAddDto",rsvAddDto);
-
-
 	}
 
 }

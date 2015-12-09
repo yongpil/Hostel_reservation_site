@@ -51,8 +51,7 @@
 				<div id="hostelsGallery">
 				<c:forEach items="${hDtos}" var="hDto">
 					<li>
-						<%-- <a href="./hostelsDetailAction.me?num=${dto.HostelCode}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> --%>
-					    <a href="./hostel_detail.html?hstNum=${hDto.hostelNum}&dayfrom=<%=dayfrom%>&dayto=<%=dayto%>"> 						
+					    <a href="./hostel_detail.html?hstNum=${hDto.hostelNum}&dayFrom=${dayFrom}&dayTo=${dayTo}"> 						
 						<div  id="HostelsPic" style="background:url(<%=realFolder%>${hDto.imageName}) no-repeat; background-size:100%">
 						<div id=price>13,000 Won</div>
 						</div>
@@ -68,7 +67,7 @@
 				</div>
 			</div>
 			<a href="addHostel_view.html">호스텔 추가</a>
-					
+			
 					
 		</div>	
 		
