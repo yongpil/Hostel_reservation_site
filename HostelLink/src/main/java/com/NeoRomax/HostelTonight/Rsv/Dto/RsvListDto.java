@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * </PRE>
  */
 
-public class RsvRoomListDto {
+public class RsvListDto {
 	private int roomsNum;
 	private String roomsName;
 	private String roomsInfo;

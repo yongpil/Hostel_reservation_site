@@ -13,13 +13,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/hostels/hstList.css">
 
 <title>Insert title here</title>
 </head>
+	<meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0"/>
 <body>
 	<div id="main">
 		<!--Header-->
@@ -81,7 +81,7 @@
 	  $("#filter").slideToggle("fast"); 
  }); 
   
- $('#DetailSearch').hide();
+ $('#DetailSearch').hide();ccxx
   $('#DetailSearchBtn').click(function(){
 	  if($("#filter").css("display")=="block") 
 	$("#filter").slideUp("fast");

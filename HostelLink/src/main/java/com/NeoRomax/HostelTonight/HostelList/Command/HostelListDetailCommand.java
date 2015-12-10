@@ -18,7 +18,7 @@ import com.NeoRomax.HostelTonight.HostelList.Dao.RoomsDao;
 import com.NeoRomax.HostelTonight.HostelList.Dto.RoomsDto;
 import com.NeoRomax.HostelTonight.Rsv.Dao.RsvDao;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto;
-import com.NeoRomax.HostelTonight.Rsv.Dto.RsvRoomListDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvListDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
 /**
@@ -49,16 +49,15 @@ public class HostelListDetailCommand implements HCommand {
 		RsvDao rsvDao = sqlSession.getMapper(RsvDao.class);
 		
 		ArrayList<RoomsDto> hostelListRoomDtos = (ArrayList<RoomsDto>)roomsDao.RoomsList(Integer.parseInt(request.getParameter("hstNum")));//해당 hostel의 room정보가 들어 있는 List
-		System.out.println(request.getParameter("dayFrom"));
-		System.out.println(request.getParameter("dayTo"));
 		ArrayList<RsvAvailableDto> rsvAvailableDtos = (ArrayList<RsvAvailableDto>)rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("hstNum"))),request.getParameter("dayFrom"),request.getParameter("dayTo"));
-		ArrayList<RsvRoomListDto> rsvRoomListDtos = new ArrayList<RsvRoomListDto>();//hostel_detail.jsp에서 jstl로 화면에 편리하게 뿌리기위해 만든 DTO
+		ArrayList<RsvListDto> RsvListDtos = new ArrayList<RsvListDto>();//hostel_detail.jsp에서 jstl로 화면에 편리하게 뿌리기위해 만든 DTO
 
 		model.addAttribute("hDto",hDao.getHDto(Integer.parseInt(request.getParameter("hstNum"))));
 		model.addAttribute("hImgDtos",hImgDao.getHImgList(Integer.parseInt(request.getParameter("hstNum"))));
 		model.addAttribute("roomsDtos",hostelListRoomDtos);
 		model.addAttribute("RsvAbleDto",rsvAvailableDtos);
-		
+		model.addAttribute("dayFrom",request.getParameter("dayFrom"));
+		model.addAttribute("dayTo",request.getParameter("dayTo"));
 		
 		
 		for(int i=0;i<rsvAvailableDtos.size();i++)
@@ -68,12 +67,12 @@ public class HostelListDetailCommand implements HCommand {
 
 		for(int i=0;i<hostelListRoomDtos.size();i++)
 		{
-			RsvRoomListDto rsvRoomListDto = new RsvRoomListDto();
+			RsvListDto rsvListDto = new RsvListDto();
 			RoomsDto hostelListRoomsDto = hostelListRoomDtos.get(i);
 		
-			rsvRoomListDto.setRoomsNum(hostelListRoomsDto.getRoomsNum());
-			rsvRoomListDto.setRoomsName(hostelListRoomsDto.getRoomsName());
-			rsvRoomListDto.setRoomsInfo(hostelListRoomsDto.getRoomsInfo());
+			rsvListDto.setRoomsNum(hostelListRoomsDto.getRoomsNum());
+			rsvListDto.setRoomsName(hostelListRoomsDto.getRoomsName());
+			rsvListDto.setRoomsInfo(hostelListRoomsDto.getRoomsInfo());
 			ArrayList<RsvAvailableDto> rsvRoomCheckDtos = new ArrayList<RsvAvailableDto>();
 			
 			
@@ -84,11 +83,11 @@ public class HostelListDetailCommand implements HCommand {
 					rsvRoomCheckDtos.add(rsvAvailableDtos.get(j));		
 				}
 			}
-			rsvRoomListDto.settRsvAvailableDtos(rsvRoomCheckDtos);
-			rsvRoomListDtos.add(rsvRoomListDto);
+			rsvListDto.settRsvAvailableDtos(rsvRoomCheckDtos);
+			RsvListDtos.add(rsvListDto);
 		}
 		
-		model.addAttribute("rsvRoomListDtos",rsvRoomListDtos);
+		model.addAttribute("rsvListDtos",RsvListDtos);
 	}
 		
 	}

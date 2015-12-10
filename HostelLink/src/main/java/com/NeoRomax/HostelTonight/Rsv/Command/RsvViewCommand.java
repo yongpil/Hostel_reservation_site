@@ -17,7 +17,7 @@ import com.NeoRomax.HostelTonight.HostelList.Dto.RoomsDto;
 import com.NeoRomax.HostelTonight.Rsv.Dao.RsvDao;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAvailableDto;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvConfirmDto;
-import com.NeoRomax.HostelTonight.Rsv.Dto.RsvRoomListDto;
+import com.NeoRomax.HostelTonight.Rsv.Dto.RsvListDto;
 import com.NeoRomax.HostelTonight.Rsv.Dto.RsvSessionDto;
 import com.NeoRomax.HostelTonight.util.Constant;
 
@@ -50,7 +50,7 @@ public RsvViewCommand() {
 		
 		List<RoomsDto> roomList = new ArrayList<RoomsDto>();
 		roomList = roomsDao.RoomsList(Integer.parseInt(request.getParameter("hostelNum")));
-		List<RsvAvailableDto> rsvAbleDto = rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("hostelNum"))),"20150915","20150920");
+		List<RsvAvailableDto> rsvAbleDto = rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("hostelNum"))),request.getParameter("dayFrom"),request.getParameter("dayTo"));
 		
 	 	ArrayList<ArrayList<String>> rsvDatesList = new ArrayList<ArrayList<String>>();
 	 	ArrayList<ArrayList<String>> rsvRatesList = new ArrayList<ArrayList<String>>();

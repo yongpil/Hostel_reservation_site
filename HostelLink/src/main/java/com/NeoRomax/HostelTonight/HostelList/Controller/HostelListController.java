@@ -71,7 +71,7 @@ public class HostelListController {
 		
 		logger.info("index()");
 		logger.info(lctSearch);
-		if(dayFrom.equals("") && dayTo.equals(""))
+		if(dayFrom.equals("") && dayTo.equals(""))//만약 사용자에 의해 날짜가 입력되지 않으면 현재 날짜를 default로 넣어준다.
 		{
 			Date defaultDayFrom = new Date();
 			SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");

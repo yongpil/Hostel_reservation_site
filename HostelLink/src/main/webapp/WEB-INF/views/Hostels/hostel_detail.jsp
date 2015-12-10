@@ -29,7 +29,7 @@
 
 <html>
 <head>
-
+  <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0"/>
   <script src= "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="dist/js/bootstrap.js"></script>
@@ -105,54 +105,59 @@
 						  		 <div class="panel-group" id="accordion">
 						  		<form action="rsvView.html" method="post" name="rsvForm">
 						  			 <div class="panel-group" id="accordion">
-						  			 		<c:forEach items="${rsvRoomListDtos}" var="rsvRoom" varStatus="roomIndex">
+						  			 
+						  			 		<c:forEach items="${rsvListDtos}" var="rsvList" varStatus="roomIndex"> 
 						  					<div class="panel panel-default">
 							      				<div class="panel-heading">
 								        			<h4 class="panel-title">
-								        			 <a data-toggle="collapse" data-parent="#accordion" href="#Room${roomIndex.index}">${rsvRoom.roomsName}</a>
+								        			 <a data-toggle="collapse" data-parent="#accordion" href="#Room${roomIndex.index}">${rsvList.roomsName}</a>
 								        			</h4>
 							      				</div>
 							      				<div id="Room${roomIndex.index}" class="panel-collapse collapse">
-							      				 <div class="panel-body">${rsvRoom.roomsInfo}<br><br>
+							      				 <div class="panel-body">${rsvList.roomsInfo}<br><br>
 							      				 	<!-- 객실예약 테이블 -->	
 							      				 		<table class="table table-bordered table-striped" >		
-														 	<c:forEach items="${rsvRoom.tRsvAvailableDtos}" var="RsvAvailDto" varStatus="RsvADIndex" step="3">
+														 	<c:forEach items="${rsvList.tRsvAvailableDtos}" var="RsvAvailDto" varStatus="RsvADIndex" step="3">
 														 		<tr>
-														 		 <td data-ng-show="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index]}">
+														 		 <td data-ng-show="${rsvList.tRsvAvailableDtos[RsvADIndex.index]}">
 														 		 <label class="rsvDate"><input type="checkbox" name="check${roomIndex.index}-${RsvADIndex.index}"
-														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvRate}"
+														 		  value="${rsvList.tRsvAvailableDtos[RsvADIndex.index].rsvDate},${rsvList.tRsvAvailableDtos[RsvADIndex.index].rsvRate}"
 														 		  id = "check${roomIndex.index}-${RsvADIndex.index}"
-														 		  onclick="priceCal(${RsvADIndex.index},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvRate},${rsvRoom.roomsNum})"/>
-														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index].rsvRate}
+														 		  onclick="priceCal(${roomIndex.index},${rsvList.tRsvAvailableDtos[RsvADIndex.index].rsvRate},${RsvADIndex.index})"/>			 		  
+														 		  ${rsvList.tRsvAvailableDtos[RsvADIndex.index].rsvDate},${rsvList.tRsvAvailableDtos[RsvADIndex.index].rsvRate}
 														 		 </label>													 		 
 								        						 </td>
-																 <td data-ng-show="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1]}">
+																 <td data-ng-show="${rsvList.tRsvAvailableDtos[RsvADIndex.index+1]}">
 																 <label class="rsvDate"><input type="checkbox" name="check${roomIndex.index}-${RsvADIndex.index+1}"
-														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate}"
+														 		  value="${rsvList.tRsvAvailableDtos[RsvADIndex.index+1].rsvDate},${rsvList.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate}"
 														 		  id = "check${roomIndex.index}-${RsvADIndex.index+1}"
-														 		  onclick="priceCal(${RsvADIndex.index+1},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate},${rsvRoom.roomsNum})"/>	  
-														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate}
+														 		  onclick="priceCal(${roomIndex.index},${rsvList.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate},${RsvADIndex.index+1})"/>  
+														 		  ${rsvList.tRsvAvailableDtos[RsvADIndex.index+1].rsvDate},${rsvList.tRsvAvailableDtos[RsvADIndex.index+1].rsvRate}
 														 		 </label> 
 																 </td>
-																 <td data-ng-show="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2]}">
+																 <td data-ng-show="${rsvList.tRsvAvailableDtos[RsvADIndex.index+2]}">
 																 <label class="rsvDate"><input type="checkbox" name="check${roomIndex.index}-${RsvADIndex.index+2}"
-														 		  value="${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate}"
+														 		  value="${rsvList.tRsvAvailableDtos[RsvADIndex.index+2].rsvDate},${rsvList.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate}"
 														 		  id = "check${roomIndex.index}-${RsvADIndex.index+2}"
-														 		  onclick="priceCal(${RsvADIndex.index+2},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate},${rsvRoom.roomsNum})"/>
-														 		  ${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvDate},${rsvRoom.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate}
+														 		   onclick="priceCal(${roomIndex.index},${rsvList.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate},${RsvADIndex.index+2})"/>
+														 		  ${rsvList.tRsvAvailableDtos[RsvADIndex.index+2].rsvDate},${rsvList.tRsvAvailableDtos[RsvADIndex.index+2].rsvRate}
 														 		 </label> 
 																 </td>
 																</tr>
 															</c:forEach>		
-														</table>		       
+														</table>
+														객실 별 가격 : <label id="rate${roomIndex.index}"></label> 		       
 							      				 </div>
 							      				</div>
 						      				</div>
 						    			 </c:forEach>
 						    			 </div>
 						    		 <input type="hidden" name="hostelNum" value="${hDto.hostelNum}">
-						    		 <input type="hidden" name="userId" id="userId" value="<s:authentication property="name"/>">  		 	 
-						    		 <input type="button" value="예약" onclick="checkLogin()">							    		 
+						    		 <input type="hidden" name="userId" id="userId" value="<s:authentication property="name"/>"> 
+						    		 <input type="hidden" name="dayFrom" value="${dayFrom}">
+						    		 <input type="hidden" name="dayTo" value="${dayTo}">
+						    		  총 가격:<label id="TotalRate">0</label><br>	 		 	 
+						    		 <input type="button" value="예약" onclick="checkLogin()">						    		 
 						  			</form>
 						  			</div>
 						  			</div>
@@ -174,13 +179,8 @@
 					</div> 
 				 </div>
 			<!-- 게시판 수정 -->
-			<c:forEach items="${rsvRoomListDtos}" var="roomRate" varStatus="rrIndex">
-				<label>${roomRate.roomsName}</label> <label id="rate${rrIndex.index}"></label> <br>
-			</c:forEach>
 			<a href="../HostelProject/hostelsModify.me?num=${hDto.hostelNum}">호스텔 수정</a>
 			
-			<br> 총 합계:<label id="TotalRate">0</label>	  
-			${hDto.hostelNum}
 		<script>
 		var rateArry = new Array(${roomsDtos.size()});
 		
@@ -189,10 +189,11 @@
 			rateArry[i]=0;
 		}
 		
-		var priceCal = function (checkId,roomsRate,roomsNum){
+		var priceCal = function (roomsNum,roomsRate,checkId){
 			checkBoxId = "check"+roomsNum+"-"+checkId;
 			rateId = "rate"+roomsNum;
 			var x = document.getElementById(checkBoxId);
+			console.log(checkBoxId);
 			var total = 0;
 			if(x.checked==true)
 			{

@@ -6,11 +6,13 @@ public class RsvDaysAddDto {
 	private int rsvDaysNum;
 	private Date rsvDays;
 	private int rsvRoomsNum;
+	private String hostelCity;
 	
-	public RsvDaysAddDto(Date rsvDays, int rsvRoomsNum) {
+	public RsvDaysAddDto(Date rsvDays, int rsvRoomsNum, String hostelCity) {
 		super();
 		this.rsvDays = rsvDays;
 		this.rsvRoomsNum = rsvRoomsNum;
+		this.hostelCity = hostelCity;
 	}
 
 	public int getRsvDaysNum() {
@@ -35,6 +37,14 @@ public class RsvDaysAddDto {
 
 	public void setRsvRoomsNum(int rsvRoomsNum) {
 		this.rsvRoomsNum = rsvRoomsNum;
+	}
+
+	public String getHostelCity() {
+		return hostelCity;
+	}
+
+	public void setHostelCity(String hostelCity) {
+		this.hostelCity = hostelCity;
 	}
 	
 	

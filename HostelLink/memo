@@ -47,8 +47,11 @@ http://www.javaproject.kr/Document/Lecture :javaproject
 지역 /가장많이 예약한 날짜 /횟수 /가장 많이 예약한 달   ->지도?
 3.호스텔에 예약한 사람 도표
 
-트랜젝션? 디자인? 웹 퍼블리셔? 뎃글?
+트랜젝션2 디자인1 웹 퍼블리셔? 뎃글3
 
 문제2
 뒤로 가기하면 다시제출 할껀지 물어본다.
 url로 direct로 들어가면 오류가  뜬다.
+
+스프링 프로젝트 구조
+http://addio3305.tistory.com/39

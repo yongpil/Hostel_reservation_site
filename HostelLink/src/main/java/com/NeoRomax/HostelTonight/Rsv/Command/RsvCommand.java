@@ -78,7 +78,7 @@ public class RsvCommand implements HCommand {
 							}
 							java.sql.Date date = new java.sql.Date(parsed.getTime());
 
-							rsvDaysAddDto = new RsvDaysAddDto(date,rsvRoomAddDto.getRsvRoomsNum());
+							rsvDaysAddDto = new RsvDaysAddDto(date,rsvRoomAddDto.getRsvRoomsNum(),sessionDto.getHostelDto().getHostelCity());
 							rsvDao.rsvDaysAdd(rsvDaysAddDto);//reservation_days »ðÀÔ
 							rsvDao.rsvAbleUpdate(sessionDto.getHostelDto().getHostelNum(),sessionDto.getRoomList().get(i).getRoomsNum(),date);
 						}

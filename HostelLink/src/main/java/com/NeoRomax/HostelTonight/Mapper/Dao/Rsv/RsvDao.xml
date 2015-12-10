@@ -27,7 +27,7 @@
 	</insert>
 
 	<insert id="rsvDaysAdd" parameterType="com.NeoRomax.HostelTonight.Rsv.Dto.RsvDaysAddDto" >
-			insert into reservation_days (rsvDays, rsvRoomsNum) values(#{rsvDays},#{rsvRoomsNum});
+			insert into reservation_days (rsvDays, rsvRoomsNum, rsvHostelCity) values(#{rsvDays},#{rsvRoomsNum},#{hostelCity});
 	</insert>
 	
 	<update id="rsvAbleUpdate">

@@ -103,44 +103,6 @@ var imgcount = 1;
 								</td>
 							</tr>
 							
-	<%-- 						<%
-								String fileName[] = {"HOSTELSIMAGE0","HOSTELSIMAGE1","HOSTELSIMAGE2","HOSTELSIMAGE3","HOSTELSIMAGE4"};
-								String fileInfo[] = {"파일 첨부0","파일 첨부1","파일 첨부2","파일 첨부3","파일 첨부4"};	
-							
-							for(int i=0; i<5;i++)
-							{
-							%>
-							 <tr>
-								<td style="font-family: 돋음; font-size: 12">
-									<div align="center"><%=fileInfo[i]%></div>
-								</td>
-								<td><input name="<%=fileName[i]%>" type="file" /></td>
-							</tr>
-							<%
-							}
-							%>
-							
-							<%
-								String roomName[] = {"FIR_ROOM_IMAGE0","FIR_ROOM_IMAGE1","FIR_ROOM_IMAGE2","SEC_ROOM_IMAGE0","SEC_ROOM_IMAGE1"
-									,"SEC_ROOM_IMAGE2","THI_ROOM_IMAGE0","THI_ROOM_IMAGE1","THI_ROOM_IMAGE2","FOR_ROOM_IMAGE0"
-									,"FOR_ROOM_IMAGE1","FOR_ROOM_IMAGE2","FIV_ROOM_IMAGE2","SEC_ROOM_IMAGE2","SEC_ROOM_IMAGE2"};
-								
-							
-							for(int i=0; i<5;i++)
-							{
-							%>
-							 <tr>
-								<td style="font-family: 돋음; font-size: 12">
-									<div align="center"><%=fileInfo[i]%></div>
-								</td>
-								<td><input name="<%=fileName[i]%>" type="file" /></td>
-							</tr>
-							<%
-							}
-							%> --%>
-							
-
-							
 							<tr bgcolor="cccccc">
 								<td colspan="2" style="height: 1px;"></td>
 							</tr>
