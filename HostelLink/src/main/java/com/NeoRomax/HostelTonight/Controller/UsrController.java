@@ -1,4 +1,4 @@
-package com.NeoRomax.HostelTonight.Usr.Controller;
+package com.NeoRomax.HostelTonight.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
