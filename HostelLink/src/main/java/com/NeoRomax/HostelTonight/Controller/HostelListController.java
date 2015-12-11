@@ -1,4 +1,4 @@
-package com.NeoRomax.HostelTonight.HostelList.Controller;
+package com.NeoRomax.HostelTonight.Controller;
 
 
 
