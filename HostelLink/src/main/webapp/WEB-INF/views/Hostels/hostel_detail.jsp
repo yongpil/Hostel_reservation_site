@@ -16,8 +16,7 @@
  */ 
 %>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"%>
-<%@ page import="com.NeoRomax.HostelTonight.HostelList.Dto.*"%>
-<%@ page import="com.NeoRomax.HostelTonight.Rsv.Dto.*"%>
+<%@ page import="com.NeoRomax.HostelTonight.Dto.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
@@ -172,7 +171,7 @@
 						    </div> 
 						    
 					 <!-- 이용후기 -->
-						<div> <a href="../HostelProject/hostelsReviewListAction.re?num=${hDto.hostelNum}">이용 후기</a> <i class="fa fa-pencil"></i></div>
+						<div> <a href="review.html?hstNum=${hDto.hostelNum}">이용 후기</a> <i class="fa fa-pencil"></i></div>
 						  <div id="review" class="collapse"><br>	  
 						    </div> 	
 					 </div> 

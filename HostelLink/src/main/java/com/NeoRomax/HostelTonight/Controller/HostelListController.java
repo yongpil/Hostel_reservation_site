@@ -5,15 +5,15 @@ package com.NeoRomax.HostelTonight.Controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
-import org.hamcrest.core.IsNull;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,20 +23,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.NeoRomax.HostelTonight.HostelList.Command.HostelListAddCommand;
-import com.NeoRomax.HostelTonight.HostelList.Command.HCommand;
-import com.NeoRomax.HostelTonight.HostelList.Command.HostelListDetailCommand;
-import com.NeoRomax.HostelTonight.HostelList.Command.HostelListViewCommand;
-import com.NeoRomax.HostelTonight.Rsv.Command.RsvCommand;
-import com.NeoRomax.HostelTonight.Rsv.Command.RsvConfirmViewCommand;
-import com.NeoRomax.HostelTonight.Rsv.Command.RsvViewCommand;
-import com.NeoRomax.HostelTonight.Rsv.Dto.RsvAddDto;
-import com.NeoRomax.HostelTonight.Rsv.Dto.RsvSessionDto;
-import com.NeoRomax.HostelTonight.util.Constant;
+import com.NeoRomax.HostelTonight.Command.HCommand;
+import com.NeoRomax.HostelTonight.Command.HostelListAddCommand;
+import com.NeoRomax.HostelTonight.Command.HostelListDetailCommand;
+import com.NeoRomax.HostelTonight.Command.HostelListViewCommand;
+import com.NeoRomax.HostelTonight.Command.RsvCommand;
+import com.NeoRomax.HostelTonight.Command.RsvConfirmViewCommand;
+import com.NeoRomax.HostelTonight.Command.RsvViewCommand;
+import com.NeoRomax.HostelTonight.Dto.RsvAddDto;
+import com.NeoRomax.HostelTonight.Dto.RsvSessionDto;
+import com.NeoRomax.HostelTonight.Service.HostelService;
 
-import ch.qos.logback.classic.Logger;
+import util.Constant;
 
 /**
  * <PRE>
@@ -54,7 +55,10 @@ import ch.qos.logback.classic.Logger;
 public class HostelListController {
 	private static org.slf4j.Logger logger = LoggerFactory.getLogger(HostelListController.class);
 
+	@Resource(name="hostelService")
+	private HostelService hostelService;
     
+	
 	HCommand command = null;
 	public SqlSession sqlSession;
 
@@ -63,6 +67,15 @@ public class HostelListController {
 	public void setSqlSession(SqlSession sqlSession){
 		this.sqlSession = sqlSession;
 		Constant.sqlSession = this.sqlSession;
+	}
+
+	
+	@RequestMapping(value="/review.html")
+	public ModelAndView review(@RequestParam("hstNum") int hstNum) throws Exception{
+		ModelAndView mv = new ModelAndView("/Hostels/hostel_review");
+		List<Map<String,Object>> reviewList = hostelService.selectReviewList(hstNum);
+		mv.addObject("reviewList",reviewList);
+		return mv;
 	}
 	
 	@RequestMapping(value="/index.html", method={RequestMethod.POST,RequestMethod.GET})

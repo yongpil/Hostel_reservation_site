@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.NeoRomax.HostelTonight.HostelList.Dto.*"%>
-<%@ page import="com.NeoRomax.HostelTonight.Rsv.Dto.*"%>
+<%@ page import="com.NeoRomax.HostelTonight.Dto.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 

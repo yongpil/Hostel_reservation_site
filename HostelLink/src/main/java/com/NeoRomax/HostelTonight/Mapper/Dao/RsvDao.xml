@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.NeoRomax.HostelTonight.Dao.RsvDao">
+	<select id="rsvAvailList" resultType="com.NeoRomax.HostelTonight.Dto.RsvAvailableDto">
+		<![CDATA[select * from reservation_able where rsvHostelNum = #{param1} and RSVDATE >=#{param2} and RSVDATE <= #{param3} and rsvAble=true]]>
+	</select>
+	
+	<insert id="rsvAdd" parameterType="com.NeoRomax.HostelTonight.Dto.RsvAddDto" >
+			insert into reservation_list (hostelNum, userId, totalRate) values(#{hostelNum},#{userId},#{totalRate});
+		 <selectKey keyProperty="rsvNum" resultType="integer">
+          select LAST_INSERT_ID();
+     	 </selectKey> 
+	</insert>	
+	
+	<select id="getRsvList" resultType="com.NeoRomax.HostelTonight.Dto.RsvAddDto">
+		select * from reservation_list where rsvNum = #{param1}
+	</select>
+	
+	<insert id="rsvRoomsAdd" parameterType="com.NeoRomax.HostelTonight.Dto.RsvRoomAddDto" >
+			insert into reservation_rooms (rsvNum, roomNum, rsvRoomsRate) values(#{rsvNum},#{roomNum},#{rsvRoomsRate});
+		 <selectKey keyProperty="rsvRoomsNum" resultType="integer">
+          select LAST_INSERT_ID();
+     	 </selectKey> 
+	</insert>
+
+	<insert id="rsvDaysAdd" parameterType="com.NeoRomax.HostelTonight.Dto.RsvDaysAddDto" >
+			insert into reservation_days (rsvDays, rsvRoomsNum, rsvHostelCity) values(#{rsvDays},#{rsvRoomsNum},#{hostelCity});
+	</insert>
+	
+	<update id="rsvAbleUpdate">
+		update reservation_able rsvAble set rsvAble = 0 where rsvHostelNum = #{param1} and rsvRoom =#{param2} and rsvDate= #{param3}
+	</update>
+</mapper>

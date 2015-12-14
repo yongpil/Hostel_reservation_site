@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.NeoRomax.HostelTonight.Dao.RoomsDao">
+	<select id="RoomsList" resultType="com.NeoRomax.HostelTonight.Dto.RoomsDto">
+		select * from rooms where hostelsNum = #{param1}
+	</select>
+</mapper>
