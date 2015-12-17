@@ -13,7 +13,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>loginForm.jsp</h1>
+<!--Header-->
+<jsp:include page="header.jsp"></jsp:include>
+
+<br><h1>로그인</h1><br>
 <c:url value="j_spring_security_check" var="loginUrl"/>
 <form action="${loginUrl}" method="post">
 	<c:if test="${param.ng != null}">

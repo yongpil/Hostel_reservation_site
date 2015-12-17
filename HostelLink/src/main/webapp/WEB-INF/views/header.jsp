@@ -54,11 +54,17 @@
 			<div class="navWishlist">
 				<p onclick="location.href='#'">위시리스트</p>
 			</div>
+			<div class="navWishlist">
+				<a href="${pageContext.request.contextPath}/j_spring_security_logout">로그아웃</a>
+			</div>
 		</s:authorize>
 		<!-- Logout State -->
-		<s:authorize ifNotGranted="ROLE_USER">
+		<s:authorize ifAnyGranted="ROLE_ADMIN">
 			<div class="navLogin">
 				<p onclick="location.href='hostelAdmin.html'">호스텔 관리자 페이지</p>
+			</div>
+			<div class="navWishlist">
+				<a href="${pageContext.request.contextPath}/j_spring_security_logout">로그아웃</a>
 			</div>
 		</s:authorize>
 	</div>

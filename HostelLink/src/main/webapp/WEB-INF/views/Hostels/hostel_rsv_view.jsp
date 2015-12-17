@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="hostels/hstGalleryCss/hstView.css">
   <link rel="stylesheet" href="dist/css/font-awesome.css">
   <link rel="stylesheet" href="dist/css/bootstrap.css">
+  
 </head>
 <body>   
 
@@ -54,27 +55,18 @@
 			<br>
 			 <form action="rsvConfirm.html" method="post">
 			 <!-- 객실예약 테이블 -->						       
-						<table>
+						<table class="table table-bordered">
 							<c:forEach items="${sessionDto.rsvDatesList}" var="rsvDates" varStatus="sta1">
 								<tr>
 								<th>${sessionDto.roomList[sta1.index].roomsName}</th>
 								<c:forEach items="${rsvDates}" var="rsvDate" varStatus="sta2">
-									<td>${rsvDate}&nbsp</td>
-									<td>${sessionDto.rsvRatesList[sta1.index].get(sta2.index)}&nbsp</td>
+									<td>${rsvDate} ${sessionDto.rsvRatesList[sta1.index].get(sta2.index)}</td>
 								</c:forEach>
 								</tr>
 							</c:forEach>
 						</table>
 						total : ${sessionDto.totalRate}<br> 
-<%-- 						<table>
-							<c:forEach items="${sessionDto.rsvRatesList}" var="rsvRates" varStatus="sta1">
-								<tr>
-								<c:forEach items="${rsvRates}" var="rsvRate" varStatus="sta2">
-									<td>${rsvRate}&nbsp</td>
-								</c:forEach>
-								</tr>
-							</c:forEach>
-						</table> --%>
+
 						
 				<input type="submit" value="예약확정">
 			  </form> 

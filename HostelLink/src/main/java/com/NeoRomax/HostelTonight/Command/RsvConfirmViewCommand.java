@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
+import com.NeoRomax.HostelTonight.Dao.HostelDao;
 import com.NeoRomax.HostelTonight.Dao.RsvDao;
 
 import util.Constant;
@@ -22,8 +23,10 @@ public class RsvConfirmViewCommand implements HCommand {
 		int rsvNumParam = (Integer) map.get("rsvNum");
 		
 		RsvDao rsvDao = sqlSession.getMapper(RsvDao.class);
+		HostelDao hDao = sqlSession.getMapper(HostelDao.class);
+		
 		model.addAttribute("RsvList",rsvDao.getRsvList(rsvNumParam));
-
+		model.addAttribute("hDto",hDao.getHDto(rsvDao.getRsvList(rsvNumParam).getHostelNum()));
 	}
 
 }

@@ -81,7 +81,7 @@
 	  $("#filter").slideToggle("fast"); 
  }); 
   
- $('#DetailSearch').hide();ccxx
+ $('#DetailSearch').hide();
   $('#DetailSearchBtn').click(function(){
 	  if($("#filter").css("display")=="block") 
 	$("#filter").slideUp("fast");

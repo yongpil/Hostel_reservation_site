@@ -12,7 +12,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-
 <title>Insert title here</title>
 </head>
 <body>
@@ -29,10 +28,10 @@
 	    });
 	  });
 </script>
+<!--Header-->
+<jsp:include page="header.jsp"></jsp:include>
 
-<h1>join.jsp</h1><br/>
-
-<h1>MemberJoin.jsp</h1>
+<br><h1>회원가입</h1><br>
 	<form action="join.html" method="post">
 		ID : <input type="text" name="id" id="id" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><br />
 		Password : <input type="password" name="pwd" id="pwd" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><br />

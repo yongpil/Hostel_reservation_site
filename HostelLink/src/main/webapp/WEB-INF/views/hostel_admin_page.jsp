@@ -5,37 +5,83 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="js/Chart.js"></script>
+<script src="js/Chart.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="css/hostels/hstAdmin.css">
 <title>Insert title here</title>
 </head>
 <body>
- 
- 	<h2>Admin Page</h2>
-    <div style="width:30%">
-        <div>
-            <canvas id="clients" width="500" height="400"></canvas>
-        </div>
-    </div>
-<script>
+ 	<div id="main">
+		<!--Header-->
+		<jsp:include page="header.jsp"></jsp:include>
+			<!-- 컨텐츠 -->
+			<div id="content">
+		 	<h2>사용자 검색 순위</h2>
+		        <div>
+		            <canvas id="searchRank"></canvas>
+		     	</div>
+		    <div class="container">
+			  <h2>지역별 성수기</h2>        
+			  <table class="table table-bordered">
+			    <thead>
+			      <tr>
+			        <th>지역</th>
+			        <th>the most day</th>
+			        <th>횟수</th>
+			        <th>the most month</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td>seoul</td>
+			        <td>2015-08-10</td>
+			        <td>111</td>
+			         <td>August</td>
+			      </tr>
+			      <tr>
+			        <td>london</td>
+			        <td>2015-08-13</td>
+			        <td>87</td>
+			        <td>March</td>
+			      </tr>
+			      <tr>
+			        <td>osaka</td>
+			        <td>2015-08-10</td>
+			        <td>65</td>
+			        <td>August</td>
+			      </tr>
+			        <tr>
+			        <td>paris</td>
+			        <td>2015-08-10</td>
+			        <td>50</td>
+			         <td>July</td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</div>
+		     	
+			</div>	
+	</div>
 
+
+<script>
+	
 var barData = {
-	    labels: ['Italy', 'UK', 'USA', 'Germany', 'France', 'Japan'],
+	    labels: ['seoul', 'london', 'osaka', 'paris', 'barcelona', 'berlin', 'madrid', 'gwangju', 'prague', 'tokyo'],
 	    datasets: [
 	        {
 	            label: '2010 customers #',
-	            fillColor: '#382765',
-	            data: [2500, 1902, 1041, 610, 1245, 952]
-	        },
-	        {
-	            label: '2014 customers #',
-	            fillColor: '#7BC225',
-	            data: [3104, 1689, 1318, 589, 1199, 1436]
+	            fillColor: '#4a8af4',
+	            data: [100, 95, 90, 85, 80, 75, 70, 50, 45, 20]
 	        }
 	    ]
 	};
  
-var context = document.getElementById('clients').getContext('2d');
+var context = document.getElementById('searchRank').getContext('2d');
 var clientsChart = new Chart(context).Bar(barData);
+
+
 
 </script>
 </body>

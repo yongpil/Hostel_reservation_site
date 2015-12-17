@@ -12,8 +12,11 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 		
 		<h2>예약해 주셔서 감사 합니다.</h2>
-${RsvList.rsvNum}<br>
-${RsvList.hostelNum}<br>
+
+호스텔 : ${hDto.hostelName}<br>
+주소 : ${hDto.hostelAddr}<br>
+연락처 : ${hDto.hostelPhone}<br>
+이메일 : ${hDto.hostelEmail}<br>
 예약 아이디 : ${RsvList.userId}<br>
 총 비용 : ${RsvList.totalRate}<br>
 </div>
