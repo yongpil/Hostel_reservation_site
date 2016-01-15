@@ -41,6 +41,10 @@
 	
 	<div class="menuContent">
 		<!-- Login State -->
+		<s:authorize ifNotGranted="ROLE_USER, ROLE_ADMIN">
+			<p onclick="location.href='loginForm.html'">로그인</p>
+		</s:authorize>
+
 		<s:authorize ifAnyGranted="ROLE_USER">
 			<div class="navAccount">
 				<p onclick="location.href='#'">내 계정</p>
