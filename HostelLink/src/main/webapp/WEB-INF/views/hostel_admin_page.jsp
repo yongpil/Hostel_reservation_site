@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.*"%>
+<%
+List schLocationDtos = (List) request.getAttribute("schLocationDtos");
+List<String> schLocationList = new ArrayList<String>();
+for(int i=0;i<schLocationDtos.size();i++)
+{
+	schLocationList.add(schLocationDtos.get(i))
+}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +21,7 @@
  <link rel="stylesheet" href="css/hostels/hstAdmin.css">
 <title>Insert title here</title>
 </head>
+
 <body>
  	<div id="main">
 		<!--Header-->
@@ -66,7 +77,15 @@
 
 
 <script>
-	
+var schLocation = new Array(${schLocationDtos.size()});
+
+for(var i=0;i<schLocation.length;i++)
+	{
+		schLocation[i]='${schLocationDtos[0].location}';
+	}
+
+console.log(schLocation[0]);
+
 var barData = {
 	    labels: ['seoul', 'london', 'osaka', 'paris', 'barcelona', 'berlin', 'madrid', 'gwangju', 'prague', 'tokyo'],
 	    datasets: [
@@ -80,8 +99,6 @@ var barData = {
  
 var context = document.getElementById('searchRank').getContext('2d');
 var clientsChart = new Chart(context).Bar(barData);
-
-
 
 </script>
 </body>

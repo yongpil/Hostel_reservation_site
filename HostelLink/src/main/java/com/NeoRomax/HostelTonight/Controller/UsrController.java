@@ -30,6 +30,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.NeoRomax.HostelTonight.Command.HCommand;
+import com.NeoRomax.HostelTonight.Command.HostelAdminCommand;
+import com.NeoRomax.HostelTonight.Command.HostelListViewCommand;
+import com.NeoRomax.HostelTonight.Dto.SchLocationDto;
 import com.NeoRomax.HostelTonight.Usr.Dao.MembersDAO;
 import com.NeoRomax.HostelTonight.Usr.Dao.SearchDAO;
 
@@ -45,6 +49,7 @@ public class UsrController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	HCommand command = null;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -115,7 +120,12 @@ public class UsrController {
 	}
 	
 	@RequestMapping("/hostelAdmin.html")
-	public String hostelAdmin(){
+	public String hostelAdmin(Model model){
+		System.out.println("hostelAdmin");
+		
+		command = new HostelAdminCommand();
+		command.execute(model);
+		
 		return "hostel_admin_page";
 	}
 }
