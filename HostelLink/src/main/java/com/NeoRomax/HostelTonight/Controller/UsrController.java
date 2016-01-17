@@ -126,6 +126,6 @@ public class UsrController {
 		command = new HostelAdminCommand();
 		command.execute(model);
 		
-		return "hostel_admin_page";
+		return "/Hostels/hostel_admin_page";
 	}
 }

@@ -5,10 +5,10 @@
 <%
 List schLocationDtos = (List) request.getAttribute("schLocationDtos");
 List<String> schLocationList = new ArrayList<String>();
-for(int i=0;i<schLocationDtos.size();i++)
+/* for(int i=0;i<schLocationDtos.size();i++)
 {
 	schLocationList.add(schLocationDtos.get(i))
-}
+} */
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,11 +21,11 @@ for(int i=0;i<schLocationDtos.size();i++)
  <link rel="stylesheet" href="css/hostels/hstAdmin.css">
 <title>Insert title here</title>
 </head>
-
+	<meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0"/>
 <body>
  	<div id="main">
 		<!--Header-->
-		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="../header.jsp"></jsp:include>
 			<!-- ÄÁÅÙÃ÷ -->
 			<div id="content">
 		 	<h2>»ç¿ëÀÚ °Ë»ö ¼øÀ§</h2>
@@ -77,22 +77,26 @@ for(int i=0;i<schLocationDtos.size();i++)
 
 
 <script>
-var schLocation = new Array(${schLocationDtos.size()});
+var labelsArray = new Array();
+<c:forEach items="${schLocationDtos}" var="schLct" varStatus="status">
+index = parseInt("${status.index}");
+labelsArray[index] = "${schLct.location}";
+</c:forEach>
 
-for(var i=0;i<schLocation.length;i++)
-	{
-		schLocation[i]='${schLocationDtos[0].location}';
-	}
+var dataArray = new Array();
+<c:forEach items="${schLocationDtos}" var="schCnt" varStatus="status">
+index = parseInt("${status.index}");
+dataArray[index] = "${schCnt.searchCnt}";
+</c:forEach>
 
-console.log(schLocation[0]);
 
 var barData = {
-	    labels: ['seoul', 'london', 'osaka', 'paris', 'barcelona', 'berlin', 'madrid', 'gwangju', 'prague', 'tokyo'],
+	    labels: labelsArray,
 	    datasets: [
 	        {
 	            label: '2010 customers #',
 	            fillColor: '#4a8af4',
-	            data: [100, 95, 90, 85, 80, 75, 70, 50, 45, 20]
+	            data: dataArray
 	        }
 	    ]
 	};
