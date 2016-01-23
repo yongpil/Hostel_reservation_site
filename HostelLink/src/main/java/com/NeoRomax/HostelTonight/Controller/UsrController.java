@@ -128,4 +128,22 @@ public class UsrController {
 		
 		return "/Hostels/hostel_admin_page";
 	}
+	
+	@RequestMapping(value="/test.html", method=RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<SearchResult> test(@RequestParam("searchValue") String searchValue) throws Throwable{
+		System.out.println("HomeController : autoComplete.html");
+		Map<String, Object> jsonObject= new HashMap<String, Object>();
+		ArrayList<SearchResult> searchResult = new ArrayList<SearchResult>();
+		
+		SearchDAO dao = sqlSession.getMapper(SearchDAO.class);
+		searchResult.addAll(dao.autoCompleteDao(searchValue+'%'));
+		/*System.out.println(searchResult);
+		for(int i=0; i<searchResult.size(); i++)
+		{
+			jsonObject.put("data", searchResult.get(i));
+			System.out.println(jsonObject.get("data"));
+		}*/
+		return searchResult;
+	}
 }

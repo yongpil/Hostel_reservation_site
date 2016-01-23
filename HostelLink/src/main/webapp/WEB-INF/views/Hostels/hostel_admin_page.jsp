@@ -5,10 +5,7 @@
 <%
 List schLocationDtos = (List) request.getAttribute("schLocationDtos");
 List<String> schLocationList = new ArrayList<String>();
-/* for(int i=0;i<schLocationDtos.size();i++)
-{
-	schLocationList.add(schLocationDtos.get(i))
-} */
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,7 +15,7 @@ List<String> schLocationList = new ArrayList<String>();
 <script src="js/Chart.min.js"></script>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
- <link rel="stylesheet" href="css/hostels/hstAdmin.css">
+<link rel="stylesheet" href="css/hostels/hstAdmin.css">
 <title>Insert title here</title>
 </head>
 	<meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0"/>
@@ -31,51 +28,11 @@ List<String> schLocationList = new ArrayList<String>();
 		 	<h2>사용자 검색 순위</h2>
 		        <div>
 		            <canvas id="searchRank"></canvas>
-		     	</div>
-		    <div class="container">
-			  <h2>지역별 성수기</h2>        
-			  <table class="table table-bordered">
-			    <thead>
-			      <tr>
-			        <th>지역</th>
-			        <th>the most day</th>
-			        <th>횟수</th>
-			        <th>the most month</th>
-			      </tr>
-			    </thead>
-			    <tbody>
-			      <tr>
-			        <td>seoul</td>
-			        <td>2015-08-10</td>
-			        <td>111</td>
-			         <td>August</td>
-			      </tr>
-			      <tr>
-			        <td>london</td>
-			        <td>2015-08-13</td>
-			        <td>87</td>
-			        <td>March</td>
-			      </tr>
-			      <tr>
-			        <td>osaka</td>
-			        <td>2015-08-10</td>
-			        <td>65</td>
-			        <td>August</td>
-			      </tr>
-			        <tr>
-			        <td>paris</td>
-			        <td>2015-08-10</td>
-			        <td>50</td>
-			         <td>July</td>
-			      </tr>
-			    </tbody>
-			  </table>
+		     	</div>		   
+			 	<h2>지역별 성수기</h2>        
+				<button id="serchBtn" type="button">Search</button>
 			</div>
-		     	
-			</div>	
 	</div>
-
-
 <script>
 var labelsArray = new Array();
 <c:forEach items="${schLocationDtos}" var="schLct" varStatus="status">
@@ -103,6 +60,19 @@ var barData = {
  
 var context = document.getElementById('searchRank').getContext('2d');
 var clientsChart = new Chart(context).Bar(barData);
+
+
+/* $('#serchBtn').click( function(){
+	$.ajax({
+			url:'',
+			dataType:'json',
+			type:'POST',
+			data:'msg':$('#msg').val()},
+			success:function(result)
+			}
+			)
+}); */
+
 
 </script>
 </body>

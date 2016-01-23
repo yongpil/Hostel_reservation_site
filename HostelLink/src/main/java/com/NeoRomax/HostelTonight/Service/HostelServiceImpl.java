@@ -13,9 +13,6 @@ import com.NeoRomax.HostelTonight.Dao.HostelDao;
 import com.NeoRomax.HostelTonight.Dao.HostelDaoImpl;
 
 
-
-
-
 @Service("hostelService")
 public class HostelServiceImpl implements HostelService {
 	Logger log = LoggerFactory.getLogger(HostelServiceImpl.class);
