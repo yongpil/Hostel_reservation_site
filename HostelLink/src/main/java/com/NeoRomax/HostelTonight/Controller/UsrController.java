@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +34,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.NeoRomax.HostelTonight.Command.HCommand;
 import com.NeoRomax.HostelTonight.Command.HostelAdminCommand;
 import com.NeoRomax.HostelTonight.Command.HostelListViewCommand;
+import com.NeoRomax.HostelTonight.Dao.AdminDao;
+import com.NeoRomax.HostelTonight.Dto.LocationRsvHistoryDto;
 import com.NeoRomax.HostelTonight.Dto.SchLocationDto;
 import com.NeoRomax.HostelTonight.Usr.Dao.MembersDAO;
 import com.NeoRomax.HostelTonight.Usr.Dao.SearchDAO;
@@ -129,21 +132,12 @@ public class UsrController {
 		return "/Hostels/hostel_admin_page";
 	}
 	
-	@RequestMapping(value="/test.html", method=RequestMethod.POST)
-	@ResponseBody
-	public ArrayList<SearchResult> test(@RequestParam("searchValue") String searchValue) throws Throwable{
-		System.out.println("HomeController : autoComplete.html");
-		Map<String, Object> jsonObject= new HashMap<String, Object>();
-		ArrayList<SearchResult> searchResult = new ArrayList<SearchResult>();
-		
-		SearchDAO dao = sqlSession.getMapper(SearchDAO.class);
-		searchResult.addAll(dao.autoCompleteDao(searchValue+'%'));
-		/*System.out.println(searchResult);
-		for(int i=0; i<searchResult.size(); i++)
-		{
-			jsonObject.put("data", searchResult.get(i));
-			System.out.println(jsonObject.get("data"));
-		}*/
-		return searchResult;
+	@RequestMapping("/test.html/{location}")
+	public String test(@PathVariable String location){
+		System.out.println("LocationRsvHistoryDto");
+		LocationRsvHistoryDto lctRsvHDto;
+		AdminDao aDao = sqlSession.getMapper(AdminDao.class);
+		lctRsvHDto = aDao.getLocationRsvHistoryDto(location);
+		return "search";
 	}
 }

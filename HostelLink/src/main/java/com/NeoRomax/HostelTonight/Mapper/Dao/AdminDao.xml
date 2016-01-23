@@ -7,6 +7,10 @@
 	<select id="SchLocationList" resultType="com.NeoRomax.HostelTonight.Dto.SchLocationDto">
 		SELECT location, searchCnt FROM SEARCH_LOCATION_RANK
 	</select>
+	
+	<select id="getLocationRsvHistoryDto" resultType="com.NeoRomax.HostelTonight.Dto.LocationRsvHistoryDto">
+		SELECT * FROM LOCATION_RSV_HISTORY WHERE location = #{PARAM1}
+	</select>
 </mapper>
 
 
