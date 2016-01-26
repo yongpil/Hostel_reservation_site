@@ -70,7 +70,7 @@ public class HostelListController {
 	}
 
 	
-	@RequestMapping(value="/review.html")
+	@RequestMapping(value="/review")
 	public ModelAndView review(@RequestParam("hstNum") int hstNum) throws Exception{
 		ModelAndView mv = new ModelAndView("/Hostels/hostel_review");
 		List<Map<String,Object>> reviewList = hostelService.selectReviewList(hstNum);
@@ -78,7 +78,7 @@ public class HostelListController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/index.html", method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/index", method={RequestMethod.POST,RequestMethod.GET})
 	public String list(@RequestParam(value="lctSearch", required=false, defaultValue="seoul") String lctSearch,
 			@RequestParam(value="dayFrom", required=false, defaultValue="") String dayFrom,@RequestParam(value="dayTo", required=false, defaultValue="") String dayTo,Model model) {
 		
@@ -104,22 +104,22 @@ public class HostelListController {
 		return "/Hostels/hostel_index";	
 	}
 	
-	@RequestMapping("/addHostel_view.html")
+	@RequestMapping("/addHostel_view")
 	public String addHostel_view(Model model) {
 		logger.info("addHostel_view()");
 		return "/Hostels/hostel_add_view";
 	}
 	
-	@RequestMapping("/addHostel.html")
+	@RequestMapping("/addHostel")
 	public String addHostel(MultipartHttpServletRequest mRequest, Model model) {
 		System.out.println("addHostel()");
 		model.addAttribute("mRequest", mRequest);
 		command = new HostelListAddCommand();
 		command.execute(model);
-		return "redirect:index.html";
+		return "redirect:index";
 	}
 	
-	@RequestMapping("/hostel_detail.html")
+	@RequestMapping("/hostel_detail")
 	public String hostel_detail(HttpServletRequest request, Model model) {
 		System.out.println("hostel_detail()");
 		model.addAttribute("request",request);
@@ -129,7 +129,7 @@ public class HostelListController {
 		return "/Hostels/hostel_detail";
 	}
 	
-	@RequestMapping("/rsvView.html")
+	@RequestMapping("/rsvView")
 	public String rsvView(HttpServletRequest request, Model model) {
 		System.out.println("rsvView()");
 		model.addAttribute("request",request);
@@ -140,7 +140,7 @@ public class HostelListController {
 		return "/Hostels/hostel_rsv_view";
 	}
 	
-	@RequestMapping("/rsvConfirm.html") 
+	@RequestMapping("/rsvConfirm") 
 	public String rsvConfirm(RedirectAttributes redirectAttributes, @ModelAttribute RsvSessionDto sessionDto, SessionStatus sessionStatus, HttpServletRequest request, Model model) {
 		System.out.println("rsvConfirm()");
 		model.addAttribute("request",request);
@@ -149,10 +149,10 @@ public class HostelListController {
 			Map<String, Object> map = model.asMap();
 			RsvAddDto rsvAddDto = (RsvAddDto) map.get("rsvAddDto");
 			redirectAttributes.addAttribute("rsvNum",rsvAddDto.getRsvNum());
-			return "redirect:rsvConfirmView.html";
+			return "redirect:rsvConfirmView";
 	}
 	
-	@RequestMapping("/rsvConfirmView.html") //새로고침시 중복 예약을 방지하기 위해 redirect 시킨 후 db에서 예약된 내용을 다시 가져 온다.
+	@RequestMapping("/rsvConfirmView") //새로고침시 중복 예약을 방지하기 위해 redirect 시킨 후 db에서 예약된 내용을 다시 가져 온다.
 	public String rsvConfirmView(@RequestParam("rsvNum") int rsvNum, @ModelAttribute RsvSessionDto sessionDto, SessionStatus sessionStatus, Model model) {
 		System.out.println("rsvConfirmView()");
 		model.addAttribute("rsvNum",rsvNum);

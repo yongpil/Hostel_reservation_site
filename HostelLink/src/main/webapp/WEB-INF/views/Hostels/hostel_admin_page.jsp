@@ -29,7 +29,11 @@ List<String> schLocationList = new ArrayList<String>();
 		        <div>
 		            <canvas id="searchRank"></canvas>
 		     	</div>		   
-			 	<h2>지역별 성수기</h2>        
+			 	<h2>지역별 성수기</h2>
+			 	<div id="result">
+			 		<canvas id="lctHistory" width="400" height="400"></canvas>
+			 	</div>
+			 	<input type="text" id="location"/>        
 				<button id="serchBtn" type="button">Search</button>
 			</div>
 	</div>
@@ -57,21 +61,52 @@ var barData = {
 	        }
 	    ]
 	};
+
+var data = {
+	    labels: ["January", "February", "March", "April", "May", "June", "July"],
+	    datasets: [
+	        {
+	            label: "My First dataset",
+	            fillColor: "rgba(220,220,220,0.2)",
+	            strokeColor: "rgba(220,220,220,1)",
+	            pointColor: "rgba(220,220,220,1)",
+	            pointStrokeColor: "#fff",
+	            pointHighlightFill: "#fff",
+	            pointHighlightStroke: "rgba(220,220,220,1)",
+	            data: [65, 59, 80, 81, 56, 55, 40]
+	        },
+	        {
+	            label: "My Second dataset",
+	            fillColor: "rgba(151,187,205,0.2)",
+	            strokeColor: "rgba(151,187,205,1)",
+	            pointColor: "rgba(151,187,205,1)",
+	            pointStrokeColor: "#fff",
+	            pointHighlightFill: "#fff",
+	            pointHighlightStroke: "rgba(151,187,205,1)",
+	            data: [28, 48, 40, 19, 86, 27, 90]
+	        }
+	    ]
+	};
  
 var context = document.getElementById('searchRank').getContext('2d');
 var clientsChart = new Chart(context).Bar(barData);
 
+var ctx = document.getElementById("lctHistory").getContext("2d");
+var myNewChart = new Chart(ctx).Line(data, options);
 
-/* $('#serchBtn').click( function(){
+ $('#serchBtn').click( function(){
 	$.ajax({
-			url:'',
+			url:'http://localhost:8080/HostelTonight/test',
 			dataType:'json',
 			type:'POST',
-			data:'msg':$('#msg').val()},
-			success:function(result)
+			data:{'location':$('#location').val()},
+			success:function(result){
+				$('#result').html(result['jan']);
 			}
-			)
-}); */
+			
+			}
+		)
+}); 
 
 
 </script>

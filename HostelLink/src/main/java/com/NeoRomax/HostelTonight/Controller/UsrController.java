@@ -70,22 +70,22 @@ public class UsrController {
 		return "home";
 	}*/
 	
-	@RequestMapping("/login.html")
+	@RequestMapping("/login")
 	public String login(Locale locale, Model model) {
 		System.out.println("HomeController : login.html");
 		return "redirect:index.html";
 	}
-	@RequestMapping("/loginForm.html")
+	@RequestMapping("/loginForm")
 	public String loginForm(Locale locale, Model model) {
 		System.out.println("HomeController : loginForm.html");
 		return "loginForm";
 	}
-	@RequestMapping("/joinForm.html")
+	@RequestMapping("/joinForm")
 	public String joinForm() {
 		System.out.println("HomeController : joinForm.html");
 		return "joinForm";
 	}
-	@RequestMapping("/join.html")
+	@RequestMapping("/join")
 	public String join(HttpServletRequest request, Model model) {
 		System.out.println("HomeController : join.html");
 		MembersDAO dao = sqlSession.getMapper(MembersDAO.class);
@@ -98,7 +98,7 @@ public class UsrController {
 				request.getParameter("birth")
 				);
 		dao.joinAuthDao("ROLE_USER");
-		return "redirect:index.html";
+		return "redirect:index";
 	}
 	@RequestMapping(value="/autoComplete.html", method=RequestMethod.GET)
 	public @ResponseBody ArrayList<SearchResult> autoComplete(@RequestParam("searchValue") String searchValue) throws Throwable{
@@ -117,12 +117,12 @@ public class UsrController {
 		return searchResult;
 	}
 	
-	@RequestMapping("/search.html")
+	@RequestMapping("/search")
 	public String searchForm(){
 		return "search";
 	}
 	
-	@RequestMapping("/hostelAdmin.html")
+	@RequestMapping("/hostelAdmin")
 	public String hostelAdmin(Model model){
 		System.out.println("hostelAdmin");
 		
@@ -132,12 +132,13 @@ public class UsrController {
 		return "/Hostels/hostel_admin_page";
 	}
 	
-	@RequestMapping("/test.html/{location}")
-	public String test(@PathVariable String location){
+	@RequestMapping("/test")
+	@ResponseBody
+	public LocationRsvHistoryDto test(@RequestParam String location){
 		System.out.println("LocationRsvHistoryDto");
 		LocationRsvHistoryDto lctRsvHDto;
 		AdminDao aDao = sqlSession.getMapper(AdminDao.class);
 		lctRsvHDto = aDao.getLocationRsvHistoryDto(location);
-		return "search";
+		return lctRsvHDto;
 	}
 }
