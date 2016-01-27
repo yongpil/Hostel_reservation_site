@@ -149,7 +149,7 @@ public class HostelListController {
 			Map<String, Object> map = model.asMap();
 			RsvAddDto rsvAddDto = (RsvAddDto) map.get("rsvAddDto");
 			redirectAttributes.addAttribute("rsvNum",rsvAddDto.getRsvNum());
-			return "redirect:rsvConfirmView";
+			return "redirect:rsvConfirmView.html";
 	}
 	
 	@RequestMapping("/rsvConfirmView") //새로고침시 중복 예약을 방지하기 위해 redirect 시킨 후 db에서 예약된 내용을 다시 가져 온다.

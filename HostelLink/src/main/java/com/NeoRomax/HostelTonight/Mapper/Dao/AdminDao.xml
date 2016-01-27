@@ -5,11 +5,15 @@
     
 <mapper namespace="com.NeoRomax.HostelTonight.Dao.AdminDao">
 	<select id="SchLocationList" resultType="com.NeoRomax.HostelTonight.Dto.SchLocationDto">
-		SELECT location, searchCnt FROM SEARCH_LOCATION_RANK
+		SELECT location, searchCnt FROM search_location_rank
 	</select>
 	
 	<select id="getLocationRsvHistoryDto" resultType="com.NeoRomax.HostelTonight.Dto.LocationRsvHistoryDto">
-		SELECT * FROM LOCATION_RSV_HISTORY WHERE location = #{PARAM1}
+		SELECT * FROM location_rsv_history WHERE location = #{PARAM1}
+	</select>
+	
+	<select id="getLocation" resultType="String">
+		SELECT location FROM location_rsv_history 
 	</select>
 </mapper>
 

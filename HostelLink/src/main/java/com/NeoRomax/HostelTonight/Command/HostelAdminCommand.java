@@ -39,6 +39,8 @@ public class HostelAdminCommand implements HCommand {
 
 		AdminDao aDao = sqlSession.getMapper(AdminDao.class);
 		model.addAttribute("schLocationDtos",aDao.SchLocationList());
+		model.addAttribute("locations",aDao.getLocation());
+		
 	}
 
 }

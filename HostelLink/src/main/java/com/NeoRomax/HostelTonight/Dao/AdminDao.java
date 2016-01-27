@@ -16,4 +16,5 @@ import com.NeoRomax.HostelTonight.Dto.SchLocationDto;
 public interface AdminDao {
 	public ArrayList<SchLocationDto> SchLocationList();
 	public LocationRsvHistoryDto getLocationRsvHistoryDto(String location);
+	public ArrayList<String> getLocation(); 
 }

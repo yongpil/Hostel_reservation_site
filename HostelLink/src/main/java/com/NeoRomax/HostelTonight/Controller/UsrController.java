@@ -100,7 +100,7 @@ public class UsrController {
 		dao.joinAuthDao("ROLE_USER");
 		return "redirect:index";
 	}
-	@RequestMapping(value="/autoComplete.html", method=RequestMethod.GET)
+	@RequestMapping(value="/autoComplete", method=RequestMethod.GET)
 	public @ResponseBody ArrayList<SearchResult> autoComplete(@RequestParam("searchValue") String searchValue) throws Throwable{
 		System.out.println("HomeController : autoComplete.html");
 		Map<String, Object> jsonObject= new HashMap<String, Object>();
@@ -136,6 +136,7 @@ public class UsrController {
 	@ResponseBody
 	public LocationRsvHistoryDto test(@RequestParam String location){
 		System.out.println("LocationRsvHistoryDto");
+		System.out.println(location);
 		LocationRsvHistoryDto lctRsvHDto;
 		AdminDao aDao = sqlSession.getMapper(AdminDao.class);
 		lctRsvHDto = aDao.getLocationRsvHistoryDto(location);

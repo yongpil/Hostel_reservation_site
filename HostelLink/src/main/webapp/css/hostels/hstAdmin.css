@@ -13,5 +13,9 @@ ul,ol,li {list-style:none;}
 	width:100%;
 	height:300px;
 }
-
+#lctHistory {
+	background-repeat: no-repeat;
+	width:100%;
+	height:300px;
+}
         
