@@ -10,7 +10,8 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-
+<script src="dist/js/bootstrap.js"></script>
+<link rel="stylesheet" href="dist/css/bootstrap.css">
 <title>Insert title here</title>
 </head>
 	<meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0"/>
@@ -20,15 +21,27 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 			<!-- 컨텐츠 -->
 			<div id="content">
-				  <c:forEach items="${reviewList}" var="rev">
+				<div class="container">
+				<h2>review 게시판</h2>
+				  <table class="table">
+				        <tr>
+				        <th>번호</th>
+				        <th>호스텔 번호</th>
+				        <th>유저 번호</th>
+				        <th>내용</th>
+				        <th>날짜</th>
+				     	</tr>
+				  <c:forEach items="${reviewList}" var="rev">				  
                     <tr>
                         <td>${rev.reNum }</td>
-                        <td>${rev.hostelNum }</td>
+                        <td>${rev.hstNum }</td>
                         <td>${rev.userNum }</td>
-                        <td>${rev.userNum }</td>
+                        <td>${rev.reContent }</td>
                         <td>${rev.reDate }</td>
                     </tr>
                 </c:forEach>
+                </table>
+				</div>
 			</div>
 		</div>	
 		
