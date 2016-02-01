@@ -39,14 +39,7 @@
     <!-- class만 따로 지정해서 이 클래스만 로그를 따로 관리할 수 있다. LoginInterceptor class 파일만 따로 로그 관리 -->
     <appender name="fileHostelListController" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>C:\Users\nick\logs\Search\HSearchFile.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
         
-            <!-- d:\ testRollingFile 2015-04-07-15.log 파일 생성 -->
-            <fileNamePattern>C:\Users\nick\logs\Search\HSearchFile.log.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
-        
-            <!-- 30시간 지난건 지우겠다. -->
-            <maxHistory>30</maxHistory>
-        </rollingPolicy>
         <encoder>
             <pattern>
                 %date SEARCH_INFO KEYWORD %msg%n
@@ -64,6 +57,7 @@
     <root level="info">
         <appender-ref ref="console" />
         <appender-ref ref="file" />
+         <appender-ref ref="fileHostelListController" />
     </root>
         
 </configuration>

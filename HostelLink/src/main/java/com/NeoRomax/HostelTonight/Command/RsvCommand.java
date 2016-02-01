@@ -25,7 +25,7 @@ import util.Constant;
  * <PRE>
  * 1. FileName  : RsvCommand.java
  * 2. Package  : com.NeoRomax.HostelTonight.Rsv.Command
- * 3. Comment  : 
+ * 3. Comment  : 호스텔 예약이 이루어 지는 클래스. sessionDto에 있는 호스텔 예약 정보를 실제 DB에 저장한다.
  * 4. 작성자   : "Yong Pil Moon"
  * 5. 작성일   : 2015. 11. 20. 오후 3:45:25
  * </PRE>

@@ -39,11 +39,20 @@ import com.NeoRomax.HostelTonight.Dto.LocationRsvHistoryDto;
 import com.NeoRomax.HostelTonight.Dto.SchLocationDto;
 import com.NeoRomax.HostelTonight.Usr.Dao.MembersDAO;
 import com.NeoRomax.HostelTonight.Usr.Dao.SearchDAO;
+import com.NeoRomax.HostelTonight.Usr.Dto.membersDTO;
+
 
 
 /**
- * Handles requests for the application home page.
- */
+* <pre>
+* 1. 프로젝트명 : HostelTonight
+* 2. 패키지명(또는 디렉토리 경로) : com.NeoRomax.HostelTonight.Controller
+* 3. 파일명 : UsrController.java
+* 4. 작성일 : 2016. 2. 1. 오후 2:00:23
+* 5. 작성자 : Yang Jin Seung 
+* 6. 설명 : 사용자 관련 기능을 수행 시키는 컨트롤러
+* </pre>
+*/
 @Controller
 public class UsrController {
 	
@@ -70,34 +79,30 @@ public class UsrController {
 		return "home";
 	}*/
 	
-	@RequestMapping("/login")
-	public String login(Locale locale, Model model) {
-		System.out.println("HomeController : login.html");
-		return "redirect:index.html";
-	}
-	@RequestMapping("/loginForm")
+
+	@RequestMapping("/loginForm")//로그인을 위한 페이지
 	public String loginForm(Locale locale, Model model) {
 		System.out.println("HomeController : loginForm.html");
 		return "loginForm";
 	}
-	@RequestMapping("/joinForm")
+	@RequestMapping("/joinForm")//회원가입 페이지
 	public String joinForm() {
 		System.out.println("HomeController : joinForm.html");
 		return "joinForm";
 	}
-	@RequestMapping("/join")
+	@RequestMapping("/join")//회원가입 기능
 	public String join(HttpServletRequest request, Model model) {
 		System.out.println("HomeController : join.html");
 		MembersDAO dao = sqlSession.getMapper(MembersDAO.class);
-		dao.joinDao
-		(
-				request.getParameter("id"), 
+		membersDTO memberDto = new membersDTO(
+				request.getParameter("id"),
 				request.getParameter("pwd"),
+				request.getParameter("confirmPwd"),
 				request.getParameter("firstName"),
-				request.getParameter("lastName"),
-				request.getParameter("birth")
+				request.getParameter("lastName")
 				);
-		dao.joinAuthDao("ROLE_USER");
+		dao.joinDao(memberDto);
+		dao.joinAuthDao(memberDto.getUsrNum(),"ROLE_USER");
 		return "redirect:index";
 	}
 	@RequestMapping(value="/autoComplete", method=RequestMethod.GET)
@@ -122,7 +127,7 @@ public class UsrController {
 		return "search";
 	}
 	
-	@RequestMapping("/hostelAdmin")
+	@RequestMapping("/hostelAdmin") //호스텔 관리자 페이지
 	public String hostelAdmin(Model model){
 		System.out.println("hostelAdmin");
 		
@@ -132,7 +137,7 @@ public class UsrController {
 		return "/Hostels/hostel_admin_page";
 	}
 	
-	@RequestMapping("/test")
+	@RequestMapping("/lctSearch") //관리자 페이지 에서 지역별 성수기 기능을 위해 사용, ajax통신을 위해 json형식으로 location_rsv_history 테이블로 부터 데이터를 가져온다.
 	@ResponseBody
 	public LocationRsvHistoryDto test(@RequestParam String location){
 		System.out.println("LocationRsvHistoryDto");

@@ -38,7 +38,7 @@
 		Confirm Password : <input type="password" name="confirmPwd" id="confirmPwd" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><br />
 		FirstName : <input type="text" name="firstName" id="firstName" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><br />
 		LastName : <input type="text" name="lastName" id="lastName" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><br />
-		BirthDay : <input type="text" name="birth" id="birth" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" readonly="readonly"><br />
+		BirthDay : <input type="text" name="birth" id="birth" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ><br />
 		<input type="submit" value="SIGNUP"> <br />
 	</form>
 </body>

@@ -22,7 +22,7 @@ import util.Constant;
  * <PRE>
  * 1. FileName  : RsvViewCommand.java
  * 2. Package  : com.NeoRomax.HostelTonight.Rsv.Command
- * 3. Comment  : 
+ * 3. Comment  : 호스텔 예약전에 정보를 확인하는 클래스, 예약 정보를 RsvSessionDto에 담고 RsvCommand로 전달
  * 4. 작성자   : "Yong Pil Moon"
  * 5. 작성일   : 2015. 11. 20. 오후 3:45:34
  * </PRE>
@@ -49,7 +49,7 @@ public class RsvViewCommand implements HCommand {
 		
 		List<RoomsDto> roomList = new ArrayList<RoomsDto>();
 		roomList = roomsDao.RoomsList(Integer.parseInt(request.getParameter("hostelNum")));
-		List<RsvAvailableDto> rsvAbleDto = rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("hostelNum"))),request.getParameter("dayFrom"),request.getParameter("dayTo"));
+		List<RsvAvailableDto> rsvAbleDto = rsvDao.rsvAvailList((Integer.parseInt(request.getParameter("hostelNum"))),request.getParameter("dayFrom"),request.getParameter("dayTo"));//해당 호스텔의 객실 중 검색한 날짜에 포함되며 예약 가능한 객실 리스트를 불러온다. 
 		
 	 	ArrayList<ArrayList<String>> rsvDatesList = new ArrayList<ArrayList<String>>();
 	 	ArrayList<ArrayList<String>> rsvRatesList = new ArrayList<ArrayList<String>>();
@@ -70,7 +70,7 @@ public class RsvViewCommand implements HCommand {
 			
 			for(int j=0;j<rsvAbleDto.size();j++)
 			{   
-				if(request.getParameter("check"+i+"-"+j) != null)
+				if(request.getParameter("check"+i+"-"+j) != null)//사용자가 체크한 것만 불러온다.
 				{
 					String[] tempRsv = request.getParameter("check"+i+"-"+j).split(",");//,로 구분 되어 있는 rsvRate와 rsvDate를 분리 한다.
 					rsvDates.add(tempRsv[0]);
@@ -90,6 +90,7 @@ public class RsvViewCommand implements HCommand {
 	 		totalRate = totalRate + eachRoomRate[i];
 	 	}
 	 	
+		//예약에 필요한 sessionDto생성
 		RsvSessionDto sessionDto = new RsvSessionDto(rsvDatesList,rsvRatesList,
 				hDao.getHDto(Integer.parseInt(request.getParameter("hostelNum"))),roomList,totalRate,request.getParameter("userId"));
 	 	model.addAttribute("sessionDto",sessionDto);

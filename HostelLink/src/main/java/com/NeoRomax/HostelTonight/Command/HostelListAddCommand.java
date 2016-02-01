@@ -21,7 +21,7 @@ import util.Constant;
  * <PRE>
  * 1. FileName  : HostelListAddCommand.java
  * 2. Package  : com.NeoRomax.HostelTonight.HostelList.Command
- * 3. Comment  : 
+ * 3. Comment  : 호스텔을 추가하기위한 클래스
  * 4. 작성자   : "Yong Pil Moon"
  * 5. 작성일   : 2015. 11. 20. 오후 3:33:13
  * </PRE>

@@ -13,7 +13,7 @@ import com.NeoRomax.HostelTonight.Dto.RsvRoomAddDto;
  * <PRE>
  * 1. FileName  : RsvDao.java
  * 2. Package  : com.NeoRomax.HostelTonight.Rsv.Dao
- * 3. Comment  : 
+ * 3. Comment  : 예약 기능들을 위한 DAO
  * 4. 작성자   : "Yong Pil Moon"
  * 5. 작성일   : 2015. 11. 20. 오후 3:45:39
  * </PRE>

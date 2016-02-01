@@ -1,4 +1,7 @@
 package com.NeoRomax.HostelTonight.Usr.Dao;
+
+import com.NeoRomax.HostelTonight.Usr.Dto.membersDTO;
+
 /**
  * Members Data Access Object
  * @version 1.0
@@ -6,7 +9,7 @@ package com.NeoRomax.HostelTonight.Usr.Dao;
  */
 public interface MembersDAO {
 	
-	public void joinDao(String id, String pwd, String firstName, String lastName, String birth);
-	public void joinAuthDao(String authority);
+	public void joinAuthDao(int lastUserNum, String authority);
+	public void joinDao(membersDTO memberDto);
 	
 }

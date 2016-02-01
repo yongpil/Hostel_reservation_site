@@ -8,6 +8,16 @@ package com.NeoRomax.HostelTonight.Usr.Dto;
 
 import java.util.Date;
 
+/**
+* <pre>
+* 1. 프로젝트명 : HostelTonight
+* 2. 패키지명(또는 디렉토리 경로) : com.NeoRomax.HostelTonight.Usr.Dto
+* 3. 파일명 : membersDTO.java
+* 4. 작성일 : 2016. 2. 1. 오후 3:10:31
+* 5. 작성자 : Yang Jin Seung 
+* 6. 설명 : 사용자 관리 정보를 위한 DTO
+* </pre>
+*/
 public class membersDTO {
 
 	private int usrNum;
@@ -20,17 +30,14 @@ public class membersDTO {
 	private String usrEmail;
 	
 	
-	public membersDTO(int usrNum, String usrId, String usrPsw, String usrConfirmPsw, String usrFirstName,
-			String usrLastName, Date usrBirth, String usrEmail) {
+	public membersDTO(String usrId, String usrPsw, String usrConfirmPsw, String usrFirstName,
+			String usrLastName) {
 		super();
-		this.usrNum = usrNum;
 		this.usrId = usrId;
 		this.usrPsw = usrPsw;
 		this.usrConfirmPsw = usrConfirmPsw;
 		this.usrFirstName = usrFirstName;
 		this.usrLastName = usrLastName;
-		this.usrBirth = usrBirth;
-		this.usrEmail = usrEmail;
 	}
 	
 	public int getUsrNum() {

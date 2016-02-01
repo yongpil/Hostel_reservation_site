@@ -5,7 +5,7 @@
     
 <mapper namespace="com.NeoRomax.HostelTonight.Dao.HostelDao">
 	<select id="Hlist" resultType="com.NeoRomax.HostelTonight.Dto.HostelsListDto">
-		SELECT hostelNum, hostelName, hostelNation, hostelCity, hostelAddr, hostelInfo, hostelPhone, hostelEmail, imageName FROM HOSTELS A JOIN HOSTELS_IMAGE B ON A.hostelNum = B.hstNum WHERE hostelCity = #{param1} GROUP BY hstNum
+		SELECT hostelNum, hostelName, hostelNation, hostelCity, hostelAddr, hostelInfo, hostelPhone, hostelEmail, imageName FROM hostels A JOIN hostels_image B ON A.hostelNum = B.hstNum WHERE hostelCity = #{param1} GROUP BY hstNum
 	</select>
 	
 	<insert id="addHostel">
@@ -17,15 +17,15 @@
 	</insert>
 	
 	<select id="getHDto" resultType="com.NeoRomax.HostelTonight.Dto.HostelDto">
-		SELECT * FROM HOSTELS WHERE hostelNum = #{PARAM1}
+		SELECT * FROM hostels WHERE hostelNum = #{PARAM1}
 	</select>
 	
 	<select id="getHImgList" resultType="com.NeoRomax.HostelTonight.Dto.ImgDto">
-		SELECT * FROM  HOSTELS_IMAGE WHERE hstNum = #{PARAM1}
+		SELECT * FROM  hostels_image WHERE hstNum = #{PARAM1}
 	</select>
 	
 	<insert id="addHImg">
-		insert into HOSTELS_IMAGE (hstNum,imageName) values( #{param1}, #{param2})
+		insert into hostels_image (hstNum,imageName) values( #{param1}, #{param2})
 	</insert>
 </mapper>
 

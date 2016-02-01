@@ -43,7 +43,7 @@ import util.Constant;
  * <PRE>
  * 1. FileName  : HostelListController.java
  * 2. Package  : com.NeoRomax.HostelTonight.HostelList.Controller
- * 3. Comment  : 
+ * 3. Comment  : 호스텔에 관련된 기능을 제어하는 컨트롤러, 들어온 요청에 따라 각 command클래스를 수행 시킨다.
  * 4. 작성자   : "Yong Pil Moon"
  * 5. 작성일   : 2015. 11. 20. 오후 3:44:40
  * </PRE>
@@ -51,7 +51,7 @@ import util.Constant;
 
 
 @Controller
-@SessionAttributes("sessionDto")
+@SessionAttributes("sessionDto")//예약을 위한 sessionDto 
 public class HostelListController {
 	private static org.slf4j.Logger logger = LoggerFactory.getLogger(HostelListController.class);
 
@@ -70,7 +70,7 @@ public class HostelListController {
 	}
 
 	
-	@RequestMapping(value="/review")
+	@RequestMapping(value="/review")//이용후기
 	public ModelAndView review(@RequestParam("hstNum") int hstNum) throws Exception{
 		ModelAndView mv = new ModelAndView("/Hostels/hostel_review");
 		List<Map<String,Object>> reviewList = hostelService.selectReviewList(hstNum);
@@ -78,11 +78,11 @@ public class HostelListController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/index", method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/index", method={RequestMethod.POST,RequestMethod.GET})//index 페이지
 	public String list(@RequestParam(value="lctSearch", required=false, defaultValue="seoul") String lctSearch,
 			@RequestParam(value="dayFrom", required=false, defaultValue="") String dayFrom,@RequestParam(value="dayTo", required=false, defaultValue="") String dayTo,Model model) {
 		
-		logger.info("index()");
+		logger.info("index()"); //로그 생성
 		logger.info(lctSearch);
 		if(dayFrom.equals("") && dayTo.equals(""))//만약 사용자에 의해 날짜가 입력되지 않으면 현재 날짜를 default로 넣어준다.
 		{
@@ -104,13 +104,12 @@ public class HostelListController {
 		return "/Hostels/hostel_index";	
 	}
 	
-	@RequestMapping("/addHostel_view")
+	@RequestMapping("/addHostel_view") //호스텔 추가 페이지
 	public String addHostel_view(Model model) {
-		logger.info("addHostel_view()");
 		return "/Hostels/hostel_add_view";
 	}
 	
-	@RequestMapping("/addHostel")
+	@RequestMapping("/addHostel")//호스텔 추가 기능 수행
 	public String addHostel(MultipartHttpServletRequest mRequest, Model model) {
 		System.out.println("addHostel()");
 		model.addAttribute("mRequest", mRequest);
@@ -119,7 +118,7 @@ public class HostelListController {
 		return "redirect:index";
 	}
 	
-	@RequestMapping("/hostel_detail")
+	@RequestMapping("/hostel_detail") //호스텔 상세 정보 페이지
 	public String hostel_detail(HttpServletRequest request, Model model) {
 		System.out.println("hostel_detail()");
 		model.addAttribute("request",request);
@@ -129,7 +128,7 @@ public class HostelListController {
 		return "/Hostels/hostel_detail";
 	}
 	
-	@RequestMapping("/rsvView")
+	@RequestMapping("/rsvView") //예약 정보 확인 페이지
 	public String rsvView(HttpServletRequest request, Model model) {
 		System.out.println("rsvView()");
 		model.addAttribute("request",request);
@@ -140,7 +139,7 @@ public class HostelListController {
 		return "/Hostels/hostel_rsv_view";
 	}
 	
-	@RequestMapping("/rsvConfirm") 
+	@RequestMapping("/rsvConfirm") //예약 확정 페이지
 	public String rsvConfirm(RedirectAttributes redirectAttributes, @ModelAttribute RsvSessionDto sessionDto, SessionStatus sessionStatus, HttpServletRequest request, Model model) {
 		System.out.println("rsvConfirm()");
 		model.addAttribute("request",request);

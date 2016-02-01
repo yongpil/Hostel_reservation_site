@@ -11,7 +11,7 @@
 <title>호스텔 추가</title>
 <script language="javascript">
 var imgcount = 1;
-	function addImgFunction(){
+	function addImgFunction(){//이미지 추가 함수
 		imgcount++;
 		var tr = document .createElement('tr');
 		tr.id = 'imgInputDiv'+ imgcount;
@@ -25,7 +25,7 @@ var imgcount = 1;
 		tr.innerHTML=str;
 		document.getElementById('imgUpload').appendChild(tr);
 	}
-	function removeImgFunction(num){
+	function removeImgFunction(num){ //이미지 제거 함수
 		var tr = document.getElementById("imgInputDiv" + num);
 		tr.parentNode.removeChild(tr);
 		imgcount--;

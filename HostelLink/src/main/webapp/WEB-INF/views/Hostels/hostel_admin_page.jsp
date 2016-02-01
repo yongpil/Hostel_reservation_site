@@ -92,9 +92,9 @@ var clientsChart = new Chart(context).Bar(barData);
 var ctx = document.getElementById("lctHistory").getContext("2d");
 
 
- $('#serchBtn').click( function(){
+ $('#serchBtn').click( function(){ //지역별 데이터를 불러 오기위한 ajax통신
 	$.ajax({
-			url:'http://localhost:8080/HostelTonight/test',
+			url:'http://localhost:8080/HostelTonight/lctSearch',
 			dataType:'json',
 			type:'GET',
 			data:{'location':$('#location').val()},

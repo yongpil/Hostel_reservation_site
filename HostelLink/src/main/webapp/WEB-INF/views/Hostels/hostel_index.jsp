@@ -1,3 +1,14 @@
+<%
+/* =================================================================
+ * 
+ * 작성일 : 2015. 11. 20.
+ *  
+ * 작성자 : 문용필
+ * 
+ * 상세설명 : 사이트 시작 페이지
+ *   
+ */ 
+%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
